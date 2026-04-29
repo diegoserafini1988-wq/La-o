@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
@@ -13,15 +12,19 @@
 
 <h1>Laço 💘</h1>
 <p>Conexões com propósito</p>
+
+<div class="buttons">
+<a href="login.html">Entrar</a>
+<a href="#">Criar Conta</a>
+</div>
+
+</div>
+
+<!-- 🔥 FIREBASE SEMPRE NO FINAL -->
 <script type="module">
-  // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   const firebaseConfig = {
     apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
     authDomain: "lacoapp.firebaseapp.com",
@@ -32,17 +35,9 @@
     measurementId: "G-MSB3J89XLL"
   };
 
-  // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
 </script>
-<div class="buttons">
-<a href="login.html">Entrar</a>
-<a href="#">Criar Conta</a>
-</div>
-
-</div>
 
 </body>
 </html>
-
