@@ -1,33 +1,50 @@
-const profiles = [
-  {name: "Ana, 23", bio: "Espiritualidade e paz ✨", photo: "https://via.placeholder.com/300"},
-  {name: "Lucas, 27", bio: "Buscando conexão real 💬", photo: "https://via.placeholder.com/300"},
-  {name: "Marina, 25", bio: "Energia boa e vibe leve 🌿", photo: "https://via.placeholder.com/300"}
-];
-
-let index = 0;
-
-function updateCard() {
-  document.getElementById("name").innerText = profiles[index].name;
-  document.getElementById("bio").innerText = profiles[index].bio;
-  document.getElementById("photo").src = profiles[index].photo;
-}
+let likedProfiles = [];
 
 function like() {
-  alert("Você curtiu ❤️");
-  next();
+    const card = document.getElementById("card");
+
+    card.style.transform = "translateX(500px) rotate(30deg)";
+
+    setTimeout(() => {
+        checkMatch();
+        nextProfile();
+    }, 300);
 }
 
 function dislike() {
-  next();
+    const card = document.getElementById("card");
+
+    card.style.transform = "translateX(-500px) rotate(-30deg)";
+
+    setTimeout(() => {
+        nextProfile();
+    }, 300);
 }
 
-function next() {
-  index = (index + 1) % profiles.length;
-  updateCard();
+function nextProfile() {
+    const profiles = [
+        {nome: "Ana, 25", img: "https://randomuser.me/api/portraits/women/44.jpg"},
+        {nome: "Julia, 22", img: "https://randomuser.me/api/portraits/women/65.jpg"},
+        {nome: "Marina, 27", img: "https://randomuser.me/api/portraits/women/12.jpg"}
+    ];
+
+    let random = profiles[Math.floor(Math.random() * profiles.length)];
+
+    const card = document.getElementById("card");
+
+    card.style.transform = "none";
+
+    card.innerHTML = `
+        <img src="${random.img}">
+        <h3>${random.nome}</h3>
+        <p>Conexão especial 💘</p>
+    `;
 }
 
-function login() {
-  alert("Sistema de login em breve 🚀");
-}
+function checkMatch() {
+    let matchChance = Math.random();
 
-updateCard();
+    if (matchChance > 0.7) {
+        alert("💘 Deu Match!");
+    }
+}
