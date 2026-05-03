@@ -52,11 +52,12 @@ const db = getFirestore(app);
 const nomeUsuario = document.getElementById("nomeUsuario");
 const nomeCard = document.getElementById("nomeCard");
 const idadeCard = document.getElementById("idadeCard");
+const foto = document.getElementById("foto");
 
 let usuarios = [];
 let index = 0;
 
-// 🔥 PEGAR USUÁRIOS DO BANCO
+// 🔥 CARREGAR USUÁRIOS
 async function carregarUsuarios() {
   const querySnapshot = await getDocs(collection(db, "usuarios"));
   usuarios = querySnapshot.docs.map(doc => doc.data());
@@ -70,7 +71,8 @@ function mostrarUsuario() {
   const user = usuarios[index];
 
   nomeCard.innerText = user.nome || "Sem nome";
-  idadeCard.innerText = user.idade || "Idade não informada";
+  idadeCard.innerText = user.idade || "Sem idade";
+  foto.src = user.foto || "https://via.placeholder.com/300";
 }
 
 // BOTÕES
