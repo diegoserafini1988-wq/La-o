@@ -12,9 +12,17 @@
 
 <div class="card">
 
-<h2>Bem-vindo 💘</h2>
+<h2 id="nomeUsuario">Carregando...</h2>
 
-<h3 id="nomeUsuario">Carregando...</h3>
+<img id="foto" src="https://via.placeholder.com/300" />
+
+<h3 id="nomeCard">Nome</h3>
+<p id="idadeCard">Idade</p>
+
+<div class="actions">
+<button onclick="naoCurtir()">❌</button>
+<button onclick="curtir()">❤️</button>
+</div>
 
 <br>
 
@@ -25,7 +33,7 @@
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+import { getFirestore, doc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
@@ -42,23 +50,57 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 const nomeUsuario = document.getElementById("nomeUsuario");
+const nomeCard = document.getElementById("nomeCard");
+const idadeCard = document.getElementById("idadeCard");
 
-// 🔥 VER USUÁRIO LOGADO
+let usuarios = [];
+let index = 0;
+
+// 🔥 PEGAR USUÁRIOS DO BANCO
+async function carregarUsuarios() {
+  const querySnapshot = await getDocs(collection(db, "usuarios"));
+  usuarios = querySnapshot.docs.map(doc => doc.data());
+  mostrarUsuario();
+}
+
+// 🔥 MOSTRAR USUÁRIO
+function mostrarUsuario() {
+  if (usuarios.length === 0) return;
+
+  const user = usuarios[index];
+
+  nomeCard.innerText = user.nome || "Sem nome";
+  idadeCard.innerText = user.idade || "Idade não informada";
+}
+
+// BOTÕES
+window.curtir = function() {
+  index++;
+  mostrarUsuario();
+};
+
+window.naoCurtir = function() {
+  index++;
+  mostrarUsuario();
+};
+
+// LOGIN
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     const docRef = doc(db, "usuarios", user.uid);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      const dados = docSnap.data();
-      nomeUsuario.innerText = "Olá, " + dados.nome + " 👋";
+      nomeUsuario.innerText = "Olá, " + docSnap.data().nome;
     }
+
+    carregarUsuarios();
   } else {
     window.location.href = "login.html";
   }
 });
 
-// 🔥 LOGOUT
+// LOGOUT
 window.logout = function() {
   signOut(auth).then(() => {
     window.location.href = "login.html";
