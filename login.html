@@ -17,6 +17,12 @@
 <input type="text" id="nome" placeholder="Seu nome">
 <br><br>
 
+<input type="number" id="idade" placeholder="Sua idade">
+<br><br>
+
+<input type="text" id="foto" placeholder="URL da sua foto">
+<br><br>
+
 <input type="email" placeholder="Digite seu email">
 <br><br>
 
@@ -58,6 +64,8 @@ const db = getFirestore(app);
 
 // CAMPOS
 const nome = document.getElementById("nome");
+const idade = document.getElementById("idade");
+const foto = document.getElementById("foto");
 const email = document.querySelector('input[type="email"]');
 const senha = document.querySelector('input[type="password"]');
 const botao = document.getElementById("loginBtn");
@@ -81,6 +89,8 @@ window.criarConta = async function () {
 
     await setDoc(doc(db, "usuarios", user.uid), {
       nome: nome.value,
+      idade: idade.value,
+      foto: foto.value,
       email: email.value,
       criadoEm: new Date()
     });
