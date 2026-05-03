@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Criar Conta - Laço</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="home">
+
+<div class="card">
+
+<h2>Criar Conta 💘</h2>
+
+<input type="text" id="nome" placeholder="Seu nome"><br><br>
+<input type="number" id="idade" placeholder="Sua idade"><br><br>
+<input type="text" id="foto" placeholder="URL da sua foto"><br><br>
+
+<input type="email" id="email" placeholder="Digite seu email"><br><br>
+<input type="password" id="senha" placeholder="Digite sua senha"><br><br>
+
+<button id="criarBtn">Criar Conta</button>
+
+<br><br>
+
+<a href="login.html">Já tenho conta</a>
+
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+import { getFirestore, setDoc, doc } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
+  authDomain: "lacoapp.firebaseapp.com",
+  projectId: "lacoapp",
+  storageBucket: "lacoapp.firebasestorage.app",
+  messagingSenderId: "485009455528",
+  appId: "1:485009455528:web:0c43153be60e62cd6a459d",
+  measurementId: "G-MSB3J89XLL"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const nome = document.getElementById("nome");
+const idade = document.getElementById("idade");
+const foto = document.getElementById("foto");
+const email = document.getElementById("email");
+const senha = document.getElementById("senha");
+
+document.getElementById("criarBtn").addEventListener("click", async () => {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email.value, senha.value);
+    const user = userCredential.user;
+
+    await setDoc(doc(db, "usuarios", user.uid), {
+      nome: nome.value,
+      idade: idade.value,
+      foto: foto.value,
+      email: email.value,
+      criadoEm: new Date()
+    });
+
+    alert("Conta criada com sucesso!");
+    window.location.href = "app.html";
+
+  } catch (error) {
+    alert("Erro: " + error.message);
+  }
+});
+</script>
+
+</body>
+</html>
