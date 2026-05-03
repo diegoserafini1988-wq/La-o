@@ -13,11 +13,19 @@
 <div class="card">
 
 <h2>Entrar no Laço 💘</h2>
+
 <input type="text" id="nome" placeholder="Seu nome">
+<br><br>
+
 <input type="email" placeholder="Digite seu email">
+<br><br>
+
 <input type="password" placeholder="Digite sua senha">
+<br><br>
 
 <button id="loginBtn">Entrar</button>
+
+<br><br>
 
 <button onclick="criarConta()">Criar Conta</button>
 
@@ -29,7 +37,6 @@
 
 </div>
 
-<!-- 🔥 SCRIPT NO LUGAR CERTO (ANTES DO </body>) -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
@@ -49,12 +56,13 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// PEGAR CAMPOS
+// CAMPOS
+const nome = document.getElementById("nome");
 const email = document.querySelector('input[type="email"]');
 const senha = document.querySelector('input[type="password"]');
 const botao = document.getElementById("loginBtn");
 
-// 👉 LOGIN
+// LOGIN
 botao.addEventListener("click", async () => {
   try {
     await signInWithEmailAndPassword(auth, email.value, senha.value);
@@ -65,13 +73,14 @@ botao.addEventListener("click", async () => {
   }
 });
 
-// 👉 CRIAR CONTA
+// CRIAR CONTA
 window.criarConta = async function () {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email.value, senha.value);
     const user = userCredential.user;
 
     await setDoc(doc(db, "usuarios", user.uid), {
+      nome: nome.value,
       email: email.value,
       criadoEm: new Date()
     });
