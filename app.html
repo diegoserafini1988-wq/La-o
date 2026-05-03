@@ -56,8 +56,8 @@ const foto = document.getElementById("foto");
 
 let usuarios = [];
 let index = 0;
-let usuarioLogado = null;
 let usuarioId = null;
+let usuarioLogado = null;
 
 // 🔥 CARREGAR USUÁRIOS
 async function carregarUsuarios() {
@@ -82,7 +82,7 @@ function mostrarUsuario() {
   foto.src = user.foto || "https://via.placeholder.com/300";
 }
 
-// ❤️ CURTIR (AGORA SALVA)
+// ❤️ CURTIR + MATCH
 window.curtir = async function() {
   const alvo = usuarios[index];
 
@@ -90,9 +90,21 @@ window.curtir = async function() {
 
   const userRef = doc(db, "usuarios", usuarioId);
 
+  // SALVA LIKE
   await updateDoc(userRef, {
     likes: arrayUnion(alvo.id)
   });
+
+  // 🔥 VERIFICAR MATCH
+  if (alvo.likes && alvo.likes.includes(usuarioId)) {
+    
+    alert("💘 DEU MATCH COM " + alvo.nome + "!");
+    
+    // SALVAR MATCH
+    await updateDoc(userRef, {
+      matches: arrayUnion(alvo.id)
+    });
+  }
 
   index++;
   mostrarUsuario();
