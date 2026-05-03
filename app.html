@@ -3,36 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <title>Laço 💘</title>
+
 <link rel="stylesheet" href="style.css">
+
 </head>
 
-<body>
+<body class="home">
 
-<div class="app">
+<div class="card">
 
-<h1>Laço 💘</h1>
+<h2>Bem-vindo 💘</h2>
 
-<div id="card-container">
+<h3 id="nomeUsuario">Carregando...</h3>
 
-<div class="card" id="card">
+<br>
 
-<img src="https://randomuser.me/api/portraits/women/44.jpg">
-
-<h3>Ana, 25</h3>
-<p>Conexões reais 💬</p>
+<button onclick="logout()">Sair</button>
 
 </div>
 
-</div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
-<div class="actions">
-<button onclick="dislike()">❌</button>
-<button onclick="like()">❤️</button>
-</div>
+const firebaseConfig = {
+  apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
+  authDomain: "lacoapp.firebaseapp.com",
+  projectId: "lacoapp",
+  storageBucket: "lacoapp.firebasestorage.app",
+  messagingSenderId: "485009455528",
+  appId: "1:485009455528:web:0c43153be60e62cd6a459d",
+  measurementId: "G-MSB3J89XLL"
+};
 
-</div>
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-<script src="main.js"></script>
+const nomeUsuario = document.getElementById("nomeUsuario");
+
+// 🔥 VER USUÁRIO LOGADO
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    const docRef = doc(db, "usuarios", user.uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const dados = docSnap.data();
+      nomeUsuario.innerText = "Olá, " + dados.nome + " 👋";
+    }
+  } else {
+    window.location.href = "login.html";
+  }
+});
+
+// 🔥 LOGOUT
+window.logout = function() {
+  signOut(auth).then(() => {
+    window.location.href = "login.html";
+  });
+};
+</script>
 
 </body>
 </html>
