@@ -2,51 +2,31 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Login - Laço</title>
+<title>Entrar - Laço</title>
 
 <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body class="home">
 
 <div class="card">
 
-<h2>Entrar no Laço 💘</h2>
+<h2>Entrar 💘</h2>
 
-<input type="text" id="nome" placeholder="Seu nome">
-<br><br>
-
-<input type="number" id="idade" placeholder="Sua idade">
-<br><br>
-
-<input type="text" id="foto" placeholder="URL da sua foto">
-<br><br>
-
-<input type="email" placeholder="Digite seu email">
-<br><br>
-
-<input type="password" placeholder="Digite sua senha">
-<br><br>
+<input type="email" id="email" placeholder="Digite seu email"><br><br>
+<input type="password" id="senha" placeholder="Digite sua senha"><br><br>
 
 <button id="loginBtn">Entrar</button>
 
 <br><br>
 
-<button onclick="criarConta()">Criar Conta</button>
-
-<br><br>
-
-<a href="app.html">Entrar sem login</a>
-<br>
-<a href="index.html">Voltar</a>
+<a href="cadastro.html">Criar Conta</a>
 
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
-import { getFirestore, setDoc, doc } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
@@ -60,46 +40,19 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
 
-// CAMPOS
-const nome = document.getElementById("nome");
-const idade = document.getElementById("idade");
-const foto = document.getElementById("foto");
-const email = document.querySelector('input[type="email"]');
-const senha = document.querySelector('input[type="password"]');
-const botao = document.getElementById("loginBtn");
+const email = document.getElementById("email");
+const senha = document.getElementById("senha");
 
-// LOGIN
-botao.addEventListener("click", async () => {
+document.getElementById("loginBtn").addEventListener("click", async () => {
   try {
     await signInWithEmailAndPassword(auth, email.value, senha.value);
     alert("Login realizado!");
     window.location.href = "app.html";
   } catch (error) {
-    alert("Erro no login: " + error.message);
-  }
-});
-
-// CRIAR CONTA
-window.criarConta = async function () {
-  try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email.value, senha.value);
-    const user = userCredential.user;
-
-    await setDoc(doc(db, "usuarios", user.uid), {
-      nome: nome.value,
-      idade: idade.value,
-      foto: foto.value,
-      email: email.value,
-      criadoEm: new Date()
-    });
-
-    alert("Conta criada com sucesso!");
-  } catch (error) {
     alert("Erro: " + error.message);
   }
-};
+});
 </script>
 
 </body>
