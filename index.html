@@ -3,40 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <title>Laço 💘</title>
-<link rel="stylesheet" href="estilo.css">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff4d6d, #6a00f4);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+  max-width: 350px;
+}
+
+h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+p {
+  opacity: 0.9;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 30px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login {
+  background: white;
+  color: #ff4d6d;
+}
+
+.cadastro {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+}
+</style>
 </head>
 
 <body>
 
-<div class="home">
+<div class="container">
 
 <h1>Laço 💘</h1>
 <p>Conexões com propósito</p>
 
-<div class="buttons">
-<a href="login.html">Entrar</a>
-<a href="#">Criar Conta</a>
-</div>
+<button class="login" onclick="irLogin()">Entrar</button>
+<button class="cadastro" onclick="irCadastro()">Criar Conta</button>
 
 </div>
 
-<!-- 🔥 FIREBASE SEMPRE NO FINAL -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-analytics.js";
+<script>
+function irLogin() {
+  window.location.href = "login.html";
+}
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
-    authDomain: "lacoapp.firebaseapp.com",
-    projectId: "lacoapp",
-    storageBucket: "lacoapp.firebasestorage.app",
-    messagingSenderId: "485009455528",
-    appId: "1:485009455528:web:0c43153be60e62cd6a459d",
-    measurementId: "G-MSB3J89XLL"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
+function irCadastro() {
+  window.location.href = "cadastro.html";
+}
 </script>
 
 </body>
