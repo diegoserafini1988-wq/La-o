@@ -7,52 +7,117 @@
 <style>
 body {
   margin: 0;
-  font-family: Arial;
-  background: linear-gradient(135deg, #ff4d6d, #6a00f4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f0f0f;
+  color: white;
 }
 
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: #111;
+  border-bottom: 1px solid #222;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ff4d6d;
+}
+
+.icons {
+  display: flex;
+  gap: 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* CARD */
 .container {
-  max-width: 360px;
-  width: 100%;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .card {
-  background: white;
+  width: 320px;
+  height: 500px;
   border-radius: 25px;
   overflow: hidden;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
 }
 
 .card img {
   width: 100%;
-  height: 400px;
+  height: 100%;
   object-fit: cover;
 }
 
+/* OVERLAY */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.9));
+}
+
+.nome {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* BOTÕES */
 .actions {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
+  gap: 30px;
+  margin: 20px;
 }
 
-button {
-  width: 70px;
-  height: 70px;
+.btn {
+  width: 65px;
+  height: 65px;
   border-radius: 50%;
   border: none;
-  font-size: 25px;
+  font-size: 26px;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-.premium {
-  margin-top: 15px;
-  background: gold;
-  padding: 10px;
-  border-radius: 20px;
+.btn:hover {
+  transform: scale(1.1);
+}
+
+.nope {
+  background: #222;
+  color: #ff4d4d;
+}
+
+.like {
+  background: #222;
+  color: #00ff88;
+}
+
+/* NAV BAR */
+.nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #111;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  border-top: 1px solid #222;
+}
+
+.nav div {
+  text-align: center;
+  font-size: 12px;
   cursor: pointer;
 }
 </style>
@@ -61,30 +126,39 @@ button {
 
 <body>
 
-<div class="container">
+<div class="header">
+  <div class="logo">Laço 💘</div>
+  <div class="icons">
+    <span onclick="irMatches()">💬</span>
+    <span>👤</span>
+  </div>
+</div>
 
-<div class="card">
-  <img id="foto">
-  <h2 id="nome"></h2>
+<div class="container">
+  <div class="card">
+    <img id="foto">
+    <div class="overlay">
+      <div class="nome" id="nome"></div>
+      <div id="idade"></div>
+    </div>
+  </div>
 </div>
 
 <div class="actions">
-  <button onclick="pular()">❌</button>
-  <button onclick="curtir()">❤️</button>
+  <button class="btn nope" onclick="pular()">❌</button>
+  <button class="btn like" onclick="curtir()">❤️</button>
 </div>
 
-<div class="premium" onclick="virarPremium()">
-  👑 Virar Premium
-</div>
-
-<p id="limite"></p>
-
+<div class="nav">
+  <div onclick="location.reload()">🔥<br>Descobrir</div>
+  <div onclick="irMatches()">💬<br>Matches</div>
+  <div>👤<br>Perfil</div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
-import { getFirestore, collection, getDocs, doc, updateDoc, getDoc, arrayUnion } 
+import { getFirestore, collection, getDocs } 
 from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -99,22 +173,7 @@ const db = getFirestore(app);
 
 let usuarios = [];
 let index = 0;
-let usuarioId;
-let likesHoje = 0;
-let premium = false;
 
-const limiteTexto = document.getElementById("limite");
-
-// carregar
-async function carregarUsuarios() {
-  const snap = await getDocs(collection(db, "usuarios"));
-
-  usuarios = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-
-  mostrar();
-}
-
-// mostrar
 function mostrar() {
   if (index >= usuarios.length) return;
 
@@ -122,42 +181,30 @@ function mostrar() {
 
   document.getElementById("foto").src = u.foto;
   document.getElementById("nome").innerText = u.nome;
+  document.getElementById("idade").innerText = u.idade;
 }
 
-// curtir
-window.curtir = async function() {
-
-  if (!premium && likesHoje >= 5) {
-    alert("Limite diário atingido! 😢");
-    return;
-  }
-
-  likesHoje++;
-
-  limiteTexto.innerText = "Likes hoje: " + likesHoje;
-
+window.curtir = function() {
   index++;
   mostrar();
 };
 
-// pular
 window.pular = function() {
   index++;
   mostrar();
 };
 
-// virar premium
-window.virarPremium = function() {
-  premium = true;
-  alert("Agora você é Premium 👑");
+window.irMatches = function() {
+  window.location.href = "matches.html";
 };
 
-// login
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    usuarioId = user.uid;
-    carregarUsuarios();
-  }
+onAuthStateChanged(auth, async (user) => {
+  if (!user) return;
+
+  const snap = await getDocs(collection(db, "usuarios"));
+  usuarios = snap.docs.map(doc => doc.data());
+
+  mostrar();
 });
 </script>
 
