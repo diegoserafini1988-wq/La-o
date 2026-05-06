@@ -8,7 +8,7 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: #0f0f0f;
+  background: #000;
   color: white;
 }
 
@@ -16,39 +16,31 @@ body {
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 15px 20px;
-  background: #111;
-  border-bottom: 1px solid #222;
+  padding: 15px;
+  background: #000;
+  border-bottom: 1px solid #111;
 }
 
 .logo {
-  font-size: 22px;
-  font-weight: bold;
   color: #ff4d6d;
-}
-
-.icons {
-  display: flex;
-  gap: 15px;
   font-size: 20px;
-  cursor: pointer;
+  font-weight: bold;
 }
 
 /* CARD */
 .container {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .card {
   width: 320px;
   height: 500px;
-  border-radius: 25px;
+  border-radius: 20px;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.8);
 }
 
 .card img {
@@ -57,17 +49,17 @@ body {
   object-fit: cover;
 }
 
-/* OVERLAY */
+/* INFO */
 .overlay {
   position: absolute;
   bottom: 0;
-  width: 100%;
   padding: 20px;
+  width: 100%;
   background: linear-gradient(transparent, rgba(0,0,0,0.9));
 }
 
 .nome {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
 }
 
@@ -76,7 +68,7 @@ body {
   display: flex;
   justify-content: center;
   gap: 30px;
-  margin: 20px;
+  margin-top: 15px;
 }
 
 .btn {
@@ -86,6 +78,8 @@ body {
   border: none;
   font-size: 26px;
   cursor: pointer;
+  background: #111;
+  color: white;
   transition: 0.2s;
 }
 
@@ -93,32 +87,28 @@ body {
   transform: scale(1.1);
 }
 
-.nope {
-  background: #222;
-  color: #ff4d4d;
-}
-
 .like {
-  background: #222;
   color: #00ff88;
 }
 
-/* NAV BAR */
-.nav {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: #111;
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-  border-top: 1px solid #222;
+.nope {
+  color: #ff4d4d;
 }
 
-.nav div {
-  text-align: center;
-  font-size: 12px;
-  cursor: pointer;
+/* MATCH */
+.match {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.95);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:999;
+  text-align:center;
 }
 </style>
 
@@ -128,10 +118,7 @@ body {
 
 <div class="header">
   <div class="logo">Laço 💘</div>
-  <div class="icons">
-    <span onclick="irMatches()">💬</span>
-    <span>👤</span>
-  </div>
+  <div onclick="irMatches()">💬</div>
 </div>
 
 <div class="container">
@@ -149,16 +136,10 @@ body {
   <button class="btn like" onclick="curtir()">❤️</button>
 </div>
 
-<div class="nav">
-  <div onclick="location.reload()">🔥<br>Descobrir</div>
-  <div onclick="irMatches()">💬<br>Matches</div>
-  <div>👤<br>Perfil</div>
-</div>
-
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
-import { getFirestore, collection, getDocs } 
+import { getFirestore, collection, getDocs, doc, updateDoc, getDoc, arrayUnion } 
 from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -173,38 +154,107 @@ const db = getFirestore(app);
 
 let usuarios = [];
 let index = 0;
+let usuarioId = null;
 
+// CARREGAR
+async function carregarUsuarios() {
+  const snap = await getDocs(collection(db, "usuarios"));
+
+  usuarios = snap.docs
+    .map(doc => ({ id: doc.id, ...doc.data() }))
+    .filter(u => u.id !== usuarioId);
+
+  mostrar();
+}
+
+// MOSTRAR
 function mostrar() {
-  if (index >= usuarios.length) return;
+  if (index >= usuarios.length) {
+    document.getElementById("nome").innerText = "Sem mais perfis";
+    return;
+  }
 
   const u = usuarios[index];
 
-  document.getElementById("foto").src = u.foto;
-  document.getElementById("nome").innerText = u.nome;
-  document.getElementById("idade").innerText = u.idade;
+  document.getElementById("foto").src = u.foto || "https://via.placeholder.com/300";
+  document.getElementById("nome").innerText = u.nome || "Sem nome";
+  document.getElementById("idade").innerText = u.idade || "";
 }
 
-window.curtir = function() {
-  index++;
-  mostrar();
+// CURTIR
+window.curtir = async function() {
+  const user = usuarios[index];
+
+  await updateDoc(doc(db, "usuarios", usuarioId), {
+    likes: arrayUnion(user.id)
+  });
+
+  const outroSnap = await getDoc(doc(db, "usuarios", user.id));
+  const outro = outroSnap.data();
+
+  if (outro.likes && outro.likes.includes(usuarioId)) {
+
+    await updateDoc(doc(db, "usuarios", usuarioId), {
+      matches: arrayUnion(user.id)
+    });
+
+    await updateDoc(doc(db, "usuarios", user.id), {
+      matches: arrayUnion(usuarioId)
+    });
+
+    mostrarMatch(user.nome);
+  }
+
+  proximo();
 };
 
+// PULAR
 window.pular = function() {
-  index++;
-  mostrar();
+  proximo();
 };
 
+// PROXIMO
+function proximo() {
+  index++;
+  mostrar();
+}
+
+// MATCH
+function mostrarMatch(nome) {
+  const div = document.createElement("div");
+  div.className = "match";
+
+  div.innerHTML = `
+    <h1>💘 MATCH!</h1>
+    <p>Você e ${nome} se curtiram</p>
+    <button onclick="this.parentElement.remove()" style="
+      padding:15px;
+      border:none;
+      border-radius:20px;
+      background:#ff4d6d;
+      color:white;
+      margin-top:20px;
+    ">
+      Continuar
+    </button>
+  `;
+
+  document.body.appendChild(div);
+}
+
+// NAV
 window.irMatches = function() {
   window.location.href = "matches.html";
 };
 
-onAuthStateChanged(auth, async (user) => {
-  if (!user) return;
-
-  const snap = await getDocs(collection(db, "usuarios"));
-  usuarios = snap.docs.map(doc => doc.data());
-
-  mostrar();
+// LOGIN
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    usuarioId = user.uid;
+    carregarUsuarios();
+  } else {
+    window.location.href = "login.html";
+  }
 });
 </script>
 
