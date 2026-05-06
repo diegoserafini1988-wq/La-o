@@ -4,66 +4,106 @@
 <meta charset="UTF-8">
 <title>Laço 💘</title>
 
-<link rel="stylesheet" href="style.css">
-
 <style>
 body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff4d6d, #6a00f4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   overflow: hidden;
 }
 
-.swipe-card {
+/* CONTAINER */
+#app {
+  width: 100%;
+  max-width: 350px;
+  height: 600px;
+  position: relative;
+}
+
+/* CARD */
+.card {
   position: absolute;
-  width: 300px;
-  height: 450px;
-  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
   overflow: hidden;
-  background: white;
-  color: black;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  background: #000;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+  cursor: grab;
   transition: transform 0.3s ease;
 }
 
-.swipe-card img {
+/* IMAGEM CORRIGIDA */
+.card img {
   width: 100%;
-  height: 70%;
+  height: 100%;
   object-fit: cover;
 }
 
+/* GRADIENTE */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(transparent, rgba(0,0,0,0.8));
+}
+
+/* INFO */
 .info {
-  padding: 10px;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
+}
+
+.info h2 {
+  margin: 0;
+  font-size: 26px;
+}
+
+.info p {
+  margin: 5px 0 0;
+}
+
+/* BADGES */
+.badge {
+  position: absolute;
+  top: 20px;
+  padding: 10px 20px;
+  border: 3px solid;
+  font-size: 22px;
+  font-weight: bold;
+  opacity: 0;
 }
 
 .like {
-  position: absolute;
-  top: 20px;
   left: 20px;
-  color: green;
-  font-size: 30px;
-  opacity: 0;
+  color: #00ff88;
+  border-color: #00ff88;
 }
 
 .nope {
-  position: absolute;
-  top: 20px;
   right: 20px;
-  color: red;
-  font-size: 30px;
-  opacity: 0;
+  color: #ff4d4d;
+  border-color: #ff4d4d;
 }
 </style>
 
 </head>
 
-<body class="home">
+<body>
 
-<h2 id="nomeUsuario">Carregando...</h2>
-
-<div id="cardContainer"></div>
+<div id="app"></div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
-import { getFirestore, collection, getDocs, doc, getDoc, updateDoc, arrayUnion } 
+import { getFirestore, collection, getDocs, doc, updateDoc, arrayUnion } 
 from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -76,7 +116,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const container = document.getElementById("cardContainer");
+const container = document.getElementById("app");
 
 let usuarios = [];
 let index = 0;
@@ -94,15 +134,18 @@ function criarCard() {
   const user = usuarios[index];
 
   const card = document.createElement("div");
-  card.className = "swipe-card";
+  card.className = "card";
 
   card.innerHTML = `
-    <div class="like">❤️</div>
-    <div class="nope">❌</div>
-    <img src="${user.foto}">
+    <div class="badge like">LIKE</div>
+    <div class="badge nope">NOPE</div>
+
+    <img src="${user.foto || 'https://via.placeholder.com/300'}">
+
+    <div class="overlay"></div>
+
     <div class="info">
-      <h3>${user.nome}</h3>
-      <p>${user.idade}</p>
+      <h2>${user.nome}, ${user.idade}</h2>
     </div>
   `;
 
@@ -115,25 +158,32 @@ function criarCard() {
 
     document.onmousemove = (e) => {
       let moveX = e.clientX - startX;
-      card.style.transform = `translateX(${moveX}px) rotate(${moveX/10}deg)`;
+      card.style.transform = `translateX(${moveX}px) rotate(${moveX/15}deg)`;
 
-      if (moveX > 100) card.querySelector(".like").style.opacity = 1;
-      else card.querySelector(".like").style.opacity = 0;
+      if (moveX > 80) {
+        card.querySelector(".like").style.opacity = 1;
+      } else {
+        card.querySelector(".like").style.opacity = 0;
+      }
 
-      if (moveX < -100) card.querySelector(".nope").style.opacity = 1;
-      else card.querySelector(".nope").style.opacity = 0;
+      if (moveX < -80) {
+        card.querySelector(".nope").style.opacity = 1;
+      } else {
+        card.querySelector(".nope").style.opacity = 0;
+      }
     };
 
     document.onmouseup = async (e) => {
       let moveX = e.clientX - startX;
 
-      if (moveX > 150) {
+      if (moveX > 120) {
         // LIKE
         await updateDoc(doc(db, "usuarios", usuarioId), {
           likes: arrayUnion(user.id)
         });
+
         card.style.transform = "translateX(1000px)";
-      } else if (moveX < -150) {
+      } else if (moveX < -120) {
         card.style.transform = "translateX(-1000px)";
       } else {
         card.style.transform = "";
@@ -151,14 +201,9 @@ function criarCard() {
   });
 }
 
-onAuthStateChanged(auth, async (user) => {
+onAuthStateChanged(auth, (user) => {
   if (user) {
     usuarioId = user.uid;
-
-    const docSnap = await getDoc(doc(db, "usuarios", user.uid));
-    document.getElementById("nomeUsuario").innerText =
-      "Olá, " + docSnap.data().nome;
-
     carregarUsuarios();
   } else {
     window.location.href = "login.html";
