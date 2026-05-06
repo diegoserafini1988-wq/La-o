@@ -2,13 +2,14 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Entrar</title>
+<title>Login - Laço 💘</title>
 
 <style>
 body {
   margin: 0;
-  font-family: Arial;
-  background: linear-gradient(135deg, #ff4d6d, #6a00f4);
+  font-family: 'Segoe UI', sans-serif;
+  background: #000;
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,29 +17,41 @@ body {
 }
 
 .card {
-  background: white;
+  background: #111;
   padding: 30px;
   border-radius: 20px;
   width: 300px;
   text-align: center;
 }
 
+h2 {
+  color: #ff4d6d;
+}
+
 input {
   width: 100%;
   padding: 12px;
-  margin-top: 10px;
+  margin: 10px 0;
   border-radius: 10px;
-  border: 1px solid #ccc;
+  border: none;
+  background: #222;
+  color: white;
 }
 
 button {
   width: 100%;
   padding: 12px;
-  margin-top: 15px;
-  border-radius: 20px;
+  margin-top: 10px;
+  border-radius: 10px;
   border: none;
   background: #ff4d6d;
   color: white;
+  cursor: pointer;
+}
+
+.link {
+  margin-top: 15px;
+  font-size: 14px;
   cursor: pointer;
 }
 </style>
@@ -48,41 +61,70 @@ button {
 
 <div class="card">
 
-<h2>Entrar</h2>
+<h2>Laço 💘</h2>
 
-<input type="email" id="email" placeholder="Email">
-<input type="password" id="senha" placeholder="Senha">
+<input id="email" type="email" placeholder="Email">
+<input id="senha" type="password" placeholder="Senha">
 
 <button onclick="login()">Entrar</button>
+<button onclick="criarConta()">Criar Conta</button>
 
-<br><br>
-
-<a href="cadastro.html">Criar Conta</a>
+<div class="link" onclick="window.location.href='index.html'">
+Voltar
+</div>
 
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
 
+// 🔥 CONFIG COMPLETA (NÃO ALTERAR)
 const firebaseConfig = {
   apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
   authDomain: "lacoapp.firebaseapp.com",
-  projectId: "lacoapp"
+  projectId: "lacoapp",
+  storageBucket: "lacoapp.firebasestorage.app",
+  messagingSenderId: "485009455528",
+  appId: "1:485009455528:web:0c43153be60e62cd6a459d"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+// LOGIN
 window.login = async function() {
   const email = document.getElementById("email").value;
   const senha = document.getElementById("senha").value;
 
+  if (!email || !senha) {
+    alert("Preencha tudo");
+    return;
+  }
+
   try {
     await signInWithEmailAndPassword(auth, email, senha);
     window.location.href = "app.html";
-  } catch (e) {
-    alert("Erro: " + e.message);
+  } catch (error) {
+    alert("Erro: " + error.message);
+  }
+};
+
+// CRIAR CONTA
+window.criarConta = async function() {
+  const email = document.getElementById("email").value;
+  const senha = document.getElementById("senha").value;
+
+  if (!email || !senha) {
+    alert("Preencha tudo");
+    return;
+  }
+
+  try {
+    await createUserWithEmailAndPassword(auth, email, senha);
+    alert("Conta criada!");
+  } catch (error) {
+    alert("Erro: " + error.message);
   }
 };
 </script>
