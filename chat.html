@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Chat 💬</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #111;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#mensagens {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.msg {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+}
+
+.minha {
+  background: #ff4d6d;
+  margin-left: auto;
+}
+
+.outro {
+  background: #333;
+}
+
+.input {
+  display: flex;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  background: #ff4d6d;
+  color: white;
+}
+</style>
+</head>
+
+<body>
+
+<div id="mensagens"></div>
+
+<div class="input">
+  <input id="msg" placeholder="Digite...">
+  <button onclick="enviar()">Enviar</button>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+import { getFirestore, collection, addDoc, query, where, onSnapshot } 
+from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
+  authDomain: "lacoapp.firebaseapp.com",
+  projectId: "lacoapp"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const params = new URLSearchParams(window.location.search);
+const outroId = params.get("uid");
+
+let meuId = null;
+
+const mensagensDiv = document.getElementById("mensagens");
+
+onAuthStateChanged(auth, (user) => {
+  if (!user) return;
+
+  meuId = user.uid;
+
+  const q = query(
+    collection(db, "mensagens"),
+    where("users", "array-contains", meuId)
+  );
+
+  onSnapshot(q, (snapshot) => {
+    mensagensDiv.innerHTML = "";
+
+    snapshot.forEach(doc => {
+      const msg = doc.data();
+
+      if (!msg.users.includes(outroId)) return;
+
+      const div = document.createElement("div");
+      div.className = "msg " + (msg.from === meuId ? "minha" : "outro");
+      div.innerText = msg.texto;
+
+      mensagensDiv.appendChild(div);
+    });
+  });
+});
+
+window.enviar = async function() {
+  const texto = document.getElementById("msg").value;
+
+  if (!texto) return;
+
+  await addDoc(collection(db, "mensagens"), {
+    texto,
+    from: meuId,
+    users: [meuId, outroId],
+    created: new Date()
+  });
+
+  document.getElementById("msg").value = "";
+};
+</script>
+
+</body>
+</html>
