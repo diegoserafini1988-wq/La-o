@@ -15,29 +15,39 @@ body {
   height: 100vh;
 }
 
+/* CONTAINER */
 .container {
   width: 100%;
-  max-width: 350px;
+  max-width: 360px;
   text-align: center;
 }
 
+/* CARD */
 .card {
   background: white;
   border-radius: 25px;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  transition: 0.3s;
 }
 
+/* FOTO */
 .card img {
   width: 100%;
-  height: 400px;
+  height: 420px;
   object-fit: cover;
 }
 
+/* INFO */
 .info {
   padding: 15px;
 }
 
+.info h2 {
+  margin: 0;
+}
+
+/* BOTÕES */
 .actions {
   display: flex;
   justify-content: center;
@@ -55,13 +65,30 @@ body {
 }
 
 .nope {
-  background: red;
+  background: #ff4d4d;
   color: white;
 }
 
 .like {
-  background: green;
+  background: #00c853;
   color: white;
+}
+
+/* MATCH POPUP */
+.match {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.9);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  color:white;
+  z-index:999;
+  text-align:center;
 }
 </style>
 
@@ -121,10 +148,10 @@ async function carregarUsuarios() {
   mostrar();
 }
 
-// 🔥 MOSTRAR
+// 🔥 MOSTRAR PERFIL
 function mostrar() {
   if (index >= usuarios.length) {
-    nome.innerText = "Sem mais perfis 😢";
+    nome.innerText = "Acabaram os perfis 😢";
     foto.src = "";
     idade.innerText = "";
     return;
@@ -137,7 +164,7 @@ function mostrar() {
   idade.innerText = user.idade || "";
 }
 
-// ❤️ CURTIR (AGORA CORRETO)
+// ❤️ CURTIR (COM MATCH REAL + SALVANDO)
 window.curtir = async function() {
   if (index >= usuarios.length) return;
 
@@ -148,13 +175,22 @@ window.curtir = async function() {
     likes: arrayUnion(user.id)
   });
 
-  // 🔥 BUSCA DADOS ATUALIZADOS DO OUTRO USUÁRIO
-  const outroRef = doc(db, "usuarios", user.id);
-  const outroSnap = await getDoc(outroRef);
-  const outroData = outroSnap.data();
+  // pega dados atualizados do outro
+  const outroSnap = await getDoc(doc(db, "usuarios", user.id));
+  const outro = outroSnap.data();
 
   // 🔥 VERIFICA MATCH REAL
-  if (outroData.likes && outroData.likes.includes(usuarioId)) {
+  if (outro.likes && outro.likes.includes(usuarioId)) {
+
+    // salva match nos dois
+    await updateDoc(doc(db, "usuarios", usuarioId), {
+      matches: arrayUnion(user.id)
+    });
+
+    await updateDoc(doc(db, "usuarios", user.id), {
+      matches: arrayUnion(usuarioId)
+    });
+
     mostrarMatch(user.nome);
   }
 
@@ -166,54 +202,37 @@ window.pular = function() {
   proximo();
 };
 
-// 👉 PRÓXIMO
+// 👉 PRÓXIMO PERFIL
 function proximo() {
   index++;
   mostrar();
 }
 
-// 💘 MATCH VISUAL PROFISSIONAL
+// 💘 POPUP MATCH
 function mostrarMatch(nome) {
   const div = document.createElement("div");
+  div.className = "match";
 
   div.innerHTML = `
-    <div style="
-      position: fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      background: rgba(0,0,0,0.9);
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      flex-direction:column;
+    <h1>💘 DEU MATCH!</h1>
+    <p>Você e ${nome} se curtiram</p>
+    <button onclick="this.parentElement.remove()" style="
+      padding:15px 25px;
+      border:none;
+      border-radius:30px;
+      background:#ff4d6d;
       color:white;
-      z-index:999;
-      text-align:center;
+      cursor:pointer;
+      margin-top:20px;
     ">
-      <h1 style="font-size:40px;">💘 DEU MATCH!</h1>
-      <p style="font-size:20px;">Você e ${nome} se curtiram</p>
-
-      <button onclick="this.parentElement.parentElement.remove()" style="
-        margin-top:20px;
-        padding:15px 30px;
-        border:none;
-        border-radius:30px;
-        background:#ff4d6d;
-        color:white;
-        font-size:16px;
-        cursor:pointer;
-      ">
-        Continuar
-      </button>
-    </div>
+      Continuar
+    </button>
   `;
 
   document.body.appendChild(div);
 }
 
-// LOGIN
+// 🔐 LOGIN
 onAuthStateChanged(auth, (user) => {
   if (user) {
     usuarioId = user.uid;
