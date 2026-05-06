@@ -5,142 +5,165 @@
 <title>Laço 💘</title>
 
 <link rel="stylesheet" href="style.css">
+
+<style>
+body {
+  overflow: hidden;
+}
+
+.swipe-card {
+  position: absolute;
+  width: 300px;
+  height: 450px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: white;
+  color: black;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+
+.swipe-card img {
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+}
+
+.info {
+  padding: 10px;
+}
+
+.like {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: green;
+  font-size: 30px;
+  opacity: 0;
+}
+
+.nope {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: red;
+  font-size: 30px;
+  opacity: 0;
+}
+</style>
+
 </head>
 
 <body class="home">
 
-<div class="card">
-
 <h2 id="nomeUsuario">Carregando...</h2>
 
-<img id="foto" src="https://via.placeholder.com/300" />
-
-<h3 id="nomeCard">Nome</h3>
-<p id="idadeCard">Idade</p>
-
-<div class="actions">
-<button onclick="naoCurtir()">❌</button>
-<button onclick="curtir()">❤️</button>
-</div>
-
-<br>
-
-<button onclick="logout()">Sair</button>
-
-</div>
+<div id="cardContainer"></div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
-import { getFirestore, doc, getDoc, collection, getDocs, updateDoc, arrayUnion } 
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+import { getFirestore, collection, getDocs, doc, getDoc, updateDoc, arrayUnion } 
 from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
   authDomain: "lacoapp.firebaseapp.com",
-  projectId: "lacoapp",
-  storageBucket: "lacoapp.firebasestorage.app",
-  messagingSenderId: "485009455528",
-  appId: "1:485009455528:web:0c43153be60e62cd6a459d",
-  measurementId: "G-MSB3J89XLL"
+  projectId: "lacoapp"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const nomeUsuario = document.getElementById("nomeUsuario");
-const nomeCard = document.getElementById("nomeCard");
-const idadeCard = document.getElementById("idadeCard");
-const foto = document.getElementById("foto");
+const container = document.getElementById("cardContainer");
 
 let usuarios = [];
 let index = 0;
 let usuarioId = null;
-let usuarioLogado = null;
 
-// 🔥 CARREGAR USUÁRIOS
 async function carregarUsuarios() {
-  const querySnapshot = await getDocs(collection(db, "usuarios"));
-
-  usuarios = querySnapshot.docs.map(doc => ({
-    id: doc.id,
-    ...doc.data()
-  }));
-
-  mostrarUsuario();
+  const snap = await getDocs(collection(db, "usuarios"));
+  usuarios = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  criarCard();
 }
 
-// 🔥 MOSTRAR USUÁRIO
-function mostrarUsuario() {
-  if (usuarios.length === 0) return;
+function criarCard() {
+  if (index >= usuarios.length) return;
 
   const user = usuarios[index];
 
-  nomeCard.innerText = user.nome || "Sem nome";
-  idadeCard.innerText = user.idade || "Sem idade";
-  foto.src = user.foto || "https://via.placeholder.com/300";
+  const card = document.createElement("div");
+  card.className = "swipe-card";
+
+  card.innerHTML = `
+    <div class="like">❤️</div>
+    <div class="nope">❌</div>
+    <img src="${user.foto}">
+    <div class="info">
+      <h3>${user.nome}</h3>
+      <p>${user.idade}</p>
+    </div>
+  `;
+
+  container.appendChild(card);
+
+  let startX = 0;
+
+  card.addEventListener("mousedown", (e) => {
+    startX = e.clientX;
+
+    document.onmousemove = (e) => {
+      let moveX = e.clientX - startX;
+      card.style.transform = `translateX(${moveX}px) rotate(${moveX/10}deg)`;
+
+      if (moveX > 100) card.querySelector(".like").style.opacity = 1;
+      else card.querySelector(".like").style.opacity = 0;
+
+      if (moveX < -100) card.querySelector(".nope").style.opacity = 1;
+      else card.querySelector(".nope").style.opacity = 0;
+    };
+
+    document.onmouseup = async (e) => {
+      let moveX = e.clientX - startX;
+
+      if (moveX > 150) {
+        // LIKE
+        await updateDoc(doc(db, "usuarios", usuarioId), {
+          likes: arrayUnion(user.id)
+        });
+        card.style.transform = "translateX(1000px)";
+      } else if (moveX < -150) {
+        card.style.transform = "translateX(-1000px)";
+      } else {
+        card.style.transform = "";
+      }
+
+      document.onmousemove = null;
+      document.onmouseup = null;
+
+      setTimeout(() => {
+        card.remove();
+        index++;
+        criarCard();
+      }, 300);
+    };
+  });
 }
 
-// ❤️ CURTIR + MATCH
-window.curtir = async function() {
-  const alvo = usuarios[index];
-
-  if (!usuarioId || !alvo) return;
-
-  const userRef = doc(db, "usuarios", usuarioId);
-
-  // SALVA LIKE
-  await updateDoc(userRef, {
-    likes: arrayUnion(alvo.id)
-  });
-
-  // 🔥 VERIFICAR MATCH
-  if (alvo.likes && alvo.likes.includes(usuarioId)) {
-    
-    alert("💘 DEU MATCH COM " + alvo.nome + "!");
-    
-    // SALVAR MATCH
-    await updateDoc(userRef, {
-      matches: arrayUnion(alvo.id)
-    });
-  }
-
-  index++;
-  mostrarUsuario();
-};
-
-// ❌ NÃO CURTIR
-window.naoCurtir = function() {
-  index++;
-  mostrarUsuario();
-};
-
-// LOGIN
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     usuarioId = user.uid;
 
-    const docRef = doc(db, "usuarios", user.uid);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      usuarioLogado = docSnap.data();
-      nomeUsuario.innerText = "Olá, " + usuarioLogado.nome;
-    }
+    const docSnap = await getDoc(doc(db, "usuarios", user.uid));
+    document.getElementById("nomeUsuario").innerText =
+      "Olá, " + docSnap.data().nome;
 
     carregarUsuarios();
   } else {
     window.location.href = "login.html";
   }
 });
-
-// LOGOUT
-window.logout = function() {
-  signOut(auth).then(() => {
-    window.location.href = "login.html";
-  });
-};
 </script>
 
 </body>
