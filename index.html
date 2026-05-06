@@ -1,11 +1,77 @@
-<body class="home">
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Laço 💘</title>
 
-<h1>Laço 💘</h1>
-<p>Conexões que começam no olhar</p>
+<link rel="stylesheet" href="style.css">
 
-<div class="buttons">
-  <a href="login.html">Entrar</a>
-  <a href="login.html">Criar Conta</a>
+<style>
+body {
+  margin: 0;
+  background: #000;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.box {
+  text-align: center;
+}
+
+h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+p {
+  opacity: 0.7;
+  margin-bottom: 30px;
+}
+
+a {
+  display: block;
+  margin: 10px auto;
+  width: 200px;
+  padding: 15px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn-login {
+  background: #111;
+  color: #fff;
+  border: 1px solid #333;
+}
+
+.btn-criar {
+  background: linear-gradient(45deg, #ff4d6d, #ff758f);
+  color: white;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="home">
+  <div class="box">
+
+    <h1>Laço 💘</h1>
+    <p>Conexões que começam no olhar</p>
+
+    <a href="login.html" class="btn-login">Entrar</a>
+    <a href="login.html?modo=criar" class="btn-criar">Criar Conta</a>
+
+  </div>
 </div>
 
 </body>
+</html>
