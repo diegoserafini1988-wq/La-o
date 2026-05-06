@@ -7,7 +7,7 @@
 <style>
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: Arial;
   background: linear-gradient(135deg, #ff4d6d, #6a00f4);
   display: flex;
   justify-content: center;
@@ -26,7 +26,6 @@ body {
   border-radius: 25px;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-  transition: 0.3s;
 }
 
 .card img {
@@ -64,12 +63,6 @@ body {
   background: green;
   color: white;
 }
-
-.empty {
-  color: white;
-  font-size: 20px;
-  margin-top: 20px;
-}
 </style>
 
 </head>
@@ -91,14 +84,12 @@ body {
   <button class="like" onclick="curtir()">❤️</button>
 </div>
 
-<p id="mensagem" class="empty"></p>
-
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
-import { getFirestore, collection, getDocs, doc, updateDoc, arrayUnion } 
+import { getFirestore, collection, getDocs, doc, updateDoc, getDoc, arrayUnion } 
 from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -114,34 +105,27 @@ const db = getFirestore(app);
 const foto = document.getElementById("foto");
 const nome = document.getElementById("nome");
 const idade = document.getElementById("idade");
-const mensagem = document.getElementById("mensagem");
 
 let usuarios = [];
 let index = 0;
 let usuarioId = null;
 
-// 🔥 CARREGAR USUÁRIOS (FILTRADO)
+// 🔥 CARREGAR USUÁRIOS
 async function carregarUsuarios() {
   const snap = await getDocs(collection(db, "usuarios"));
 
   usuarios = snap.docs
     .map(doc => ({ id: doc.id, ...doc.data() }))
-    .filter(u => u.id !== usuarioId); // remove você mesmo
-
-  if (usuarios.length === 0) {
-    mensagem.innerText = "Sem usuários disponíveis 😢";
-    return;
-  }
+    .filter(u => u.id !== usuarioId);
 
   mostrar();
 }
 
-// 🔥 MOSTRAR USUÁRIO
+// 🔥 MOSTRAR
 function mostrar() {
   if (index >= usuarios.length) {
-    mensagem.innerText = "Acabaram os perfis 😢";
+    nome.innerText = "Sem mais perfis 😢";
     foto.src = "";
-    nome.innerText = "";
     idade.innerText = "";
     return;
   }
@@ -153,15 +137,26 @@ function mostrar() {
   idade.innerText = user.idade || "";
 }
 
-// ❤️ CURTIR
+// ❤️ CURTIR (AGORA CORRETO)
 window.curtir = async function() {
   if (index >= usuarios.length) return;
 
   const user = usuarios[index];
 
+  // salva like no seu perfil
   await updateDoc(doc(db, "usuarios", usuarioId), {
     likes: arrayUnion(user.id)
   });
+
+  // 🔥 BUSCA DADOS ATUALIZADOS DO OUTRO USUÁRIO
+  const outroRef = doc(db, "usuarios", user.id);
+  const outroSnap = await getDoc(outroRef);
+  const outroData = outroSnap.data();
+
+  // 🔥 VERIFICA MATCH REAL
+  if (outroData.likes && outroData.likes.includes(usuarioId)) {
+    mostrarMatch(user.nome);
+  }
 
   proximo();
 };
@@ -175,6 +170,47 @@ window.pular = function() {
 function proximo() {
   index++;
   mostrar();
+}
+
+// 💘 MATCH VISUAL PROFISSIONAL
+function mostrarMatch(nome) {
+  const div = document.createElement("div");
+
+  div.innerHTML = `
+    <div style="
+      position: fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background: rgba(0,0,0,0.9);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      color:white;
+      z-index:999;
+      text-align:center;
+    ">
+      <h1 style="font-size:40px;">💘 DEU MATCH!</h1>
+      <p style="font-size:20px;">Você e ${nome} se curtiram</p>
+
+      <button onclick="this.parentElement.parentElement.remove()" style="
+        margin-top:20px;
+        padding:15px 30px;
+        border:none;
+        border-radius:30px;
+        background:#ff4d6d;
+        color:white;
+        font-size:16px;
+        cursor:pointer;
+      ">
+        Continuar
+      </button>
+    </div>
+  `;
+
+  document.body.appendChild(div);
 }
 
 // LOGIN
