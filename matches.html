@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Matches 💘</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #111;
+  color: white;
+}
+
+.header {
+  padding: 20px;
+  text-align: center;
+  background: #ff4d6d;
+}
+
+.match {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #333;
+  cursor: pointer;
+}
+
+.match img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h2>Seus Matches 💘</h2>
+</div>
+
+<div id="lista"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
+  authDomain: "lacoapp.firebaseapp.com",
+  projectId: "lacoapp"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const lista = document.getElementById("lista");
+
+onAuthStateChanged(auth, async (user) => {
+  if (!user) return;
+
+  const userSnap = await getDoc(doc(db, "usuarios", user.uid));
+  const data = userSnap.data();
+
+  if (!data.matches) return;
+
+  for (let id of data.matches) {
+    const snap = await getDoc(doc(db, "usuarios", id));
+    const u = snap.data();
+
+    const div = document.createElement("div");
+    div.className = "match";
+
+    div.innerHTML = `
+      <img src="${u.foto}">
+      <span>${u.nome}</span>
+    `;
+
+    div.onclick = () => {
+      window.location.href = "chat.html?uid=" + id;
+    };
+
+    lista.appendChild(div);
+  }
+});
+</script>
+
+</body>
+</html>
