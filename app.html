@@ -7,11 +7,13 @@
 <style>
 body {
   margin:0;
-  font-family: Arial;
   background:#000;
   color:white;
+  font-family: Arial;
+  overflow:hidden;
 }
 
+/* HEADER */
 .header {
   padding:15px;
   display:flex;
@@ -19,13 +21,22 @@ body {
   border-bottom:1px solid #111;
 }
 
+/* CARD */
+.container {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:80vh;
+}
+
 .card {
   width:320px;
   height:500px;
-  margin:20px auto;
   border-radius:20px;
   overflow:hidden;
-  position:relative;
+  position:absolute;
+  touch-action:none;
+  transition: transform 0.3s ease;
 }
 
 .card img {
@@ -42,6 +53,7 @@ body {
   background:linear-gradient(transparent, rgba(0,0,0,0.9));
 }
 
+/* BOTÕES */
 .actions {
   display:flex;
   justify-content:center;
@@ -56,6 +68,7 @@ button {
   font-size:25px;
 }
 </style>
+
 </head>
 
 <body>
@@ -65,23 +78,25 @@ button {
   <div onclick="location.href='matches.html'">💬</div>
 </div>
 
-<div class="card">
-  <img id="foto">
-  <div class="overlay">
-    <h2 id="nome"></h2>
-    <p id="idade"></p>
+<div class="container">
+  <div class="card" id="card">
+    <img id="foto">
+    <div class="overlay">
+      <h2 id="nome"></h2>
+      <p id="idade"></p>
+    </div>
   </div>
 </div>
 
 <div class="actions">
-  <button onclick="pular()">❌</button>
-  <button onclick="curtir()">❤️</button>
+  <button onclick="nope()">❌</button>
+  <button onclick="like()">❤️</button>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
-import { getFirestore, collection, getDocs, doc, updateDoc, getDoc, arrayUnion } 
+import { getFirestore, collection, getDocs } 
 from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -94,67 +109,68 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-let usuarioId = null;
 let usuarios = [];
 let index = 0;
 
-// 🔥 GARANTE QUE NÃO VOLTA PRO LOGIN ERRADO
-onAuthStateChanged(auth, async (user) => {
-
-  if (!user) {
-    setTimeout(() => {
-      if (!auth.currentUser) {
-        window.location.href = "login.html";
-      }
-    }, 500);
-    return;
-  }
-
-  usuarioId = user.uid;
-
-  const snap = await getDocs(collection(db, "usuarios"));
-  usuarios = snap.docs
-    .map(d => ({ id: d.id, ...d.data() }))
-    .filter(u => u.id !== usuarioId);
-
-  mostrar();
-});
+const card = document.getElementById("card");
 
 function mostrar() {
   if (index >= usuarios.length) return;
 
   const u = usuarios[index];
-
-  foto.src = u.foto || "https://via.placeholder.com/300";
-  nome.innerText = u.nome || "Sem nome";
-  idade.innerText = u.idade || "";
+  foto.src = u.foto;
+  nome.innerText = u.nome;
+  idade.innerText = u.idade;
 }
 
-window.curtir = async function() {
-  const u = usuarios[index];
+onAuthStateChanged(auth, async (user) => {
+  if (!user) return location.href = "login.html";
 
-  await updateDoc(doc(db, "usuarios", usuarioId), {
-    likes: arrayUnion(u.id)
-  });
+  const snap = await getDocs(collection(db, "usuarios"));
+  usuarios = snap.docs.map(d => d.data());
 
-  const outro = await getDoc(doc(db, "usuarios", u.id));
+  mostrar();
+});
 
-  if (outro.data().likes?.includes(usuarioId)) {
-    alert("💘 MATCH!");
+// 👉 SWIPE
+let startX = 0;
+
+card.addEventListener("pointerdown", e => {
+  startX = e.clientX;
+});
+
+card.addEventListener("pointermove", e => {
+  let move = e.clientX - startX;
+  card.style.transform = `translateX(${move}px) rotate(${move/10}deg)`;
+});
+
+card.addEventListener("pointerup", e => {
+  let move = e.clientX - startX;
+
+  if (move > 100) {
+    like();
+  } else if (move < -100) {
+    nope();
+  } else {
+    card.style.transform = "";
   }
+});
 
-  index++;
-  mostrar();
+window.like = function() {
+  card.style.transform = "translateX(500px) rotate(30deg)";
+  setTimeout(proximo, 200);
 };
 
-window.pular = function() {
-  index++;
-  mostrar();
+window.nope = function() {
+  card.style.transform = "translateX(-500px) rotate(-30deg)";
+  setTimeout(proximo, 200);
 };
 
-const foto = document.getElementById("foto");
-const nome = document.getElementById("nome");
-const idade = document.getElementById("idade");
+function proximo() {
+  index++;
+  card.style.transform = "";
+  mostrar();
+}
 </script>
 
 </body>
