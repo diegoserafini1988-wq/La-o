@@ -1,134 +1,413 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
 <meta charset="UTF-8">
-<title>Chat 💬</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Chat • Laço 💘</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #111;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-#mensagens {
-  flex: 1;
-  padding: 10px;
-  overflow-y: auto;
+body{
+  background:#000;
+  color:white;
+  font-family:Segoe UI;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
 }
 
-.msg {
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 10px;
-  max-width: 70%;
+/* FUNDO */
+
+.bg{
+
+  position:fixed;
+  inset:0;
+
+  background:
+  radial-gradient(circle at top,
+  rgba(255,0,90,.15),
+  transparent 40%),
+
+  #000;
+
+  z-index:-1;
+
 }
 
-.minha {
-  background: #ff4d6d;
-  margin-left: auto;
+/* TOPO */
+
+.topo{
+
+  padding:20px;
+
+  display:flex;
+  align-items:center;
+  gap:15px;
+
+  border-bottom:1px solid #181818;
+
+  background:#090909;
+
 }
 
-.outro {
-  background: #333;
+.topo img{
+
+  width:55px;
+  height:55px;
+
+  border-radius:50%;
+
+  object-fit:cover;
+
 }
 
-.input {
-  display: flex;
+.nome{
+
+  font-size:22px;
+  font-weight:bold;
+
 }
 
-input {
-  flex: 1;
-  padding: 10px;
-  border: none;
+/* MENSAGENS */
+
+.mensagens{
+
+  flex:1;
+
+  overflow-y:auto;
+
+  padding:20px;
+
+  display:flex;
+  flex-direction:column;
+
+  gap:15px;
+
 }
 
-button {
-  padding: 10px;
-  border: none;
-  background: #ff4d6d;
-  color: white;
+/* MSG */
+
+.msg{
+
+  max-width:75%;
+
+  padding:14px 18px;
+
+  border-radius:22px;
+
+  line-height:1.5;
+
+  font-size:15px;
+
 }
+
+.eu{
+
+  align-self:flex-end;
+
+  background:#ff2d75;
+
+}
+
+.outro{
+
+  align-self:flex-start;
+
+  background:#161616;
+
+  border:1px solid #222;
+
+}
+
+/* INPUT */
+
+.area{
+
+  padding:20px;
+
+  display:flex;
+  gap:12px;
+
+  border-top:1px solid #181818;
+
+  background:#090909;
+
+}
+
+input{
+
+  flex:1;
+
+  padding:16px;
+
+  border:none;
+  outline:none;
+
+  border-radius:30px;
+
+  background:#121212;
+
+  color:white;
+
+}
+
+button{
+
+  padding:0 28px;
+
+  border:none;
+
+  border-radius:30px;
+
+  background:#ff2d75;
+
+  color:white;
+
+  cursor:pointer;
+
+  font-size:16px;
+
+}
+
 </style>
+
 </head>
 
 <body>
 
-<div id="mensagens"></div>
+<div class="bg"></div>
 
-<div class="input">
-  <input id="msg" placeholder="Digite...">
-  <button onclick="enviar()">Enviar</button>
+<!-- TOPO -->
+
+<div class="topo">
+
+<img id="foto">
+
+<div class="nome" id="nome">
+Carregando...
+</div>
+
+</div>
+
+<!-- MENSAGENS -->
+
+<div class="mensagens" id="mensagens">
+
+</div>
+
+<!-- INPUT -->
+
+<div class="area">
+
+<input
+type="text"
+id="texto"
+placeholder="Digite sua mensagem">
+
+<button onclick="enviar()">
+Enviar
+</button>
+
 </div>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
-import { getFirestore, collection, addDoc, query, where, onSnapshot } 
+
+/* FIREBASE */
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+collection,
+addDoc,
+query,
+orderBy,
+onSnapshot
+}
 from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
+import {
+getAuth,
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+
+/* CONFIG */
+
 const firebaseConfig = {
+
   apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
+
   authDomain: "lacoapp.firebaseapp.com",
-  projectId: "lacoapp"
+
+  projectId: "lacoapp",
+
+  storageBucket: "lacoapp.firebasestorage.app",
+
+  messagingSenderId: "485009455528",
+
+  appId: "1:485009455528:web:0c43153be60e62cd6a459d"
+
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+/* INIT */
 
-const params = new URLSearchParams(window.location.search);
-const outroId = params.get("uid");
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+const auth =
+getAuth(app);
+
+/* ELEMENTOS */
+
+const mensagens =
+document.getElementById("mensagens");
+
+const texto =
+document.getElementById("texto");
+
+const nome =
+document.getElementById("nome");
+
+const foto =
+document.getElementById("foto");
+
+/* URL */
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const matchId =
+params.get("id");
+
+/* CHAT ID */
+
+let chatId = null;
 
 let meuId = null;
 
-const mensagensDiv = document.getElementById("mensagens");
+/* USER */
 
-onAuthStateChanged(auth, (user) => {
-  if (!user) return;
+onAuthStateChanged(auth,
+async(user)=>{
+
+  if(!user){
+
+    window.location.href =
+    "login.html";
+
+    return;
+
+  }
 
   meuId = user.uid;
 
-  const q = query(
-    collection(db, "mensagens"),
-    where("users", "array-contains", meuId)
+  /* CHAT ID */
+
+  chatId =
+  [meuId,matchId]
+  .sort()
+  .join("_");
+
+  /* PEGAR MATCH */
+
+  const snap =
+  await getDoc(
+  doc(db,"usuarios",matchId)
   );
 
-  onSnapshot(q, (snapshot) => {
-    mensagensDiv.innerHTML = "";
+  const dados =
+  snap.data();
 
-    snapshot.forEach(doc => {
-      const msg = doc.data();
+  nome.innerText =
+  dados.nome;
 
-      if (!msg.users.includes(outroId)) return;
+  foto.src =
+  dados.foto;
 
-      const div = document.createElement("div");
-      div.className = "msg " + (msg.from === meuId ? "minha" : "outro");
-      div.innerText = msg.texto;
+  carregarMensagens();
 
-      mensagensDiv.appendChild(div);
-    });
-  });
 });
 
-window.enviar = async function() {
-  const texto = document.getElementById("msg").value;
+/* CARREGAR */
 
-  if (!texto) return;
+function carregarMensagens(){
 
-  await addDoc(collection(db, "mensagens"), {
-    texto,
-    from: meuId,
-    users: [meuId, outroId],
-    created: new Date()
+  const q =
+  query(
+  collection(db,"chats",chatId,"mensagens"),
+  orderBy("criadoEm")
+  );
+
+  onSnapshot(q,(snapshot)=>{
+
+    mensagens.innerHTML = "";
+
+    snapshot.forEach(doc=>{
+
+      const dados =
+      doc.data();
+
+      mensagens.innerHTML += `
+
+      <div class="
+      msg
+      ${dados.userId === meuId ? 'eu' : 'outro'}
+      ">
+
+      ${dados.texto}
+
+      </div>
+
+      `;
+
+    });
+
+    mensagens.scrollTop =
+    mensagens.scrollHeight;
+
   });
 
-  document.getElementById("msg").value = "";
+}
+
+/* ENVIAR */
+
+window.enviar = async function(){
+
+  if(!texto.value) return;
+
+  await addDoc(
+  collection(db,"chats",chatId,"mensagens"),
+  {
+
+    texto:texto.value,
+
+    userId:meuId,
+
+    criadoEm:Date.now()
+
+  });
+
+  texto.value = "";
+
 };
+
 </script>
 
 </body>
