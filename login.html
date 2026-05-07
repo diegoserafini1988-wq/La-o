@@ -1,107 +1,429 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-<meta charset="UTF-8">
-<title>Login - Laço 💘</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Laço 💘</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #000;
-  color: white;
+
+/* RESET */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+/* BODY */
+
+body{
+  background:#000;
+  font-family:Segoe UI;
+  color:white;
+  overflow:hidden;
+}
+
+/* FUNDO */
+
+.bg{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:
+  radial-gradient(circle at top,
+  rgba(255,0,90,.18),
+  transparent 40%),
+
+  radial-gradient(circle at bottom,
+  rgba(255,0,120,.12),
+  transparent 35%),
+
+  #000;
+
+  z-index:-1;
+}
+
+/* CENTRAL */
+
+.center{
+  width:100%;
+  height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  height:100vh;
+  padding:20px;
 }
 
-.card {
-  background:#111;
-  padding:30px;
-  border-radius:20px;
-  width:300px;
+/* CARD */
+
+.card{
+  width:420px;
+  max-width:100%;
+  background:#090909;
+  border:1px solid #1d1d1d;
+  border-radius:30px;
+  padding:35px;
+  box-shadow:
+  0 0 40px rgba(255,0,90,.15);
+}
+
+/* LOGO */
+
+.logo{
   text-align:center;
+  font-size:42px;
+  font-weight:bold;
+  color:#ff2d75;
+  margin-bottom:10px;
 }
 
-input {
-  width:100%;
-  padding:12px;
-  margin:10px 0;
-  border-radius:10px;
-  border:none;
-  background:#222;
-  color:white;
+.sub{
+  text-align:center;
+  opacity:.7;
+  margin-bottom:35px;
 }
 
-button {
+/* INPUT */
+
+input, textarea{
+
   width:100%;
-  padding:12px;
-  margin-top:10px;
+  padding:16px;
   border:none;
-  border-radius:10px;
-  background:#ff4d6d;
+  outline:none;
+  border-radius:18px;
+  background:#121212;
   color:white;
+  margin-bottom:15px;
+  border:1px solid #222;
+  transition:.3s;
+  font-size:15px;
+
+}
+
+textarea{
+  resize:none;
+  height:90px;
+}
+
+input:focus,
+textarea:focus{
+
+  border:1px solid #ff2d75;
+  box-shadow:
+  0 0 12px rgba(255,45,117,.25);
+
+}
+
+/* BOTÕES */
+
+button{
+
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:40px;
+  background:#ff2d75;
+  color:white;
+  font-size:17px;
+  font-weight:bold;
   cursor:pointer;
+  transition:.3s;
+  margin-top:10px;
+
 }
+
+button:hover{
+  transform:scale(1.02);
+}
+
+/* TOGGLE */
+
+.toggle{
+
+  margin-top:25px;
+  text-align:center;
+  opacity:.8;
+  cursor:pointer;
+
+}
+
+.toggle span{
+  color:#ff2d75;
+}
+
+/* CAMPOS EXTRA */
+
+.extra{
+  display:none;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+  .card{
+    padding:25px;
+  }
+
+}
+
 </style>
+
 </head>
 
 <body>
 
+<div class="bg"></div>
+
+<div class="center">
+
 <div class="card">
-<h2>Laço 💘</h2>
 
-<input id="email" type="email" placeholder="Email">
-<input id="senha" type="password" placeholder="Senha">
+<div class="logo">
+Laço 💘
+</div>
 
-<button onclick="login()">Entrar</button>
-<button onclick="criar()">Criar Conta</button>
+<div class="sub">
+Conexões que começam no olhar
+</div>
+
+<!-- LOGIN -->
+
+<input type="email" id="email" placeholder="Seu email">
+
+<input type="password" id="senha" placeholder="Sua senha">
+
+<!-- CAMPOS CADASTRO -->
+
+<div class="extra" id="extra">
+
+<input type="text" id="nome" placeholder="Seu nome">
+
+<input type="number" id="idade" placeholder="Sua idade">
+
+<input type="text" id="cidade" placeholder="Sua cidade">
+
+<input type="text" id="foto" placeholder="URL da sua foto">
+
+<textarea id="bio" placeholder="Fale um pouco sobre você"></textarea>
+
+</div>
+
+<button id="botao">
+Entrar
+</button>
+
+<div class="toggle" onclick="alternarModo()">
+
+<span id="textoModo">
+Criar nova conta
+</span>
+
+</div>
+
+</div>
 
 </div>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+
+/* FIREBASE */
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+
+import {
+getAuth,
+signInWithEmailAndPassword,
+createUserWithEmailAndPassword
+}
+from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+
+import {
+getFirestore,
+doc,
+setDoc
+}
+from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+/* CONFIG */
 
 const firebaseConfig = {
+
   apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
+
   authDomain: "lacoapp.firebaseapp.com",
+
   projectId: "lacoapp",
+
   storageBucket: "lacoapp.firebasestorage.app",
+
   messagingSenderId: "485009455528",
+
   appId: "1:485009455528:web:0c43153be60e62cd6a459d"
+
 };
+
+/* INICIAR */
 
 const app = initializeApp(firebaseConfig);
+
 const auth = getAuth(app);
 
-window.login = async function() {
-  const email = emailInput.value;
-  const senha = senhaInput.value;
+const db = getFirestore(app);
 
-  try {
-    await signInWithEmailAndPassword(auth, email, senha);
-    window.location.href = "app.html";
-  } catch(e) {
-    alert(e.message);
+/* ELEMENTOS */
+
+const email =
+document.getElementById("email");
+
+const senha =
+document.getElementById("senha");
+
+const nome =
+document.getElementById("nome");
+
+const idade =
+document.getElementById("idade");
+
+const cidade =
+document.getElementById("cidade");
+
+const foto =
+document.getElementById("foto");
+
+const bio =
+document.getElementById("bio");
+
+const botao =
+document.getElementById("botao");
+
+const extra =
+document.getElementById("extra");
+
+const textoModo =
+document.getElementById("textoModo");
+
+/* MODO */
+
+let criandoConta = false;
+
+/* TROCAR */
+
+window.alternarModo = function(){
+
+  criandoConta = !criandoConta;
+
+  if(criandoConta){
+
+    extra.style.display = "block";
+
+    botao.innerText =
+    "Criar Conta";
+
+    textoModo.innerHTML =
+    "Já possui conta? <span>Entrar</span>";
+
+  }else{
+
+    extra.style.display = "none";
+
+    botao.innerText =
+    "Entrar";
+
+    textoModo.innerHTML =
+    "<span>Criar nova conta</span>";
+
   }
+
 };
 
-window.criar = async function() {
-  const email = emailInput.value;
-  const senha = senhaInput.value;
+/* BOTÃO */
 
-  try {
-    await createUserWithEmailAndPassword(auth, email, senha);
-    alert("Conta criada!");
-  } catch(e) {
-    alert(e.message);
+botao.addEventListener("click", async ()=>{
+
+  /* LOGIN */
+
+  if(!criandoConta){
+
+    try{
+
+      await signInWithEmailAndPassword(
+      auth,
+      email.value,
+      senha.value
+      );
+
+      alert("Login realizado!");
+
+      window.location.href =
+      "app.html";
+
+    }catch(error){
+
+      alert(error.message);
+
+    }
+
   }
-};
 
-const emailInput = document.getElementById("email");
-const senhaInput = document.getElementById("senha");
+  /* CADASTRO */
+
+  else{
+
+    try{
+
+      const userCredential =
+      await createUserWithEmailAndPassword(
+      auth,
+      email.value,
+      senha.value
+      );
+
+      const user =
+      userCredential.user;
+
+      /* SALVAR PERFIL */
+
+      await setDoc(
+      doc(db, "usuarios", user.uid),
+      {
+
+        nome:nome.value,
+
+        idade:idade.value,
+
+        cidade:cidade.value,
+
+        foto:foto.value,
+
+        bio:bio.value,
+
+        email:email.value,
+
+        criadoEm:new Date()
+
+      });
+
+      alert("Conta criada com sucesso!");
+
+      window.location.href =
+      "app.html";
+
+    }catch(error){
+
+      alert(error.message);
+
+    }
+
+  }
+
+});
+
 </script>
 
 </body>
