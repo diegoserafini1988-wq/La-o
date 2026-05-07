@@ -9,8 +9,6 @@
 
 <style>
 
-/* RESET */
-
 *{
   margin:0;
   padding:0;
@@ -67,8 +65,6 @@ body{
 
 }
 
-/* ICONES */
-
 .top-icons{
 
   display:flex;
@@ -95,15 +91,11 @@ body{
 
   transition:.3s;
 
-  font-size:20px;
-
 }
 
 .icon:hover{
 
   transform:scale(1.08);
-
-  background:#181818;
 
 }
 
@@ -205,7 +197,7 @@ body{
 
 }
 
-/* INTERESSES */
+/* TAGS */
 
 .tags{
 
@@ -338,24 +330,6 @@ body{
 
 }
 
-/* MOBILE */
-
-@media(max-width:600px){
-
-  .card{
-
-    height:78vh;
-
-  }
-
-  .nome{
-
-    font-size:28px;
-
-  }
-
-}
-
 </style>
 
 </head>
@@ -374,17 +348,11 @@ Laço 💘
 
 <div class="top-icons">
 
-<div class="icon">
-🔥
-</div>
+<div class="icon">🔥</div>
 
-<div class="icon">
-💬
-</div>
+<div class="icon">💬</div>
 
-<div class="icon">
-⭐
-</div>
+<div class="icon">⭐</div>
 
 <div
 class="icon"
@@ -446,7 +414,7 @@ onclick="curtir()">
 💘 MATCH
 </h1>
 
-<p>
+<p id="textoMatch">
 Vocês se curtiram
 </p>
 
@@ -466,7 +434,11 @@ from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
 import {
 getFirestore,
 collection,
-getDocs
+getDocs,
+doc,
+updateDoc,
+arrayUnion,
+getDoc
 }
 from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
@@ -494,7 +466,7 @@ const firebaseConfig = {
 
 };
 
-/* INICIAR */
+/* INIT */
 
 const app =
 initializeApp(firebaseConfig);
@@ -525,13 +497,15 @@ document.getElementById("tags");
 const card =
 document.getElementById("card");
 
-/* LISTA */
+/* USERS */
 
 let usuarios = [];
 
 let index = 0;
 
-/* PEGAR USERS */
+let meuId = null;
+
+/* LOGIN */
 
 onAuthStateChanged(auth,
 async(user)=>{
@@ -545,13 +519,21 @@ async(user)=>{
 
   }
 
+  meuId = user.uid;
+
   const querySnapshot =
   await getDocs(
   collection(db, "usuarios")
   );
 
   usuarios =
-  querySnapshot.docs.map(doc => doc.data());
+  querySnapshot.docs.map(doc => ({
+
+    id:doc.id,
+    ...doc.data()
+
+  }))
+  .filter(u => u.id !== meuId);
 
   mostrar();
 
@@ -564,7 +546,7 @@ function mostrar(){
   if(usuarios.length === 0){
 
     nome.innerText =
-    "Nenhum usuário";
+    "Sem usuários";
 
     return;
 
@@ -587,17 +569,15 @@ function mostrar(){
   bio.innerText =
   user.bio || "";
 
-  /* TAGS */
-
   tags.innerHTML = "";
 
   if(user.interesses){
 
-    user.interesses.forEach(item=>{
+    user.interesses.forEach(tag=>{
 
       tags.innerHTML += `
       <div class="tag">
-      ${item}
+      ${tag}
       </div>
       `;
 
@@ -611,35 +591,111 @@ function mostrar(){
 
 window.passar = function(){
 
-  card.style.transform =
-  "translateX(-400px) rotate(-20deg)";
-
-  setTimeout(()=>{
-
-    proximo();
-
-  },300);
+  animar(-400,-20);
 
 };
 
 /* CURTIR */
 
-window.curtir = function(){
+window.curtir = async function(){
+
+  const user =
+  usuarios[index];
+
+  /* SALVAR LIKE */
+
+  await updateDoc(
+  doc(db,"usuarios",meuId),
+  {
+
+    likes:arrayUnion(user.id)
+
+  });
+
+  /* PEGAR DADOS DELE */
+
+  const snap =
+  await getDoc(
+  doc(db,"usuarios",user.id)
+  );
+
+  const dados =
+  snap.data();
+
+  /* VERIFICAR MATCH */
+
+  if(
+  dados.likes &&
+  dados.likes.includes(meuId)
+  ){
+
+    /* SALVAR MATCH */
+
+    await updateDoc(
+    doc(db,"usuarios",meuId),
+    {
+
+      matches:arrayUnion(user.id)
+
+    });
+
+    await updateDoc(
+    doc(db,"usuarios",user.id),
+    {
+
+      matches:arrayUnion(meuId)
+
+    });
+
+    mostrarMatch(user.nome);
+
+  }
+
+  animar(400,20);
+
+};
+
+/* MATCH */
+
+function mostrarMatch(nomeUser){
+
+  document
+  .getElementById("textoMatch")
+  .innerText =
+  "Você e " +
+  nomeUser +
+  " se curtiram 💘";
+
+  document
+  .getElementById("match")
+  .style.display = "flex";
+
+}
+
+/* FECHAR */
+
+window.fecharMatch = function(){
+
+  document
+  .getElementById("match")
+  .style.display = "none";
+
+};
+
+/* ANIMAR */
+
+function animar(x,r){
 
   card.style.transform =
-  "translateX(400px) rotate(20deg)";
+  `translateX(${x}px) rotate(${r}deg)`;
 
   setTimeout(()=>{
-
-    document
-    .getElementById("match")
-    .style.display = "flex";
 
     proximo();
 
   },300);
 
-};
+}
 
 /* PROXIMO */
 
@@ -662,16 +718,6 @@ function proximo(){
   "translateX(0px) rotate(0deg)";
 
 }
-
-/* FECHAR MATCH */
-
-window.fecharMatch = function(){
-
-  document
-  .getElementById("match")
-  .style.display = "none";
-
-};
 
 </script>
 
