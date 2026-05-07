@@ -1,92 +1,370 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
 <meta charset="UTF-8">
-<title>Matches 💘</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Matches • Laço 💘</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #111;
-  color: white;
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-.header {
-  padding: 20px;
-  text-align: center;
-  background: #ff4d6d;
+body{
+  background:#000;
+  color:white;
+  font-family:Segoe UI;
 }
 
-.match {
-  display: flex;
-  align-items: center;
-  padding: 15px;
-  border-bottom: 1px solid #333;
-  cursor: pointer;
+/* FUNDO */
+
+.bg{
+
+  position:fixed;
+  inset:0;
+
+  background:
+  radial-gradient(circle at top,
+  rgba(255,0,90,.15),
+  transparent 40%),
+
+  #000;
+
+  z-index:-1;
+
 }
 
-.match img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 15px;
+/* TOPO */
+
+.topo{
+
+  padding:25px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
 }
+
+.logo{
+
+  font-size:30px;
+  font-weight:bold;
+  color:#ff2d75;
+
+}
+
+.voltar{
+
+  background:#111;
+
+  border:1px solid #222;
+
+  color:white;
+
+  text-decoration:none;
+
+  padding:10px 18px;
+
+  border-radius:30px;
+
+}
+
+/* TITULO */
+
+.titulo{
+
+  padding:0 25px;
+
+  font-size:32px;
+  font-weight:bold;
+
+}
+
+/* LISTA */
+
+.lista{
+
+  padding:25px;
+
+  display:flex;
+  flex-direction:column;
+
+  gap:18px;
+
+}
+
+/* CARD */
+
+.card{
+
+  background:#090909;
+
+  border:1px solid #1d1d1d;
+
+  border-radius:28px;
+
+  padding:16px;
+
+  display:flex;
+  align-items:center;
+
+  gap:18px;
+
+  cursor:pointer;
+
+  transition:.3s;
+
+}
+
+.card:hover{
+
+  transform:translateY(-3px);
+
+  border-color:#ff2d75;
+
+}
+
+/* FOTO */
+
+.card img{
+
+  width:85px;
+  height:85px;
+
+  border-radius:50%;
+
+  object-fit:cover;
+
+}
+
+/* INFO */
+
+.info{
+
+  flex:1;
+
+}
+
+.nome{
+
+  font-size:24px;
+  font-weight:bold;
+
+}
+
+.bio{
+
+  margin-top:8px;
+
+  opacity:.8;
+
+  line-height:1.4;
+
+}
+
+/* BOTÃO */
+
+.abrir{
+
+  padding:12px 20px;
+
+  border:none;
+
+  border-radius:30px;
+
+  background:#ff2d75;
+
+  color:white;
+
+  cursor:pointer;
+
+  font-size:15px;
+
+}
+
 </style>
+
 </head>
 
 <body>
 
-<div class="header">
-  <h2>Seus Matches 💘</h2>
+<div class="bg"></div>
+
+<!-- TOPO -->
+
+<div class="topo">
+
+<div class="logo">
+Laço 💘
 </div>
 
-<div id="lista"></div>
+<a href="app.html" class="voltar">
+Voltar
+</a>
+
+</div>
+
+<!-- TITULO -->
+
+<div class="titulo">
+Seus Matches 💘
+</div>
+
+<!-- LISTA -->
+
+<div class="lista" id="lista">
+
+</div>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+/* FIREBASE */
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc
+}
+from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+import {
+getAuth,
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+
+/* CONFIG */
 
 const firebaseConfig = {
+
   apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
+
   authDomain: "lacoapp.firebaseapp.com",
-  projectId: "lacoapp"
+
+  projectId: "lacoapp",
+
+  storageBucket: "lacoapp.firebasestorage.app",
+
+  messagingSenderId: "485009455528",
+
+  appId: "1:485009455528:web:0c43153be60e62cd6a459d"
+
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+/* INIT */
 
-const lista = document.getElementById("lista");
+const app =
+initializeApp(firebaseConfig);
 
-onAuthStateChanged(auth, async (user) => {
-  if (!user) return;
+const db =
+getFirestore(app);
 
-  const userSnap = await getDoc(doc(db, "usuarios", user.uid));
-  const data = userSnap.data();
+const auth =
+getAuth(app);
 
-  if (!data.matches) return;
+/* LISTA */
 
-  for (let id of data.matches) {
-    const snap = await getDoc(doc(db, "usuarios", id));
-    const u = snap.data();
+const lista =
+document.getElementById("lista");
 
-    const div = document.createElement("div");
-    div.className = "match";
+/* USER */
 
-    div.innerHTML = `
-      <img src="${u.foto}">
-      <span>${u.nome}</span>
+onAuthStateChanged(auth,
+async(user)=>{
+
+  if(!user){
+
+    window.location.href =
+    "login.html";
+
+    return;
+
+  }
+
+  const meuDoc =
+  await getDoc(
+  doc(db,"usuarios",user.uid)
+  );
+
+  const meusDados =
+  meuDoc.data();
+
+  const matches =
+  meusDados.matches || [];
+
+  if(matches.length === 0){
+
+    lista.innerHTML = `
+    <h2>
+    Nenhum match ainda 😢
+    </h2>
     `;
 
-    div.onclick = () => {
-      window.location.href = "chat.html?uid=" + id;
-    };
+    return;
 
-    lista.appendChild(div);
   }
+
+  for(const id of matches){
+
+    const snap =
+    await getDoc(
+    doc(db,"usuarios",id)
+    );
+
+    const dados =
+    snap.data();
+
+    lista.innerHTML += `
+
+    <div
+    class="card"
+    onclick="abrirChat('${id}')"
+    >
+
+      <img src="${dados.foto}">
+
+      <div class="info">
+
+        <div class="nome">
+        ${dados.nome}
+        </div>
+
+        <div class="bio">
+        ${dados.bio || ""}
+        </div>
+
+      </div>
+
+      <button class="abrir">
+      Conversar
+      </button>
+
+    </div>
+
+    `;
+
+  }
+
 });
+
+/* CHAT */
+
+window.abrirChat = function(id){
+
+  window.location.href =
+  "bate-papo.html?id=" + id;
+
+};
+
 </script>
 
 </body>
