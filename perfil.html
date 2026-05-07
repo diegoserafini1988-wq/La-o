@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Meu Perfil • Laço 💘</title>
+
+<style>
+
+/* RESET */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:#000;
+  font-family:Segoe UI;
+  color:white;
+  overflow-x:hidden;
+}
+
+/* FUNDO */
+
+.bg{
+
+  position:fixed;
+  inset:0;
+
+  background:
+  radial-gradient(circle at top,
+  rgba(255,0,90,.18),
+  transparent 40%),
+
+  radial-gradient(circle at bottom,
+  rgba(255,0,120,.12),
+  transparent 35%),
+
+  #000;
+
+  z-index:-1;
+
+}
+
+/* TOPO */
+
+.topo{
+
+  width:100%;
+  padding:22px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+}
+
+.logo{
+
+  font-size:30px;
+  font-weight:bold;
+  color:#ff2d75;
+
+}
+
+.voltar{
+
+  color:white;
+  text-decoration:none;
+  background:#111;
+  border:1px solid #222;
+  padding:10px 18px;
+  border-radius:30px;
+
+}
+
+/* CONTAINER */
+
+.container{
+
+  width:100%;
+  display:flex;
+  justify-content:center;
+  padding:20px;
+
+}
+
+/* CARD */
+
+.card{
+
+  width:500px;
+  max-width:100%;
+
+  background:#090909;
+
+  border:1px solid #1d1d1d;
+
+  border-radius:35px;
+
+  overflow:hidden;
+
+  box-shadow:
+  0 0 40px rgba(255,0,90,.15);
+
+}
+
+/* FOTO */
+
+.foto-area{
+
+  width:100%;
+  height:320px;
+
+  position:relative;
+
+}
+
+.foto-area img{
+
+  width:100%;
+  height:100%;
+  object-fit:cover;
+
+}
+
+/* OVERLAY FOTO */
+
+.overlay{
+
+  position:absolute;
+  inset:0;
+
+  background:
+  linear-gradient(
+  transparent,
+  rgba(0,0,0,.5)
+  );
+
+}
+
+/* FORM */
+
+.form{
+
+  padding:30px;
+
+}
+
+/* TITULO */
+
+.titulo{
+
+  font-size:28px;
+  margin-bottom:25px;
+
+}
+
+/* INPUTS */
+
+input,
+textarea,
+select{
+
+  width:100%;
+
+  padding:16px;
+
+  margin-bottom:16px;
+
+  border:none;
+  outline:none;
+
+  border-radius:18px;
+
+  background:#121212;
+
+  border:1px solid #222;
+
+  color:white;
+
+  font-size:15px;
+
+  transition:.3s;
+
+}
+
+textarea{
+
+  resize:none;
+  height:120px;
+
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+
+  border:1px solid #ff2d75;
+
+  box-shadow:
+  0 0 12px rgba(255,45,117,.25);
+
+}
+
+/* BOTÃO */
+
+button{
+
+  width:100%;
+
+  padding:17px;
+
+  border:none;
+  border-radius:40px;
+
+  background:#ff2d75;
+
+  color:white;
+
+  font-size:17px;
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:.3s;
+
+}
+
+button:hover{
+
+  transform:scale(1.02);
+
+}
+
+/* TAGS */
+
+.tags{
+
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+
+  margin-bottom:18px;
+
+}
+
+.tag{
+
+  padding:10px 15px;
+
+  background:#141414;
+
+  border:1px solid #222;
+
+  border-radius:30px;
+
+  cursor:pointer;
+
+  transition:.3s;
+
+  font-size:14px;
+
+}
+
+.tag:hover{
+
+  border:1px solid #ff2d75;
+
+}
+
+.tag.active{
+
+  background:#ff2d75;
+
+  border:1px solid #ff2d75;
+
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+  .foto-area{
+
+    height:260px;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<!-- TOPO -->
+
+<div class="topo">
+
+<div class="logo">
+Laço 💘
+</div>
+
+<a href="app.html" class="voltar">
+Voltar
+</a>
+
+</div>
+
+<!-- CONTAINER -->
+
+<div class="container">
+
+<div class="card">
+
+<!-- FOTO -->
+
+<div class="foto-area">
+
+<img id="preview"
+src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop">
+
+<div class="overlay"></div>
+
+</div>
+
+<!-- FORM -->
+
+<div class="form">
+
+<div class="titulo">
+Seu Perfil
+</div>
+
+<input
+type="text"
+id="nome"
+placeholder="Seu nome">
+
+<input
+type="number"
+id="idade"
+placeholder="Sua idade">
+
+<input
+type="text"
+id="cidade"
+placeholder="Sua cidade">
+
+<input
+type="text"
+id="foto"
+placeholder="URL da sua foto">
+
+<textarea
+id="bio"
+placeholder="Fale sobre você"></textarea>
+
+<!-- INTENÇÃO -->
+
+<select id="intencao">
+
+<option value="">
+Sua intenção
+</option>
+
+<option>
+Namoro sério
+</option>
+
+<option>
+Casual
+</option>
+
+<option>
+Amizade
+</option>
+
+<option>
+Conversar
+</option>
+
+<option>
+Casamento
+</option>
+
+</select>
+
+<!-- TAGS -->
+
+<div class="tags">
+
+<div class="tag">
+Viagens
+</div>
+
+<div class="tag">
+Academia
+</div>
+
+<div class="tag">
+Música
+</div>
+
+<div class="tag">
+Filmes
+</div>
+
+<div class="tag">
+Praia
+</div>
+
+<div class="tag">
+Romance
+</div>
+
+<div class="tag">
+Games
+</div>
+
+<div class="tag">
+Fitness
+</div>
+
+</div>
+
+<button id="salvar">
+Salvar Perfil
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script type="module">
+
+/* FIREBASE */
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc
+}
+from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+import {
+getAuth,
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+
+/* CONFIG */
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
+
+  authDomain: "lacoapp.firebaseapp.com",
+
+  projectId: "lacoapp",
+
+  storageBucket: "lacoapp.firebasestorage.app",
+
+  messagingSenderId: "485009455528",
+
+  appId: "1:485009455528:web:0c43153be60e62cd6a459d"
+
+};
+
+/* INICIAR */
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+const auth =
+getAuth(app);
+
+/* CAMPOS */
+
+const nome =
+document.getElementById("nome");
+
+const idade =
+document.getElementById("idade");
+
+const cidade =
+document.getElementById("cidade");
+
+const foto =
+document.getElementById("foto");
+
+const bio =
+document.getElementById("bio");
+
+const intencao =
+document.getElementById("intencao");
+
+const preview =
+document.getElementById("preview");
+
+const salvar =
+document.getElementById("salvar");
+
+/* TAGS */
+
+const tags =
+document.querySelectorAll(".tag");
+
+let interesses = [];
+
+/* ATIVAR TAG */
+
+tags.forEach(tag=>{
+
+  tag.addEventListener("click", ()=>{
+
+    tag.classList.toggle("active");
+
+    atualizarTags();
+
+  });
+
+});
+
+/* PEGAR TAGS */
+
+function atualizarTags(){
+
+  interesses = [];
+
+  document
+  .querySelectorAll(".tag.active")
+  .forEach(tag=>{
+
+    interesses.push(
+    tag.innerText
+    );
+
+  });
+
+}
+
+/* FOTO PREVIEW */
+
+foto.addEventListener("input", ()=>{
+
+  preview.src =
+  foto.value;
+
+});
+
+/* USER */
+
+let uid = null;
+
+/* CARREGAR */
+
+onAuthStateChanged(auth,
+async(user)=>{
+
+  if(!user){
+
+    window.location.href =
+    "login.html";
+
+    return;
+
+  }
+
+  uid = user.uid;
+
+  const ref =
+  doc(db, "usuarios", uid);
+
+  const snap =
+  await getDoc(ref);
+
+  if(snap.exists()){
+
+    const dados =
+    snap.data();
+
+    nome.value =
+    dados.nome || "";
+
+    idade.value =
+    dados.idade || "";
+
+    cidade.value =
+    dados.cidade || "";
+
+    foto.value =
+    dados.foto || "";
+
+    bio.value =
+    dados.bio || "";
+
+    intencao.value =
+    dados.intencao || "";
+
+    preview.src =
+    dados.foto || preview.src;
+
+    /* TAGS */
+
+    if(dados.interesses){
+
+      interesses =
+      dados.interesses;
+
+      tags.forEach(tag=>{
+
+        if(
+        interesses.includes(
+        tag.innerText
+        )
+        ){
+
+          tag.classList.add(
+          "active"
+          );
+
+        }
+
+      });
+
+    }
+
+  }
+
+});
+
+/* SALVAR */
+
+salvar.addEventListener("click",
+async()=>{
+
+  try{
+
+    await updateDoc(
+    doc(db, "usuarios", uid),
+    {
+
+      nome:nome.value,
+
+      idade:idade.value,
+
+      cidade:cidade.value,
+
+      foto:foto.value,
+
+      bio:bio.value,
+
+      intencao:intencao.value,
+
+      interesses:interesses
+
+    });
+
+    alert(
+    "Perfil atualizado!"
+    );
+
+  }catch(error){
+
+    alert(
+    error.message
+    );
+
+  }
+
+});
+
+</script>
+
+</body>
+</html>
