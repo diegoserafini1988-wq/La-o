@@ -1,383 +1,223 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Laço 💘</title>
 
 <style>
-
 *{margin:0;padding:0;box-sizing:border-box;}
-
-body{
-background:#000;
-font-family:Segoe UI;
-color:white;
-overflow:hidden;
-}
+body{background:#000;font-family:Segoe UI;color:#fff;overflow:hidden}
 
 /* TOPO */
-
-.topo{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px;
-}
-
-.logo{
-font-size:28px;
-color:#ff2d75;
-}
-
-/* ICONES */
-
-.icons{
-display:flex;
-gap:12px;
-position:relative;
-}
-
-.icon{
-width:45px;
-height:45px;
-border-radius:50%;
-background:#111;
-display:flex;
-justify-content:center;
-align-items:center;
-cursor:pointer;
-position:relative;
-}
-
-/* BADGE */
-
-.badge{
-position:absolute;
-top:-5px;
-right:-5px;
-background:red;
-color:white;
-font-size:12px;
-padding:3px 7px;
-border-radius:50%;
-}
-
-/* AREA */
-
-.area{
-height:calc(100vh - 80px);
-display:flex;
-justify-content:center;
-align-items:center;
-}
+.topo{display:flex;justify-content:space-between;align-items:center;padding:18px 20px}
+.logo{font-size:26px;color:#ff2d75;font-weight:700}
+.right{display:flex;align-items:center;gap:12px}
+.streak{background:#111;border:1px solid #222;padding:6px 12px;border-radius:20px;font-size:13px}
+.icons{display:flex;gap:10px}
+.icon{width:44px;height:44px;border-radius:50%;background:#111;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative}
+.badge{position:absolute;top:-5px;right:-5px;background:#ff2d75;color:#fff;font-size:11px;padding:2px 6px;border-radius:50%}
 
 /* CARD */
+.area{height:calc(100vh - 80px);display:flex;justify-content:center;align-items:center}
+.card{width:360px;height:640px;border-radius:28px;overflow:hidden;position:relative;box-shadow:0 0 40px rgba(255,0,90,.25)}
+.card img{width:100%;height:100%;object-fit:cover}
+.overlay{position:absolute;bottom:0;width:100%;padding:18px;background:linear-gradient(transparent,#000)}
+.nome{font-size:26px;font-weight:700}
+.meta{font-size:13px;opacity:.8;margin-top:4px}
+.bio{margin-top:8px;opacity:.9}
 
-.card{
-width:360px;
-height:640px;
-border-radius:30px;
-overflow:hidden;
-position:relative;
-background:#000;
-box-shadow:0 0 50px rgba(255,0,90,.25);
-transition:.3s;
-}
+/* AÇÕES */
+.actions{position:absolute;bottom:16px;width:100%;display:flex;justify-content:center;gap:18px}
+.btn{width:64px;height:64px;border-radius:50%;border:none;cursor:pointer;font-size:22px}
+.nope{background:#1a1a1a;color:#ff4d6d}
+.like{background:#ff2d75;color:#fff}
 
-.card img{
-width:100%;
-height:100%;
-object-fit:cover;
-}
-
-/* INFO */
-
-.overlay{
-position:absolute;
-bottom:0;
-width:100%;
-padding:20px;
-background:linear-gradient(transparent,black);
-}
-
-.nome{
-font-size:28px;
-font-weight:bold;
-}
-
-.bio{
-margin-top:8px;
-opacity:.9;
-}
-
-/* BOTÕES */
-
-.actions{
-position:absolute;
-bottom:20px;
-width:100%;
-display:flex;
-justify-content:center;
-gap:20px;
-}
-
-.btn{
-width:70px;
-height:70px;
-border-radius:50%;
-border:none;
-cursor:pointer;
-font-size:24px;
-}
-
-.nope{
-background:#1a1a1a;
-color:#ff4d6d;
-}
-
-.like{
-background:#ff2d75;
-color:white;
-}
-
-/* NOTIFICAÇÃO */
-
-.toast{
-position:fixed;
-top:20px;
-left:50%;
-transform:translateX(-50%);
-background:#111;
-padding:12px 20px;
-border-radius:30px;
-border:1px solid #222;
-display:none;
-z-index:999;
-}
+/* TOAST */
+.toast{position:fixed;top:18px;left:50%;transform:translateX(-50%);background:#111;border:1px solid #222;padding:10px 16px;border-radius:24px;display:none;z-index:999}
 
 /* MATCH */
-
-.match{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.9);
-display:none;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-}
-
-.match h1{
-color:#ff2d75;
-}
-
-.match button{
-margin-top:20px;
-padding:15px 30px;
-border:none;
-border-radius:30px;
-background:#ff2d75;
-color:white;
-cursor:pointer;
-}
-
+.match{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;justify-content:center;align-items:center;flex-direction:column}
+.match h1{color:#ff2d75}
+.match button{margin-top:18px;padding:12px 26px;border:none;border-radius:24px;background:#ff2d75;color:#fff;cursor:pointer}
 </style>
 </head>
 
 <body>
 
 <div class="topo">
+  <div class="logo">Laço 💘</div>
 
-<div class="logo">Laço 💘</div>
+  <div class="right">
+    <div class="streak">🔥 <span id="streak">0</span> dias</div>
 
-<div class="icons">
-
-<div class="icon" onclick="window.location.href='vibe.html'">📍</div>
-
-<div class="icon" onclick="window.location.href='matches.html'">
-💬
-<div class="badge" id="badgeChat">0</div>
-</div>
-
-<div class="icon" onclick="window.location.href='likes.html'">
-⭐
-<div class="badge" id="badgeLikes">0</div>
-</div>
-
-<div class="icon" onclick="window.location.href='perfil.html'">👤</div>
-
-</div>
-
+    <div class="icons">
+      <div class="icon" onclick="location.href='vibe.html'">📍</div>
+      <div class="icon" onclick="location.href='matches.html'">💬
+        <div class="badge" id="badgeChat">0</div>
+      </div>
+      <div class="icon" onclick="location.href='likes.html'">⭐
+        <div class="badge" id="badgeLikes">0</div>
+      </div>
+      <div class="icon" onclick="location.href='perfil.html'">👤</div>
+    </div>
+  </div>
 </div>
 
 <div class="area">
-
-<div class="card" id="card">
-
-<img id="foto">
-
-<div class="overlay">
-<div class="nome" id="nome"></div>
-<div class="bio" id="bio"></div>
-</div>
-
-<div class="actions">
-<button class="btn nope" onclick="passar()">✖</button>
-<button class="btn like" onclick="curtir()">❤</button>
-</div>
-
-</div>
-
+  <div class="card" id="card">
+    <img id="foto">
+    <div class="overlay">
+      <div class="nome" id="nome"></div>
+      <div class="meta" id="meta"></div>
+      <div class="bio" id="bio"></div>
+    </div>
+    <div class="actions">
+      <button class="btn nope" onclick="passar()">✖</button>
+      <button class="btn like" onclick="curtir()">❤</button>
+    </div>
+  </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <div class="match" id="match">
-<h1>💘 MATCH</h1>
-<button onclick="fecharMatch()">Continuar</button>
+  <h1>💘 MATCH</h1>
+  <button onclick="fecharMatch()">Continuar</button>
 </div>
 
 <script type="module">
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
 import {
-getFirestore,collection,getDocs,doc,updateDoc,arrayUnion,getDoc
+  getFirestore,collection,getDocs,doc,updateDoc,arrayUnion,getDoc,setDoc
 } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 import { getAuth,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
 
 const firebaseConfig = {
-apiKey: "AIzaSy...",
-authDomain: "lacoapp.firebaseapp.com",
-projectId: "lacoapp"
+  apiKey: "SUA_API_KEY",
+  authDomain: "lacoapp.firebaseapp.com",
+  projectId: "lacoapp"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-let usuarios=[];
-let index=0;
-let meuId=null;
+let usuarios=[], index=0, meuId=null;
 
-const foto=document.getElementById("foto");
-const nome=document.getElementById("nome");
-const bio=document.getElementById("bio");
+const foto = document.getElementById("foto");
+const nome = document.getElementById("nome");
+const meta = document.getElementById("meta");
+const bio = document.getElementById("bio");
+const badgeLikes = document.getElementById("badgeLikes");
+const badgeChat = document.getElementById("badgeChat");
+const streakEl = document.getElementById("streak");
+const toast = document.getElementById("toast");
 
-const badgeLikes=document.getElementById("badgeLikes");
-const badgeChat=document.getElementById("badgeChat");
+/* ===== HELPERS ===== */
+const todayKey = () => new Date().toISOString().slice(0,10);
 
-const toast=document.getElementById("toast");
-
-/* LOGIN */
-
-onAuthStateChanged(auth,async(user)=>{
-
-if(!user){
-window.location.href="login.html";
-return;
+function showToast(t){
+  toast.innerText=t;
+  toast.style.display="block";
+  setTimeout(()=>toast.style.display="none",1800);
 }
 
-meuId=user.uid;
+/* ===== LOGIN ===== */
+onAuthStateChanged(auth, async (user)=>{
+  if(!user){ location.href="login.html"; return; }
+  meuId = user.uid;
 
-const snap=await getDocs(collection(db,"usuarios"));
+  // garante doc
+  await setDoc(doc(db,"usuarios",meuId), {}, {merge:true});
 
-usuarios=snap.docs.map(doc=>({id:doc.id,...doc.data()}))
-.filter(u=>u.id!==meuId);
+  // atualiza presença
+  await updateDoc(doc(db,"usuarios",meuId), {
+    lastSeen: Date.now()
+  });
 
-mostrar();
+  // streak
+  const meSnap = await getDoc(doc(db,"usuarios",meuId));
+  let me = meSnap.data() || {};
+  const today = todayKey();
 
-/* CONTADORES */
+  let streak = me.streak || 0;
+  if(me.lastLoginDate !== today){
+    const ontem = new Date(); ontem.setDate(ontem.getDate()-1);
+    const ontemKey = ontem.toISOString().slice(0,10);
+    if(me.lastLoginDate === ontemKey){ streak += 1; }
+    else{ streak = 1; }
+    await updateDoc(doc(db,"usuarios",meuId), {
+      streak, lastLoginDate: today
+    });
+  }
+  streakEl.innerText = streak || 1;
 
-setInterval(async ()=>{
+  // carregar usuários
+  const snap = await getDocs(collection(db,"usuarios"));
+  usuarios = snap.docs.map(d=>({id:d.id,...d.data()}))
+    .filter(u=>u.id!==meuId);
 
-const me = await getDoc(doc(db,"usuarios",meuId));
-const dados = me.data();
+  mostrar();
 
-badgeLikes.innerText = (dados.likesRecebidos || []).length;
-badgeChat.innerText = (dados.matches || []).length;
+  // badges + presença refresh
+  setInterval(async ()=>{
+    const me2 = (await getDoc(doc(db,"usuarios",meuId))).data() || {};
+    badgeLikes.innerText = (me2.likesRecebidos||[]).length;
+    badgeChat.innerText  = (me2.matches||[]).length;
 
-if(Math.random() < 0.4){
-mostrarToast("🔥 Alguém te curtiu agora");
-}
+    // ping presença
+    await updateDoc(doc(db,"usuarios",meuId), { lastSeen: Date.now() });
 
-},5000);
-
+    if(Math.random()<0.3){ showToast("🔥 Novas pessoas na sua área"); }
+  }, 6000);
 });
 
-/* MOSTRAR */
-
+/* ===== UI ===== */
 function mostrar(){
+  if(!usuarios.length) return;
 
-const user=usuarios[index];
+  const u = usuarios[index];
+  foto.src = u.foto || "";
+  nome.innerText = u.nome || "Sem nome";
 
-foto.src=user.foto;
-nome.innerText=user.nome;
-bio.innerText=user.bio;
+  const online = (u.lastSeen && (Date.now()-u.lastSeen) < 60*1000);
+  meta.innerText = online ? "🟢 Online agora" : "🕓 Visto recentemente";
 
+  bio.innerText = u.bio || "";
 }
 
-/* PASSAR */
+/* ===== AÇÕES ===== */
+window.passar = ()=> proximo();
 
-window.passar=function(){
-proximo();
+window.curtir = async ()=>{
+  const u = usuarios[index];
+
+  await updateDoc(doc(db,"usuarios",meuId), {
+    likes: arrayUnion(u.id)
+  });
+
+  await updateDoc(doc(db,"usuarios",u.id), {
+    likesRecebidos: arrayUnion(meuId)
+  });
+
+  const snap = await getDoc(doc(db,"usuarios",u.id));
+  const dados = snap.data();
+
+  if(dados.likes && dados.likes.includes(meuId)){
+    document.getElementById("match").style.display="flex";
+  }
+  proximo();
 };
-
-/* CURTIR */
-
-window.curtir=async function(){
-
-const user=usuarios[index];
-
-await updateDoc(doc(db,"usuarios",meuId),{
-likes:arrayUnion(user.id)
-});
-
-await updateDoc(doc(db,"usuarios",user.id),{
-likesRecebidos:arrayUnion(meuId)
-});
-
-const snap=await getDoc(doc(db,"usuarios",user.id));
-const dados=snap.data();
-
-if(dados.likes && dados.likes.includes(meuId)){
-document.getElementById("match").style.display="flex";
-}
-
-proximo();
-
-};
-
-/* PROXIMO */
 
 function proximo(){
-index++;
-if(index>=usuarios.length){index=0;}
-mostrar();
+  index = (index+1) % usuarios.length;
+  mostrar();
 }
 
-/* MATCH */
-
-window.fecharMatch=function(){
-document.getElementById("match").style.display="none";
+window.fecharMatch = ()=> {
+  document.getElementById("match").style.display="none";
 };
-
-/* TOAST */
-
-function mostrarToast(msg){
-
-toast.innerText=msg;
-toast.style.display="block";
-
-setTimeout(()=>{
-toast.style.display="none";
-},2000);
-
-}
-
 </script>
-
 </body>
 </html>
