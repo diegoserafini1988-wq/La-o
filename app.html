@@ -28,17 +28,17 @@ padding:20px;
 }
 
 .logo{
-font-size:30px;
+font-size:28px;
 color:#ff2d75;
-font-weight:bold;
 }
+
+/* ICONES */
 
 .icons{
 display:flex;
 gap:12px;
+position:relative;
 }
-
-/* ICONES */
 
 .icon{
 width:45px;
@@ -49,13 +49,20 @@ display:flex;
 justify-content:center;
 align-items:center;
 cursor:pointer;
-transition:.2s;
-font-size:20px;
+position:relative;
 }
 
-.icon:hover{
-transform:scale(1.1);
-background:#1a1a1a;
+/* BADGE */
+
+.badge{
+position:absolute;
+top:-5px;
+right:-5px;
+background:red;
+color:white;
+font-size:12px;
+padding:3px 7px;
+border-radius:50%;
 }
 
 /* AREA */
@@ -86,47 +93,24 @@ height:100%;
 object-fit:cover;
 }
 
-/* OVERLAY */
+/* INFO */
 
 .overlay{
 position:absolute;
 bottom:0;
 width:100%;
-padding:25px;
+padding:20px;
 background:linear-gradient(transparent,black);
 }
 
 .nome{
-font-size:30px;
+font-size:28px;
 font-weight:bold;
 }
 
 .bio{
-margin-top:10px;
+margin-top:8px;
 opacity:.9;
-}
-
-/* STAMP */
-
-.stamp{
-position:absolute;
-top:40px;
-left:20px;
-font-size:28px;
-padding:8px 18px;
-border-radius:10px;
-font-weight:bold;
-display:none;
-}
-
-.likeStamp{
-color:#00ff88;
-border:3px solid #00ff88;
-}
-
-.nopeStamp{
-color:#ff4d6d;
-border:3px solid #ff4d6d;
 }
 
 /* BOTÕES */
@@ -137,7 +121,7 @@ bottom:20px;
 width:100%;
 display:flex;
 justify-content:center;
-gap:25px;
+gap:20px;
 }
 
 .btn{
@@ -146,7 +130,7 @@ height:70px;
 border-radius:50%;
 border:none;
 cursor:pointer;
-font-size:25px;
+font-size:24px;
 }
 
 .nope{
@@ -159,6 +143,21 @@ background:#ff2d75;
 color:white;
 }
 
+/* NOTIFICAÇÃO */
+
+.toast{
+position:fixed;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+background:#111;
+padding:12px 20px;
+border-radius:30px;
+border:1px solid #222;
+display:none;
+z-index:999;
+}
+
 /* MATCH */
 
 .match{
@@ -169,16 +168,10 @@ display:none;
 justify-content:center;
 align-items:center;
 flex-direction:column;
-z-index:999;
 }
 
 .match h1{
 color:#ff2d75;
-font-size:50px;
-}
-
-.match p{
-margin-top:10px;
 }
 
 .match button{
@@ -204,9 +197,15 @@ cursor:pointer;
 
 <div class="icon" onclick="window.location.href='vibe.html'">📍</div>
 
-<div class="icon" onclick="window.location.href='matches.html'">💬</div>
+<div class="icon" onclick="window.location.href='matches.html'">
+💬
+<div class="badge" id="badgeChat">0</div>
+</div>
 
-<div class="icon" onclick="window.location.href='likes.html'">⭐</div>
+<div class="icon" onclick="window.location.href='likes.html'">
+⭐
+<div class="badge" id="badgeLikes">0</div>
+</div>
 
 <div class="icon" onclick="window.location.href='perfil.html'">👤</div>
 
@@ -219,9 +218,6 @@ cursor:pointer;
 <div class="card" id="card">
 
 <img id="foto">
-
-<div class="stamp likeStamp" id="likeStamp">LIKE</div>
-<div class="stamp nopeStamp" id="nopeStamp">NOPE</div>
 
 <div class="overlay">
 <div class="nome" id="nome"></div>
@@ -237,31 +233,25 @@ cursor:pointer;
 
 </div>
 
+<div class="toast" id="toast"></div>
+
 <div class="match" id="match">
 <h1>💘 MATCH</h1>
-<p id="textoMatch"></p>
 <button onclick="fecharMatch()">Continuar</button>
 </div>
 
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-
 import {
 getFirestore,collection,getDocs,doc,updateDoc,arrayUnion,getDoc
 } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
-
-import {
-getAuth,onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+import { getAuth,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
 
 const firebaseConfig = {
-apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
+apiKey: "AIzaSy...",
 authDomain: "lacoapp.firebaseapp.com",
-projectId: "lacoapp",
-storageBucket: "lacoapp.firebasestorage.app",
-messagingSenderId: "485009455528",
-appId: "1:485009455528:web:0c43153be60e62cd6a459d"
+projectId: "lacoapp"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -275,10 +265,13 @@ let meuId=null;
 const foto=document.getElementById("foto");
 const nome=document.getElementById("nome");
 const bio=document.getElementById("bio");
-const card=document.getElementById("card");
 
-const likeStamp=document.getElementById("likeStamp");
-const nopeStamp=document.getElementById("nopeStamp");
+const badgeLikes=document.getElementById("badgeLikes");
+const badgeChat=document.getElementById("badgeChat");
+
+const toast=document.getElementById("toast");
+
+/* LOGIN */
 
 onAuthStateChanged(auth,async(user)=>{
 
@@ -296,33 +289,45 @@ usuarios=snap.docs.map(doc=>({id:doc.id,...doc.data()}))
 
 mostrar();
 
+/* CONTADORES */
+
+setInterval(async ()=>{
+
+const me = await getDoc(doc(db,"usuarios",meuId));
+const dados = me.data();
+
+badgeLikes.innerText = (dados.likesRecebidos || []).length;
+badgeChat.innerText = (dados.matches || []).length;
+
+if(Math.random() < 0.4){
+mostrarToast("🔥 Alguém te curtiu agora");
+}
+
+},5000);
+
 });
+
+/* MOSTRAR */
 
 function mostrar(){
 
 const user=usuarios[index];
 
-foto.src=user.foto || "";
-nome.innerText=user.nome || "Sem nome";
-bio.innerText=user.bio || "";
-
-likeStamp.style.display="none";
-nopeStamp.style.display="none";
+foto.src=user.foto;
+nome.innerText=user.nome;
+bio.innerText=user.bio;
 
 }
 
 /* PASSAR */
 
 window.passar=function(){
-nopeStamp.style.display="block";
-animar(-400,-20);
+proximo();
 };
 
 /* CURTIR */
 
 window.curtir=async function(){
-
-likeStamp.style.display="block";
 
 const user=usuarios[index];
 
@@ -338,38 +343,18 @@ const snap=await getDoc(doc(db,"usuarios",user.id));
 const dados=snap.data();
 
 if(dados.likes && dados.likes.includes(meuId)){
-
-await updateDoc(doc(db,"usuarios",meuId),{
-matches:arrayUnion(user.id)
-});
-
-await updateDoc(doc(db,"usuarios",user.id),{
-matches:arrayUnion(meuId)
-});
-
-document.getElementById("textoMatch").innerText =
-"Você e " + user.nome + " se curtiram 💘";
-
 document.getElementById("match").style.display="flex";
 }
 
-animar(400,20);
+proximo();
 
 };
-
-/* ANIMAÇÃO */
-
-function animar(x,rot){
-card.style.transform=`translateX(${x}px) rotate(${rot}deg)`;
-setTimeout(()=>{proximo();},250);
-}
 
 /* PROXIMO */
 
 function proximo(){
 index++;
 if(index>=usuarios.length){index=0;}
-card.style.transform="translateX(0)";
 mostrar();
 }
 
@@ -378,6 +363,19 @@ mostrar();
 window.fecharMatch=function(){
 document.getElementById("match").style.display="none";
 };
+
+/* TOAST */
+
+function mostrarToast(msg){
+
+toast.innerText=msg;
+toast.style.display="block";
+
+setTimeout(()=>{
+toast.style.display="none";
+},2000);
+
+}
 
 </script>
 
