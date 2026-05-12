@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Vibe Local • Laço 💘</title>
+
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+background:#000;
+color:white;
+font-family:Segoe UI;
+}
+
+/* TOPO */
+
+.topo{
+padding:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:28px;
+color:#ff2d75;
+}
+
+.voltar{
+padding:8px 15px;
+background:#111;
+border-radius:20px;
+color:white;
+text-decoration:none;
+}
+
+/* LISTA */
+
+.lista{
+padding:20px;
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+/* CARD LOCAL */
+
+.local{
+background:#090909;
+border:1px solid #1d1d1d;
+border-radius:20px;
+padding:15px;
+cursor:pointer;
+transition:.2s;
+}
+
+.local:hover{
+transform:scale(1.02);
+border-color:#ff2d75;
+}
+
+.nome{
+font-size:20px;
+font-weight:bold;
+}
+
+.desc{
+opacity:.8;
+margin-top:5px;
+}
+
+/* DETALHE */
+
+.detalhe{
+position:fixed;
+inset:0;
+background:#000;
+display:none;
+flex-direction:column;
+}
+
+.topo2{
+padding:20px;
+display:flex;
+justify-content:space-between;
+}
+
+.pessoas{
+flex:1;
+overflow:auto;
+padding:20px;
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+/* USUARIO */
+
+.user{
+display:flex;
+gap:12px;
+align-items:center;
+background:#111;
+padding:10px;
+border-radius:15px;
+cursor:pointer;
+}
+
+.user img{
+width:50px;
+height:50px;
+border-radius:50%;
+object-fit:cover;
+}
+
+/* BOTÃO */
+
+.btn{
+margin:15px;
+padding:15px;
+border:none;
+border-radius:30px;
+background:#ff2d75;
+color:white;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="topo">
+<div class="logo">Vibe Local 🔥</div>
+<a href="app.html" class="voltar">Voltar</a>
+</div>
+
+<div class="lista" id="lista"></div>
+
+<!-- DETALHE -->
+
+<div class="detalhe" id="detalhe">
+
+<div class="topo2">
+<div id="titulo"></div>
+<button onclick="fechar()">X</button>
+</div>
+
+<div class="pessoas" id="pessoas"></div>
+
+<button class="btn" onclick="entrar()">
+Marcar presença 🔥
+</button>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import {
+getFirestore,collection,getDocs,doc,getDoc,updateDoc,arrayUnion
+} from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+import { getAuth,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSy...",
+authDomain: "lacoapp.firebaseapp.com",
+projectId: "lacoapp"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+const lista = document.getElementById("lista");
+const detalhe = document.getElementById("detalhe");
+const pessoasDiv = document.getElementById("pessoas");
+const titulo = document.getElementById("titulo");
+
+let locais = [
+{ id:"bar", nome:"Bar do Centro 🍻", desc:"Música ao vivo hoje" },
+{ id:"balada", nome:"Balada Neon 💃", desc:"DJ + pista cheia" },
+{ id:"estadio", nome:"Estádio 🏟️", desc:"Jogo hoje à noite" }
+];
+
+let atual = null;
+let meuId = null;
+
+onAuthStateChanged(auth, async(user)=>{
+
+if(!user){
+window.location.href="login.html";
+return;
+}
+
+meuId = user.uid;
+
+renderLocais();
+
+});
+
+function renderLocais(){
+
+locais.forEach(l=>{
+
+lista.innerHTML += `
+<div class="local" onclick="abrir('${l.id}','${l.nome}')">
+<div class="nome">${l.nome}</div>
+<div class="desc">${l.desc}</div>
+</div>
+`;
+
+});
+
+}
+
+window.abrir = async function(id,nome){
+
+atual = id;
+
+titulo.innerText = nome;
+
+detalhe.style.display="flex";
+
+pessoasDiv.innerHTML="Carregando...";
+
+const snap = await getDocs(collection(db,"usuarios"));
+
+pessoasDiv.innerHTML="";
+
+snap.forEach(docu=>{
+
+const u = docu.data();
+
+if(u.locais && u.locais.includes(id)){
+
+pessoasDiv.innerHTML += `
+<div class="user" onclick="irPerfil('${docu.id}')">
+<img src="${u.foto}">
+<div>${u.nome}</div>
+</div>
+`;
+
+}
+
+});
+
+};
+
+window.fechar = function(){
+detalhe.style.display="none";
+};
+
+window.entrar = async function(){
+
+await updateDoc(doc(db,"usuarios",meuId),{
+locais:arrayUnion(atual)
+});
+
+alert("Você entrou nesse rolê 🔥");
+
+};
+
+window.irPerfil = function(id){
+window.location.href = "bate-papo.html?id="+id;
+};
+
+</script>
+
+</body>
+</html>
