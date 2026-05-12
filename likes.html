@@ -40,6 +40,14 @@ body{
   border:1px solid #222;
 }
 
+/* TITULO */
+
+.titulo{
+  padding:0 25px;
+  font-size:28px;
+  margin-bottom:10px;
+}
+
 /* LISTA */
 
 .lista{
@@ -59,7 +67,11 @@ body{
   border:1px solid #1d1d1d;
   border-radius:25px;
   padding:15px;
+  position:relative;
+  overflow:hidden;
 }
+
+/* FOTO */
 
 .card img{
   width:80px;
@@ -68,9 +80,43 @@ body{
   object-fit:cover;
 }
 
+/* BLUR */
+
+.blur{
+  filter:blur(10px);
+}
+
+/* INFO */
+
 .nome{
   font-size:20px;
   font-weight:bold;
+}
+
+/* BLOQUEIO */
+
+.lock{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+/* BOTÃO PREMIUM */
+
+.btn-premium{
+  margin-top:10px;
+  padding:12px 22px;
+  border:none;
+  border-radius:30px;
+  background:#ff2d75;
+  color:white;
+  cursor:pointer;
+  font-size:14px;
 }
 
 </style>
@@ -84,25 +130,27 @@ body{
 <a href="app.html" class="voltar">Voltar</a>
 </div>
 
+<div class="titulo">
+🔥 Pessoas que curtiram você
+</div>
+
 <div class="lista" id="lista"></div>
 
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
 
 import {
 getFirestore,
 doc,
-getDoc
-}
-from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+getDoc,
+updateDoc
+} from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
 import {
 getAuth,
 onAuthStateChanged
-}
-from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
@@ -119,6 +167,17 @@ const auth = getAuth(app);
 
 const lista = document.getElementById("lista");
 
+/* MODO (simulação premium) */
+let premium = false;
+
+/* BOTÃO FAKE DE COMPRA */
+window.ativarPremium = async function(userId){
+  await updateDoc(doc(db,"usuarios",userId), {
+    premium:true
+  });
+  location.reload();
+};
+
 onAuthStateChanged(auth, async (user)=>{
 
   if(!user){
@@ -128,6 +187,8 @@ onAuthStateChanged(auth, async (user)=>{
 
   const meuDoc = await getDoc(doc(db,"usuarios",user.uid));
   const dados = meuDoc.data();
+
+  premium = dados.premium || false;
 
   const likes = dados.likesRecebidos || [];
 
@@ -143,8 +204,25 @@ onAuthStateChanged(auth, async (user)=>{
 
     lista.innerHTML += `
       <div class="card">
-        <img src="${u.foto}">
-        <div class="nome">${u.nome}</div>
+
+        <img class="${premium ? '' : 'blur'}" src="${u.foto}">
+
+        <div class="nome">
+          ${premium ? u.nome : '???'}
+        </div>
+
+        ${
+          !premium ? `
+          <div class="lock">
+            <div>🔥 Alguém te curtiu</div>
+            <button class="btn-premium"
+            onclick="ativarPremium('${user.uid}')">
+            Desbloquear Premium
+            </button>
+          </div>
+          ` : ''
+        }
+
       </div>
     `;
   }
