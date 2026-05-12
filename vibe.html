@@ -18,7 +18,7 @@ font-family:Segoe UI;
 overflow:hidden;
 }
 
-/* FUNDO MAPA FAKE */
+/* FUNDO */
 
 .mapa{
 position:fixed;
@@ -55,7 +55,7 @@ color:white;
 text-decoration:none;
 }
 
-/* LOCAIS */
+/* LISTA */
 
 .lista{
 position:absolute;
@@ -94,6 +94,14 @@ opacity:.8;
 margin-top:5px;
 }
 
+/* CONTADOR */
+
+.count{
+margin-top:8px;
+color:#ff2d75;
+font-size:14px;
+}
+
 /* MODAL */
 
 .modal{
@@ -109,6 +117,7 @@ z-index:3;
 padding:20px;
 display:flex;
 justify-content:space-between;
+align-items:center;
 }
 
 .pessoas{
@@ -151,6 +160,21 @@ color:white;
 cursor:pointer;
 }
 
+/* NOTIFICAÇÃO */
+
+.toast{
+position:fixed;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+background:#111;
+padding:12px 20px;
+border-radius:30px;
+border:1px solid #222;
+display:none;
+z-index:5;
+}
+
 </style>
 
 </head>
@@ -165,8 +189,6 @@ cursor:pointer;
 </div>
 
 <div class="lista" id="lista"></div>
-
-<!-- MODAL -->
 
 <div class="modal" id="modal">
 
@@ -183,14 +205,14 @@ Entrar no rolê 🔥
 
 </div>
 
+<div class="toast" id="toast"></div>
+
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-
 import {
-getFirestore,collection,getDocs,doc,getDoc,updateDoc,arrayUnion
+getFirestore,collection,getDocs,doc,updateDoc,arrayUnion
 } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
-
 import {
 getAuth,onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
@@ -209,6 +231,7 @@ const lista = document.getElementById("lista");
 const modal = document.getElementById("modal");
 const pessoasDiv = document.getElementById("pessoas");
 const titulo = document.getElementById("titulo");
+const toast = document.getElementById("toast");
 
 let atual = null;
 let meuId = null;
@@ -218,7 +241,7 @@ let meuId = null;
 const locais = [
 {id:"bar", nome:"Bar do Centro 🍻", desc:"Hoje • 22:00"},
 {id:"balada", nome:"Balada Neon 💃", desc:"Hoje • 23:30"},
-{id:"estadio", nome:"Estádio 🏟️", desc:"Jogo hoje • 21:00"}
+{id:"estadio", nome:"Estádio 🏟️", desc:"Jogo • 21:00"}
 ];
 
 /* LOGIN */
@@ -238,14 +261,22 @@ render();
 
 /* RENDER */
 
-function render(){
+async function render(){
+
+lista.innerHTML="";
+
+const snap = await getDocs(collection(db,"usuarios"));
+const usuarios = snap.docs.map(d=>d.data());
 
 locais.forEach(l=>{
+
+const count = usuarios.filter(u=>u.locais && u.locais.includes(l.id)).length;
 
 lista.innerHTML += `
 <div class="card" onclick="abrir('${l.id}','${l.nome}')">
 <div class="nome">${l.nome}</div>
 <div class="desc">${l.desc}</div>
+<div class="count">🔥 ${count} pessoas indo</div>
 </div>
 `;
 
@@ -261,7 +292,14 @@ atual = id;
 titulo.innerText = nome;
 
 modal.style.display="flex";
-pessoasDiv.innerHTML="Carregando...";
+
+await atualizarPessoas();
+
+};
+
+/* ATUALIZA LISTA */
+
+async function atualizarPessoas(){
 
 const snap = await getDocs(collection(db,"usuarios"));
 
@@ -271,10 +309,10 @@ snap.forEach(docu=>{
 
 const u = docu.data();
 
-if(u.locais && u.locais.includes(id)){
+if(u.locais && u.locais.includes(atual)){
 
 pessoasDiv.innerHTML += `
-<div class="user" onclick="chat('${docu.id}')">
+<div class="user">
 <img src="${u.foto}">
 <div>${u.nome}</div>
 </div>
@@ -284,13 +322,17 @@ pessoasDiv.innerHTML += `
 
 });
 
-};
+}
 
-/* FECHAR */
+/* SIMULA TEMPO REAL */
 
-window.fechar = function(){
-modal.style.display="none";
-};
+setInterval(()=>{
+if(atual){
+mostrarToast("🔥 Alguém entrou agora");
+atualizarPessoas();
+}
+render();
+},5000);
 
 /* ENTRAR */
 
@@ -300,14 +342,27 @@ await updateDoc(doc(db,"usuarios",meuId),{
 locais:arrayUnion(atual)
 });
 
-alert("Você entrou 🔥");
+mostrarToast("🔥 Você entrou no rolê");
 
 };
 
-/* CHAT */
+/* TOAST */
 
-window.chat = function(id){
-window.location.href = "bate-papo.html?id="+id;
+function mostrarToast(msg){
+
+toast.innerText = msg;
+toast.style.display="block";
+
+setTimeout(()=>{
+toast.style.display="none";
+},2000);
+
+}
+
+/* FECHAR */
+
+window.fechar = function(){
+modal.style.display="none";
 };
 
 </script>
