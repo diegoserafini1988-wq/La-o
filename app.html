@@ -2,265 +2,205 @@
 <html lang="pt-br">
 
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Laço 💘</title>
 
 <style>
 
+/* RESET */
+
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 body{
-  background:#000;
-  font-family:Segoe UI;
-  color:white;
-  overflow:hidden;
-}
-
-/* FUNDO */
-
-.bg{
-  position:fixed;
-  inset:0;
-
-  background:
-  radial-gradient(circle at top,
-  rgba(255,0,90,.18),
-  transparent 40%),
-
-  radial-gradient(circle at bottom,
-  rgba(255,0,120,.12),
-  transparent 35%),
-
-  #000;
-
-  z-index:-1;
+background:#000;
+font-family:Segoe UI;
+color:white;
+overflow:hidden;
 }
 
 /* TOPO */
 
 .topo{
-  width:100%;
-  padding:20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px;
 }
 
 .logo{
-  font-size:32px;
-  font-weight:bold;
-  color:#ff2d75;
+font-size:30px;
+color:#ff2d75;
+font-weight:bold;
 }
 
-.top-icons{
-  display:flex;
-  gap:14px;
+.icons{
+display:flex;
+gap:12px;
 }
 
 .icon{
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  background:#111;
-  border:1px solid #222;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  cursor:pointer;
-  transition:.3s;
-  font-size:20px;
+width:45px;
+height:45px;
+border-radius:50%;
+background:#111;
+display:flex;
+justify-content:center;
+align-items:center;
+cursor:pointer;
+transition:.2s;
 }
 
 .icon:hover{
-  transform:scale(1.08);
-  background:#181818;
-}
-
-/* AREA */
-
-.area{
-  width:100%;
-  height:calc(100vh - 90px);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
+transform:scale(1.1);
 }
 
 /* CARD */
 
-.card{
-  width:370px;
-  max-width:95%;
-  height:670px;
-  background:#090909;
-  border-radius:35px;
-  overflow:hidden;
-  position:relative;
-  border:1px solid #1d1d1d;
-  box-shadow:0 0 45px rgba(255,0,90,.18);
-  transition:.3s;
+.area{
+height:calc(100vh - 80px);
+display:flex;
+justify-content:center;
+align-items:center;
 }
 
-/* FOTO */
+.card{
+width:360px;
+height:640px;
+border-radius:30px;
+overflow:hidden;
+position:relative;
+background:#000;
+box-shadow:0 0 50px rgba(255,0,90,.25);
+transition:.3s;
+}
 
 .card img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+width:100%;
+height:100%;
+object-fit:cover;
 }
 
-/* OVERLAY */
+/* GRADIENT */
 
 .overlay{
-  position:absolute;
-  bottom:0;
-  width:100%;
-  padding:30px;
-  background:linear-gradient(transparent,rgba(0,0,0,.96));
+position:absolute;
+bottom:0;
+width:100%;
+padding:25px;
+background:linear-gradient(transparent,black);
 }
-
-/* INFO */
 
 .nome{
-  font-size:34px;
-  font-weight:bold;
-}
-
-.idade{
-  opacity:.8;
-  margin-top:5px;
+font-size:30px;
+font-weight:bold;
 }
 
 .bio{
-  margin-top:14px;
-  line-height:1.5;
-  opacity:.92;
+margin-top:10px;
+opacity:.9;
 }
 
-/* TAGS */
+/* LIKE / NOPE */
 
-.tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:18px;
+.stamp{
+position:absolute;
+top:40px;
+left:20px;
+font-size:30px;
+padding:10px 20px;
+border-radius:10px;
+font-weight:bold;
+display:none;
 }
 
-.tag{
-  padding:8px 14px;
-  border-radius:30px;
-  background:#141414;
-  border:1px solid #222;
-  font-size:13px;
+.likeStamp{
+color:#00ff88;
+border:3px solid #00ff88;
 }
 
-/* AÇÕES */
+.nopeStamp{
+color:#ff4d6d;
+border:3px solid #ff4d6d;
+}
+
+/* BOTÕES */
 
 .actions{
-  position:absolute;
-  bottom:20px;
-  width:100%;
-  display:flex;
-  justify-content:center;
-  gap:25px;
+position:absolute;
+bottom:20px;
+width:100%;
+display:flex;
+justify-content:center;
+gap:25px;
 }
 
 .btn{
-  width:78px;
-  height:78px;
-  border:none;
-  border-radius:50%;
-  cursor:pointer;
-  font-size:30px;
-  transition:.25s;
+width:70px;
+height:70px;
+border-radius:50%;
+border:none;
+cursor:pointer;
+font-size:25px;
 }
 
 .nope{
-  background:#1a1a1a;
-  color:#ff4d6d;
+background:#1a1a1a;
+color:#ff4d6d;
 }
 
 .like{
-  background:#ff2d75;
-  color:white;
-}
-
-.btn:hover{
-  transform:scale(1.08);
+background:#ff2d75;
+color:white;
 }
 
 /* MATCH */
 
 .match{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.94);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  z-index:999;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.9);
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:999;
 }
 
 .match h1{
-  color:#ff2d75;
-  font-size:60px;
-}
-
-.match p{
-  margin-top:15px;
-  font-size:22px;
+color:#ff2d75;
+font-size:50px;
 }
 
 .match button{
-  margin-top:30px;
-  padding:16px 40px;
-  border:none;
-  border-radius:40px;
-  background:#ff2d75;
-  color:white;
-  cursor:pointer;
-  font-size:17px;
+margin-top:20px;
+padding:15px 30px;
+border:none;
+border-radius:30px;
+background:#ff2d75;
+color:white;
+cursor:pointer;
 }
 
 </style>
-
 </head>
 
 <body>
 
-<div class="bg"></div>
-
-<!-- TOPO -->
-
 <div class="topo">
+<div class="logo">Laço 💘</div>
 
-<div class="logo">
-Laço 💘
-</div>
-
-<div class="top-icons">
-
-<div class="icon">🔥</div>
-
+<div class="icons">
 <div class="icon" onclick="window.location.href='matches.html'">💬</div>
-
 <div class="icon" onclick="window.location.href='likes.html'">⭐</div>
-
 <div class="icon" onclick="window.location.href='perfil.html'">👤</div>
-
 </div>
-
 </div>
-
-<!-- AREA -->
 
 <div class="area">
 
@@ -268,182 +208,152 @@ Laço 💘
 
 <img id="foto">
 
+<div class="stamp likeStamp" id="likeStamp">LIKE</div>
+<div class="stamp nopeStamp" id="nopeStamp">NOPE</div>
+
 <div class="overlay">
-
-<div class="nome" id="nome">Carregando...</div>
-
-<div class="idade" id="idade"></div>
-
+<div class="nome" id="nome"></div>
 <div class="bio" id="bio"></div>
-
-<div class="tags" id="tags"></div>
-
 </div>
 
 <div class="actions">
-
 <button class="btn nope" onclick="passar()">✖</button>
-
 <button class="btn like" onclick="curtir()">❤</button>
-
 </div>
 
 </div>
 
 </div>
-
-<!-- MATCH -->
 
 <div class="match" id="match">
-
 <h1>💘 MATCH</h1>
-
-<p id="textoMatch"></p>
-
 <button onclick="fecharMatch()">Continuar</button>
-
 </div>
 
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-
 import {
-getFirestore,
-collection,
-getDocs,
-doc,
-updateDoc,
-arrayUnion,
-getDoc
+getFirestore,collection,getDocs,doc,updateDoc,arrayUnion,getDoc
 } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
-
-import {
-getAuth,
-onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+import { getAuth,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNh2tIpj1VXnw",
-  authDomain: "lacoapp.firebaseapp.com",
-  projectId: "lacoapp",
-  storageBucket: "lacoapp.firebasestorage.app",
-  messagingSenderId: "485009455528",
-  appId: "1:485009455528:web:0c43153be60e62cd6a459d"
+apiKey: "AIzaSy...",
+authDomain: "lacoapp.firebaseapp.com",
+projectId: "lacoapp"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-let usuarios = [];
-let index = 0;
-let meuId = null;
+let usuarios=[];
+let index=0;
+let meuId=null;
 
-const foto = document.getElementById("foto");
-const nome = document.getElementById("nome");
-const idade = document.getElementById("idade");
-const bio = document.getElementById("bio");
-const tags = document.getElementById("tags");
-const card = document.getElementById("card");
+const foto=document.getElementById("foto");
+const nome=document.getElementById("nome");
+const bio=document.getElementById("bio");
+const card=document.getElementById("card");
 
-onAuthStateChanged(auth, async (user)=>{
+const likeStamp=document.getElementById("likeStamp");
+const nopeStamp=document.getElementById("nopeStamp");
 
-  if(!user){
-    window.location.href="login.html";
-    return;
-  }
+onAuthStateChanged(auth,async(user)=>{
 
-  meuId = user.uid;
+if(!user){
+window.location.href="login.html";
+return;
+}
 
-  const querySnapshot = await getDocs(collection(db,"usuarios"));
+meuId=user.uid;
 
-  usuarios = querySnapshot.docs.map(doc => ({
-    id:doc.id,
-    ...doc.data()
-  })).filter(u => u.id !== meuId);
+const snap=await getDocs(collection(db,"usuarios"));
 
-  mostrar();
+usuarios=snap.docs.map(doc=>({id:doc.id,...doc.data()}))
+.filter(u=>u.id!==meuId);
+
+mostrar();
 
 });
 
 function mostrar(){
 
-  if(usuarios.length === 0){
-    nome.innerText="Sem usuários";
-    return;
-  }
+const user=usuarios[index];
 
-  const user = usuarios[index];
+foto.src=user.foto;
+nome.innerText=user.nome;
+bio.innerText=user.bio;
 
-  foto.src = user.foto || "";
-  nome.innerText = user.nome || "Sem nome";
-  idade.innerText = (user.idade || "?") + " anos";
-  bio.innerText = user.bio || "";
-
-  tags.innerHTML="";
-
-  if(user.interesses){
-    user.interesses.forEach(tag=>{
-      tags.innerHTML += `<div class="tag">${tag}</div>`;
-    });
-  }
+likeStamp.style.display="none";
+nopeStamp.style.display="none";
 
 }
 
-window.passar = function(){
-  animar(-400,-20);
-};
+/* ANIMAÇÃO */
 
-window.curtir = async function(){
+function animar(x,rot){
 
-  const user = usuarios[index];
+card.style.transform=`translateX(${x}px) rotate(${rot}deg)`;
 
-  await updateDoc(doc(db,"usuarios",meuId), {
-    likes:arrayUnion(user.id)
-  });
+setTimeout(()=>{proximo();},250);
 
-  await updateDoc(doc(db,"usuarios",user.id), {
-    likesRecebidos:arrayUnion(meuId)
-  });
-
-  const snap = await getDoc(doc(db,"usuarios",user.id));
-  const dados = snap.data();
-
-  if(dados.likes && dados.likes.includes(meuId)){
-
-    await updateDoc(doc(db,"usuarios",meuId), {
-      matches:arrayUnion(user.id)
-    });
-
-    await updateDoc(doc(db,"usuarios",user.id), {
-      matches:arrayUnion(meuId)
-    });
-
-    document.getElementById("textoMatch").innerText =
-    "Você e " + user.nome + " se curtiram 💘";
-
-    document.getElementById("match").style.display="flex";
-  }
-
-  animar(400,20);
-};
-
-window.fecharMatch = function(){
-  document.getElementById("match").style.display="none";
-};
-
-function animar(x,r){
-  card.style.transform = `translateX(${x}px) rotate(${r}deg)`;
-  setTimeout(()=>{proximo();},300);
 }
+
+/* PASSAR */
+
+window.passar=function(){
+
+nopeStamp.style.display="block";
+animar(-400,-20);
+
+};
+
+/* CURTIR */
+
+window.curtir=async function(){
+
+likeStamp.style.display="block";
+
+const user=usuarios[index];
+
+await updateDoc(doc(db,"usuarios",meuId),{
+likes:arrayUnion(user.id)
+});
+
+await updateDoc(doc(db,"usuarios",user.id),{
+likesRecebidos:arrayUnion(meuId)
+});
+
+const snap=await getDoc(doc(db,"usuarios",user.id));
+const dados=snap.data();
+
+if(dados.likes && dados.likes.includes(meuId)){
+document.getElementById("match").style.display="flex";
+}
+
+animar(400,20);
+
+};
+
+/* NEXT */
 
 function proximo(){
-  index++;
-  if(index >= usuarios.length){index=0;}
-  mostrar();
-  card.style.transform="translateX(0) rotate(0)";
+
+index++;
+if(index>=usuarios.length){index=0;}
+
+card.style.transform="translateX(0)";
+mostrar();
+
 }
+
+/* MATCH */
+
+window.fecharMatch=function(){
+document.getElementById("match").style.display="none";
+};
 
 </script>
 
