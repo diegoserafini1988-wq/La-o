@@ -9,13 +9,7 @@
 
 <style>
 
-/* RESET */
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
 background:#000;
@@ -44,6 +38,8 @@ display:flex;
 gap:12px;
 }
 
+/* ICONES */
+
 .icon{
 width:45px;
 height:45px;
@@ -54,13 +50,15 @@ justify-content:center;
 align-items:center;
 cursor:pointer;
 transition:.2s;
+font-size:20px;
 }
 
 .icon:hover{
 transform:scale(1.1);
+background:#1a1a1a;
 }
 
-/* CARD */
+/* AREA */
 
 .area{
 height:calc(100vh - 80px);
@@ -68,6 +66,8 @@ display:flex;
 justify-content:center;
 align-items:center;
 }
+
+/* CARD */
 
 .card{
 width:360px;
@@ -86,7 +86,7 @@ height:100%;
 object-fit:cover;
 }
 
-/* GRADIENT */
+/* OVERLAY */
 
 .overlay{
 position:absolute;
@@ -106,14 +106,14 @@ margin-top:10px;
 opacity:.9;
 }
 
-/* LIKE / NOPE */
+/* STAMP */
 
 .stamp{
 position:absolute;
 top:40px;
 left:20px;
-font-size:30px;
-padding:10px 20px;
+font-size:28px;
+padding:8px 18px;
 border-radius:10px;
 font-weight:bold;
 display:none;
@@ -177,6 +177,10 @@ color:#ff2d75;
 font-size:50px;
 }
 
+.match p{
+margin-top:10px;
+}
+
 .match button{
 margin-top:20px;
 padding:15px 30px;
@@ -193,13 +197,21 @@ cursor:pointer;
 <body>
 
 <div class="topo">
+
 <div class="logo">Laço 💘</div>
 
 <div class="icons">
+
+<div class="icon" onclick="window.location.href='vibe.html'">📍</div>
+
 <div class="icon" onclick="window.location.href='matches.html'">💬</div>
+
 <div class="icon" onclick="window.location.href='likes.html'">⭐</div>
+
 <div class="icon" onclick="window.location.href='perfil.html'">👤</div>
+
 </div>
+
 </div>
 
 <div class="area">
@@ -227,21 +239,29 @@ cursor:pointer;
 
 <div class="match" id="match">
 <h1>💘 MATCH</h1>
+<p id="textoMatch"></p>
 <button onclick="fecharMatch()">Continuar</button>
 </div>
 
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+
 import {
 getFirestore,collection,getDocs,doc,updateDoc,arrayUnion,getDoc
 } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
-import { getAuth,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+
+import {
+getAuth,onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
 
 const firebaseConfig = {
-apiKey: "AIzaSy...",
+apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
 authDomain: "lacoapp.firebaseapp.com",
-projectId: "lacoapp"
+projectId: "lacoapp",
+storageBucket: "lacoapp.firebasestorage.app",
+messagingSenderId: "485009455528",
+appId: "1:485009455528:web:0c43153be60e62cd6a459d"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -282,32 +302,20 @@ function mostrar(){
 
 const user=usuarios[index];
 
-foto.src=user.foto;
-nome.innerText=user.nome;
-bio.innerText=user.bio;
+foto.src=user.foto || "";
+nome.innerText=user.nome || "Sem nome";
+bio.innerText=user.bio || "";
 
 likeStamp.style.display="none";
 nopeStamp.style.display="none";
 
 }
 
-/* ANIMAÇÃO */
-
-function animar(x,rot){
-
-card.style.transform=`translateX(${x}px) rotate(${rot}deg)`;
-
-setTimeout(()=>{proximo();},250);
-
-}
-
 /* PASSAR */
 
 window.passar=function(){
-
 nopeStamp.style.display="block";
 animar(-400,-20);
-
 };
 
 /* CURTIR */
@@ -330,6 +338,18 @@ const snap=await getDoc(doc(db,"usuarios",user.id));
 const dados=snap.data();
 
 if(dados.likes && dados.likes.includes(meuId)){
+
+await updateDoc(doc(db,"usuarios",meuId),{
+matches:arrayUnion(user.id)
+});
+
+await updateDoc(doc(db,"usuarios",user.id),{
+matches:arrayUnion(meuId)
+});
+
+document.getElementById("textoMatch").innerText =
+"Você e " + user.nome + " se curtiram 💘";
+
 document.getElementById("match").style.display="flex";
 }
 
@@ -337,16 +357,20 @@ animar(400,20);
 
 };
 
-/* NEXT */
+/* ANIMAÇÃO */
+
+function animar(x,rot){
+card.style.transform=`translateX(${x}px) rotate(${rot}deg)`;
+setTimeout(()=>{proximo();},250);
+}
+
+/* PROXIMO */
 
 function proximo(){
-
 index++;
 if(index>=usuarios.length){index=0;}
-
 card.style.transform="translateX(0)";
 mostrar();
-
 }
 
 /* MATCH */
