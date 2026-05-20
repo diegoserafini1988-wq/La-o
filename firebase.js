@@ -1,26 +1,16 @@
-import { initializeApp }
-
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
-
 getAuth,
 onAuthStateChanged,
+signInWithEmailAndPassword,
+createUserWithEmailAndPassword,
 signOut
-
-}
-
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
-
 getFirestore
-
-}
-
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-/* FIREBASE CONFIG */
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
 
@@ -40,21 +30,22 @@ measurementId: "G-MSB3J89XLL"
 
 };
 
-/* INICIAR */
-
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
 
 const db = getFirestore(app);
 
-/* EXPORTAR */
-
 export {
 
 auth,
 db,
+
 onAuthStateChanged,
+
+signInWithEmailAndPassword,
+createUserWithEmailAndPassword,
+
 signOut
 
 };
