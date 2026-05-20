@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,12 +19,14 @@ font-family:Arial, Helvetica, sans-serif;
 body{
 background:#000;
 color:white;
+height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-height:100vh;
 overflow:hidden;
 }
+
+/* FUNDO PREMIUM */
 
 .bg{
 position:fixed;
@@ -35,31 +38,42 @@ radial-gradient(circle at bottom,#ff4d6d22,transparent 40%);
 z-index:-1;
 }
 
-.container{
+/* CARD */
+
+.card{
+
 width:100%;
 max-width:400px;
-padding:30px;
 background:#111;
 border:1px solid #222;
 border-radius:30px;
-box-shadow:0 0 40px #ff006620;
-animation:fade 0.5s ease;
+padding:35px;
+box-shadow:0 0 50px rgba(255,0,102,0.15);
+
+animation:fade .5s ease;
+
 }
 
 @keyframes fade{
+
 from{
 opacity:0;
 transform:translateY(20px);
 }
+
 to{
 opacity:1;
 transform:translateY(0);
 }
+
 }
+
+/* LOGO */
 
 .logo{
 text-align:center;
-font-size:42px;
+font-size:45px;
+font-weight:bold;
 margin-bottom:10px;
 }
 
@@ -69,19 +83,26 @@ opacity:.7;
 margin-bottom:35px;
 }
 
+/* INPUTS */
+
 input{
+
 width:100%;
 padding:16px;
 margin-bottom:15px;
 border:none;
+outline:none;
 border-radius:15px;
 background:#1a1a1a;
 color:white;
 font-size:15px;
-outline:none;
+
 }
 
+/* BOTÃO */
+
 button{
+
 width:100%;
 padding:16px;
 border:none;
@@ -92,35 +113,52 @@ font-size:16px;
 font-weight:bold;
 cursor:pointer;
 transition:.3s;
+
 }
 
 button:hover{
+
 transform:scale(1.03);
+
 }
 
-.loading{
+/* TEXTO */
+
+.info{
+
+text-align:center;
 margin-top:20px;
-text-align:center;
-display:none;
 opacity:.7;
+
 }
 
-.erro{
-margin-top:15px;
-color:#ff4d6d;
-text-align:center;
-display:none;
-}
+.info a{
 
-.criar{
-margin-top:25px;
-text-align:center;
-opacity:.8;
-}
-
-.criar a{
 color:#ff4d6d;
 text-decoration:none;
+
+}
+
+/* LOADING */
+
+.loading{
+
+display:none;
+text-align:center;
+margin-top:20px;
+opacity:.7;
+
+}
+
+/* ERRO */
+
+.erro{
+
+display:none;
+margin-top:15px;
+text-align:center;
+color:#ff4d6d;
+
 }
 
 </style>
@@ -130,17 +168,27 @@ text-decoration:none;
 
 <div class="bg"></div>
 
-<div class="container">
+<div class="card">
 
-<div class="logo">Laço 💘</div>
+<div class="logo">
+Laço 💘
+</div>
 
 <div class="sub">
 Conexões que começam no olhar
 </div>
 
-<input type="email" id="email" placeholder="Seu email">
+<input
+type="email"
+id="email"
+placeholder="Seu email"
+>
 
-<input type="password" id="senha" placeholder="Sua senha">
+<input
+type="password"
+id="senha"
+placeholder="Sua senha"
+>
 
 <button onclick="entrar()">
 Entrar
@@ -152,7 +200,7 @@ Entrando...
 
 <div class="erro" id="erro"></div>
 
-<div class="criar">
+<div class="info">
 Não possui conta?
 <a href="cadastro.html">
 Criar conta
@@ -163,22 +211,35 @@ Criar conta
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { initializeApp }
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
+
 getAuth,
 signInWithEmailAndPassword,
 onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+/* FIREBASE */
 
 const firebaseConfig = {
 
-apiKey: "SUA_APIKEY",
+apiKey: "COLE_SUA_APIKEY_AQUI",
+
 authDomain: "lacoapp.firebaseapp.com",
+
 projectId: "lacoapp",
+
 storageBucket: "lacoapp.appspot.com",
-messagingSenderId: "SEU_ID",
-appId: "SEU_APP_ID"
+
+messagingSenderId: "COLE_SEU_MESSAGING_ID",
+
+appId: "COLE_SEU_APPID"
 
 };
 
@@ -186,13 +247,9 @@ const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
 
-let carregou = false;
+/* VERIFICAR LOGIN */
 
-onAuthStateChanged(auth, (user)=>{
-
-if(carregou) return;
-
-carregou = true;
+onAuthStateChanged(auth,(user)=>{
 
 if(user){
 
@@ -202,6 +259,8 @@ window.location.href = "app.html";
 
 });
 
+/* LOGIN */
+
 window.entrar = async function(){
 
 const email =
@@ -210,11 +269,11 @@ document.getElementById("email").value;
 const senha =
 document.getElementById("senha").value;
 
-const erro =
-document.getElementById("erro");
-
 const loading =
 document.getElementById("loading");
+
+const erro =
+document.getElementById("erro");
 
 erro.style.display = "none";
 
