@@ -8,21 +8,11 @@
 
 <title>Laço 💘</title>
 
-<!-- FONT -->
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
-<link
-href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet"
->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<!-- ICONS -->
-
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 
 <style>
 
@@ -31,101 +21,45 @@ margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:'Poppins',sans-serif;
+-webkit-tap-highlight-color:transparent;
 }
 
 body{
 
 background:
-radial-gradient(circle at top,#ff006633,transparent 25%),
-radial-gradient(circle at bottom,#ff4d6d22,transparent 25%),
+radial-gradient(circle at top,#ff006655,transparent 30%),
+radial-gradient(circle at bottom,#ff4d6d22,transparent 30%),
 #050505;
 
 height:100vh;
 overflow:hidden;
-
-display:flex;
-justify-content:center;
-align-items:center;
-
 color:white;
 
 }
 
-/* APP */
+/* TOPO */
 
-.app{
+.topo{
 
-width:100%;
-max-width:430px;
-height:100vh;
+position:fixed;
 
-position:relative;
-overflow:hidden;
-
-background:
-linear-gradient(to bottom,
-rgba(255,255,255,.04),
-rgba(255,255,255,.02)
-);
-
-backdrop-filter:blur(30px);
-
-border-left:1px solid rgba(255,255,255,.05);
-border-right:1px solid rgba(255,255,255,.05);
-
-}
-
-/* PARTICLES */
-
-.particle{
-
-position:absolute;
-border-radius:50%;
-background:rgba(255,0,102,.18);
-
-animation:float 12s infinite linear;
-
-}
-
-@keyframes float{
-
-from{
-transform:translateY(100vh);
-opacity:0;
-}
-
-20%{
-opacity:1;
-}
-
-to{
-transform:translateY(-120vh);
-opacity:0;
-}
-
-}
-
-/* HEADER */
-
-.header{
-
-position:absolute;
 top:0;
 left:0;
 
 width:100%;
-padding:20px;
+
+padding:22px;
 
 display:flex;
 justify-content:space-between;
 align-items:center;
 
-z-index:50;
+z-index:100;
+
+backdrop-filter:blur(20px);
 
 background:
-linear-gradient(to bottom,
-rgba(0,0,0,.65),
-transparent);
+linear-gradient(to bottom,rgba(0,0,0,.45),transparent);
 
 }
 
@@ -142,59 +76,51 @@ linear-gradient(45deg,#ff0066,#ff4d8d);
 
 }
 
-.header-actions{
+.topIcons{
 
 display:flex;
 gap:12px;
 
 }
 
-.header-btn{
+.topIcons i{
 
-width:46px;
-height:46px;
-
-border-radius:50%;
+width:44px;
+height:44px;
 
 display:flex;
 justify-content:center;
 align-items:center;
 
-background:rgba(255,255,255,.08);
+border-radius:16px;
 
-backdrop-filter:blur(20px);
+background:
+rgba(255,255,255,.06);
+
+border:
+1px solid rgba(255,255,255,.05);
 
 font-size:18px;
 
-cursor:pointer;
-
-transition:.3s;
+backdrop-filter:blur(20px);
 
 }
 
-.header-btn:hover{
+/* AREA */
 
-transform:scale(1.08);
-
-background:rgba(255,255,255,.14);
-
-}
-
-/* CARDS */
-
-.cards{
-
-position:absolute;
-
-top:90px;
-left:0;
+.area{
 
 width:100%;
-height:calc(100vh - 200px);
+height:100vh;
 
 display:flex;
 justify-content:center;
 align-items:center;
+
+padding-top:80px;
+padding-bottom:120px;
+
+position:relative;
 
 }
 
@@ -205,21 +131,21 @@ align-items:center;
 position:absolute;
 
 width:92%;
-height:100%;
+max-width:420px;
+height:72vh;
 
-border-radius:36px;
+border-radius:34px;
 
 overflow:hidden;
 
 background:#111;
 
 box-shadow:
-0 30px 80px rgba(0,0,0,.6),
-0 0 60px rgba(255,0,102,.12);
-
-cursor:grab;
+0 25px 80px rgba(0,0,0,.55);
 
 user-select:none;
+
+cursor:grab;
 
 transition:
 transform .25s ease,
@@ -231,135 +157,164 @@ opacity .25s ease;
 
 width:100%;
 height:100%;
+
 object-fit:cover;
 
+position:absolute;
+top:0;
+left:0;
+
 }
 
-/* GRADIENT */
-
-.card::after{
-
-content:"";
+.overlay{
 
 position:absolute;
-left:0;
+
 bottom:0;
+left:0;
 
 width:100%;
-height:55%;
+
+padding:26px;
 
 background:
-linear-gradient(to top,
-rgba(0,0,0,.95),
-transparent);
+linear-gradient(to top,#000 5%,transparent);
 
 }
 
-/* INFO */
+.nome{
 
-.info{
+font-size:34px;
+font-weight:700;
 
-position:absolute;
-bottom:0;
-left:0;
-
-width:100%;
-padding:28px;
-
-z-index:5;
-
-}
-
-.top-info{
+margin-bottom:6px;
 
 display:flex;
 align-items:center;
 gap:10px;
 
-margin-bottom:8px;
-
 }
 
-.name{
+.verificado{
 
-font-size:38px;
-font-weight:700;
-
-}
-
-.verified{
-
-color:#3ea6ff;
-font-size:20px;
-
-}
-
-.distance{
-
-opacity:.8;
-font-size:14px;
-
-margin-bottom:14px;
+color:#4da6ff;
+font-size:18px;
 
 }
 
 .bio{
 
-font-size:15px;
-line-height:1.5;
+font-size:14px;
+line-height:1.6;
 
 opacity:.92;
 
-margin-bottom:18px;
+margin-top:10px;
 
 }
 
-/* TAGS */
-
-.tags{
+.info{
 
 display:flex;
 gap:10px;
 flex-wrap:wrap;
 
+margin-top:16px;
+
 }
 
 .tag{
 
-padding:10px 16px;
+padding:10px 14px;
 
 border-radius:999px;
 
-background:rgba(255,255,255,.08);
+background:
+rgba(255,255,255,.08);
 
 backdrop-filter:blur(10px);
 
-font-size:13px;
+font-size:12px;
+
+border:
+1px solid rgba(255,255,255,.05);
 
 }
 
-/* ACTIONS */
+/* LIKE */
 
-.actions{
+.like{
 
 position:absolute;
 
-bottom:105px;
+top:30px;
+left:25px;
+
+padding:12px 18px;
+
+border:4px solid #00ff88;
+
+color:#00ff88;
+
+font-size:32px;
+font-weight:800;
+
+border-radius:18px;
+
+transform:rotate(-15deg);
+
+opacity:0;
+
+}
+
+/* NOPE */
+
+.nope{
+
+position:absolute;
+
+top:30px;
+right:25px;
+
+padding:12px 18px;
+
+border:4px solid #ff3b5c;
+
+color:#ff3b5c;
+
+font-size:32px;
+font-weight:800;
+
+border-radius:18px;
+
+transform:rotate(15deg);
+
+opacity:0;
+
+}
+
+/* BOTÕES */
+
+.actions{
+
+position:fixed;
+
+bottom:95px;
 left:50%;
 
 transform:translateX(-50%);
 
 display:flex;
-gap:24px;
+gap:18px;
 
-z-index:60;
+z-index:100;
 
 }
 
-.action{
+.btn{
 
-width:78px;
-height:78px;
+width:70px;
+height:70px;
 
 border-radius:50%;
 
@@ -367,138 +322,192 @@ display:flex;
 justify-content:center;
 align-items:center;
 
-font-size:30px;
+font-size:24px;
 
-cursor:pointer;
+background:
+rgba(255,255,255,.06);
 
-transition:.3s;
+backdrop-filter:blur(20px);
 
-backdrop-filter:blur(25px);
+border:
+1px solid rgba(255,255,255,.05);
+
+box-shadow:
+0 10px 40px rgba(0,0,0,.3);
+
+transition:.25s;
+
+}
+
+.btn:active{
+
+transform:scale(.92);
 
 }
 
 .dislike{
-
-background:rgba(255,255,255,.08);
-
 color:#ff4d6d;
-
 }
 
-.like{
-
-background:
-linear-gradient(45deg,#ff0066,#ff4d8d);
-
-box-shadow:
-0 0 40px rgba(255,0,102,.45);
-
+.likeBtn{
+color:#00ff88;
 }
 
-.action:hover{
-
-transform:scale(1.12);
-
+.star{
+color:#ffd54a;
 }
 
-/* NAV */
+/* NAVBAR */
 
 .nav{
 
-position:absolute;
+position:fixed;
+
 bottom:0;
 left:0;
 
 width:100%;
-height:88px;
+
+padding:18px 10px 28px;
 
 display:flex;
 justify-content:space-around;
 align-items:center;
 
-background:rgba(0,0,0,.55);
+background:
+rgba(10,10,10,.82);
 
-backdrop-filter:blur(25px);
+backdrop-filter:blur(30px);
 
-border-top:1px solid rgba(255,255,255,.05);
+border-top:
+1px solid rgba(255,255,255,.05);
 
-z-index:100;
+z-index:200;
 
 }
 
-.nav-item{
+.navItem{
 
 display:flex;
 flex-direction:column;
 align-items:center;
-
 gap:6px;
 
 font-size:12px;
 
 opacity:.55;
 
-transition:.25s;
-
-cursor:pointer;
+transition:.3s;
 
 }
 
-.nav-item.active{
+.navItem.active{
 
 opacity:1;
+
 color:#ff4d8d;
 
 }
 
-.nav-item i{
+.navItem i{
 
-font-size:21px;
+font-size:22px;
 
 }
 
-/* MATCH EFFECT */
+/* MATCH */
 
 .match{
 
-position:absolute;
+position:fixed;
 
 top:50%;
 left:50%;
 
-transform:translate(-50%,-50%) scale(.5);
+transform:translate(-50%,-50%) scale(.7);
 
-font-size:120px;
+background:
+rgba(15,15,15,.95);
 
-opacity:0;
+padding:40px;
 
-pointer-events:none;
+border-radius:34px;
+
+text-align:center;
 
 z-index:999;
 
-}
-
-.showMatch{
-
-animation:match .8s ease;
-
-}
-
-@keyframes match{
-
-0%{
 opacity:0;
-transform:translate(-50%,-50%) scale(.3);
+pointer-events:none;
+
+transition:.4s;
+
+backdrop-filter:blur(30px);
+
+border:
+1px solid rgba(255,255,255,.06);
+
 }
 
-50%{
+.match.show{
+
 opacity:1;
-transform:translate(-50%,-50%) scale(1.2);
+
+transform:translate(-50%,-50%) scale(1);
+
 }
 
-100%{
-opacity:0;
-transform:translate(-50%,-50%) scale(1.8);
+.match h1{
+
+font-size:42px;
+
+margin-bottom:12px;
+
+background:
+linear-gradient(45deg,#ff0066,#ff4d8d);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+}
+
+.match p{
+
+opacity:.75;
+
+margin-bottom:25px;
+
+}
+
+.match button{
+
+padding:15px 24px;
+
+border:none;
+
+border-radius:16px;
+
+background:
+linear-gradient(45deg,#ff0066,#ff4d8d);
+
+color:white;
+
+font-weight:700;
+
+font-size:15px;
+
+}
+
+/* RESPONSIVO */
+
+@media(max-width:500px){
+
+.card{
+height:68vh;
+}
+
+.nome{
+font-size:28px;
 }
 
 }
@@ -509,50 +518,41 @@ transform:translate(-50%,-50%) scale(1.8);
 
 <body>
 
-<div class="app">
+<!-- TOPO -->
 
-<!-- PARTICLES -->
-
-<div class="particle" style="width:6px;height:6px;left:10%;animation-delay:0s;"></div>
-<div class="particle" style="width:4px;height:4px;left:25%;animation-delay:2s;"></div>
-<div class="particle" style="width:8px;height:8px;left:60%;animation-delay:4s;"></div>
-<div class="particle" style="width:5px;height:5px;left:85%;animation-delay:1s;"></div>
-
-<!-- HEADER -->
-
-<div class="header">
+<div class="topo">
 
 <div class="logo">
-Laço
+Laço 💘
 </div>
 
-<div class="header-actions">
+<div class="topIcons">
 
-<div class="header-btn">
-<i class="fa-solid fa-magnifying-glass"></i>
-</div>
-
-<div class="header-btn">
 <i class="fa-solid fa-bell"></i>
-</div>
+
+<i class="fa-solid fa-sliders"></i>
 
 </div>
 
 </div>
 
-<!-- STACK -->
+<!-- AREA -->
 
-<div class="cards" id="cards"></div>
+<div class="area" id="area"></div>
 
-<!-- ACTIONS -->
+<!-- BOTÕES -->
 
 <div class="actions">
 
-<div class="action dislike" onclick="dislike()">
+<div class="btn dislike" onclick="swipeLeft()">
 <i class="fa-solid fa-xmark"></i>
 </div>
 
-<div class="action like" onclick="like()">
+<div class="btn star">
+<i class="fa-solid fa-star"></i>
+</div>
+
+<div class="btn likeBtn" onclick="swipeRight()">
 <i class="fa-solid fa-heart"></i>
 </div>
 
@@ -562,147 +562,94 @@ Laço
 
 <div class="nav">
 
-<div class="nav-item active">
-<i class="fa-solid fa-house"></i>
-<span>Início</span>
-</div>
-
-<div class="nav-item">
+<div class="navItem active">
 <i class="fa-solid fa-fire"></i>
-<span>Likes</span>
+<span>Descobrir</span>
 </div>
 
-<div class="nav-item">
+<div class="navItem">
+<i class="fa-solid fa-heart"></i>
+<span>Matches</span>
+</div>
+
+<div class="navItem">
 <i class="fa-solid fa-comments"></i>
 <span>Chat</span>
 </div>
 
-<div class="nav-item">
+<div class="navItem">
 <i class="fa-solid fa-location-dot"></i>
 <span>Vibe</span>
 </div>
 
-<div class="nav-item">
+<div class="navItem">
 <i class="fa-solid fa-user"></i>
 <span>Perfil</span>
 </div>
 
 </div>
 
-<!-- EFFECT -->
+<!-- MATCH -->
 
 <div class="match" id="match">
-💘
-</div>
+
+<h1>É MATCH 💘</h1>
+
+<p>
+Vocês curtiram um ao outro.
+</p>
+
+<button onclick="fecharMatch()">
+Continuar
+</button>
 
 </div>
 
-<script type="module">
+<script>
 
-/* FIREBASE */
-
-import {
-
-auth,
-db
-
-}
-
-from "./js/firebase.js";
-
-import {
-
-collection,
-addDoc,
-serverTimestamp
-
-}
-
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-/* USERS */
-
-const users = [
+const perfis = [
 
 {
-
-id:1,
-
 nome:"Amanda",
 idade:24,
-
 cidade:"Rio de Janeiro",
-
-distancia:"3 km",
-
-bio:"Apaixonada por viagens, vinho e conexões reais.",
-
-foto:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200",
-
-tags:["Viagens","Vinho","Música"]
-
+bio:"Apaixonada por viagens, praia e conexões intensas.",
+foto:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop",
+interesses:["Praia","Viagens","Música","Fitness"]
 },
 
 {
-
-id:2,
-
-nome:"Beatriz",
-idade:26,
-
+nome:"Camila",
+idade:27,
 cidade:"São Paulo",
-
-distancia:"6 km",
-
-bio:"Fotógrafa, intensa e amante de cafés escondidos.",
-
-foto:"https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=1200",
-
-tags:["Fotografia","Café","Arte"]
-
+bio:"Café, academia e conversas até de madrugada.",
+foto:"https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=1200&auto=format&fit=crop",
+interesses:["Café","Cinema","Treino","Pets"]
 },
 
 {
-
-id:3,
-
-nome:"Larissa",
-idade:23,
-
-cidade:"Florianópolis",
-
-distancia:"2 km",
-
-bio:"Surfista, fitness e apaixonada por adrenalina.",
-
-foto:"https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200",
-
-tags:["Praia","Surf","Academia"]
-
+nome:"Isabella",
+idade:22,
+cidade:"Belo Horizonte",
+bio:"Gosto de adrenalina, risadas e pessoas verdadeiras.",
+foto:"https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop",
+interesses:["Rolês","Trilhas","Shows","Fotografia"]
 }
 
 ];
 
-/* APP */
-
-const cards =
-document.getElementById("cards");
+const area =
+document.getElementById("area");
 
 let current = 0;
 
-/* CREATE */
+function renderCards(){
 
-function renderCard(){
+area.innerHTML = "";
 
-cards.innerHTML = "";
+for(let i = perfis.length - 1; i >= current; i--){
 
-if(current >= users.length){
-
-current = 0;
-
-}
-
-const user = users[current];
+const p = perfis[i];
 
 const card =
 document.createElement("div");
@@ -711,39 +658,33 @@ card.className = "card";
 
 card.innerHTML = `
 
-<img src="${user.foto}">
+<img src="${p.foto}">
+
+<div class="like">LIKE</div>
+
+<div class="nope">NOPE</div>
+
+<div class="overlay">
+
+<div class="nome">
+
+${p.nome}, ${p.idade}
+
+<i class="fa-solid fa-circle-check verificado"></i>
+
+</div>
+
+<div>${p.cidade}</div>
+
+<div class="bio">
+${p.bio}
+</div>
 
 <div class="info">
 
-<div class="top-info">
-
-<div class="name">
-${user.nome}, ${user.idade}
-</div>
-
-<div class="verified">
-<i class="fa-solid fa-circle-check"></i>
-</div>
-
-</div>
-
-<div class="distance">
-📍 ${user.cidade} • ${user.distancia}
-</div>
-
-<div class="bio">
-${user.bio}
-</div>
-
-<div class="tags">
-
-${user.tags.map(tag=>`
-
-<div class="tag">
-${tag}
-</div>
-
-`).join("")}
+${p.interesses.map(i =>
+`<div class="tag">${i}</div>`
+).join("")}
 
 </div>
 
@@ -751,95 +692,41 @@ ${tag}
 
 `;
 
-cards.appendChild(card);
+area.appendChild(card);
+
+if(i === current){
 
 drag(card);
 
 }
 
-/* LIKE */
-
-window.like = async function(){
-
-showMatch();
-
-const user = users[current];
-
-try{
-
-await addDoc(collection(db,"likes"),{
-
-perfil:user.nome,
-idade:user.idade,
-foto:user.foto,
-timestamp:serverTimestamp()
-
-});
-
-}catch(e){
-
-console.log(e);
+}
 
 }
 
-next();
-
-}
-
-/* DISLIKE */
-
-window.dislike = function(){
-
-next();
-
-}
-
-/* NEXT */
-
-function next(){
-
-current++;
-
-renderCard();
-
-}
-
-/* EFFECT */
-
-function showMatch(){
-
-const match =
-document.getElementById("match");
-
-match.classList.add("showMatch");
-
-setTimeout(()=>{
-
-match.classList.remove("showMatch");
-
-},800);
-
-}
+renderCards();
 
 /* DRAG */
 
 function drag(card){
 
 let startX = 0;
+
 let currentX = 0;
-let dragging = false;
+
+let isDragging = false;
 
 card.addEventListener("mousedown",start);
 card.addEventListener("touchstart",start);
 
 function start(e){
 
-dragging = true;
+isDragging = true;
 
 startX =
 e.type.includes("mouse")
-? e.clientX
-: e.touches[0].clientX;
+? e.pageX
+: e.touches[0].pageX;
 
 document.addEventListener("mousemove",move);
 document.addEventListener("touchmove",move);
@@ -851,57 +738,146 @@ document.addEventListener("touchend",end);
 
 function move(e){
 
-if(!dragging) return;
+if(!isDragging) return;
 
 currentX =
 e.type.includes("mouse")
-? e.clientX
-: e.touches[0].clientX;
+? e.pageX
+: e.touches[0].pageX;
 
-const diff =
+const x =
 currentX - startX;
 
 card.style.transform =
-`translateX(${diff}px)
-rotate(${diff/10}deg)`;
+`translateX(${x}px) rotate(${x/10}deg)`;
+
+const like =
+card.querySelector(".like");
+
+const nope =
+card.querySelector(".nope");
+
+if(x > 0){
+
+like.style.opacity =
+x / 120;
+
+nope.style.opacity = 0;
+
+}else{
+
+nope.style.opacity =
+Math.abs(x) / 120;
+
+like.style.opacity = 0;
+
+}
 
 }
 
 function end(){
 
-dragging = false;
+isDragging = false;
 
-const diff =
+const x =
 currentX - startX;
 
-if(diff > 120){
+if(x > 120){
 
 like();
 
-}
-
-else if(diff < -120){
+}else if(x < -120){
 
 dislike();
 
-}
-
-else{
+}else{
 
 card.style.transform = "";
+card.querySelector(".like").style.opacity = 0;
+card.querySelector(".nope").style.opacity = 0;
+
+}
+
+document.removeEventListener("mousemove",move);
+document.removeEventListener("touchmove",move);
+
+}
+
+function like(){
+
+card.style.transform =
+"translateX(120%) rotate(25deg)";
+
+setTimeout(()=>{
+
+showMatch();
+
+next();
+
+},300);
+
+}
+
+function dislike(){
+
+card.style.transform =
+"translateX(-120%) rotate(-25deg)";
+
+setTimeout(()=>{
+
+next();
+
+},300);
 
 }
 
 }
 
+function next(){
+
+current++;
+
+if(current >= perfis.length){
+
+current = 0;
+
 }
 
-/* START */
+renderCards();
 
-renderCard();
+}
+
+function swipeRight(){
+
+showMatch();
+
+next();
+
+}
+
+function swipeLeft(){
+
+next();
+
+}
+
+function showMatch(){
+
+document
+.getElementById("match")
+.classList.add("show");
+
+}
+
+function fecharMatch(){
+
+document
+.getElementById("match")
+.classList.remove("show");
+
+}
 
 </script>
 
 </body>
-
 </html>
