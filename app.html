@@ -43,7 +43,7 @@ radial-gradient(circle at top left,#2c130d 0%,#050505 40%),
 radial-gradient(circle at bottom right,#1d0d09 0%,#050505 45%);
 }
 
-/* BRASAS */
+/* GLOW */
 
 .glow{
 position:absolute;
@@ -152,19 +152,10 @@ z-index:100;
 
 /* LOGO */
 
-.logo{
-display:flex;
-flex-direction:column;
-}
-
 .logo h1{
-
 font-family:'Cormorant Garamond',serif;
-
-font-size:52px;
+font-size:54px;
 font-weight:600;
-
-letter-spacing:-2px;
 
 background:
 linear-gradient(
@@ -178,16 +169,13 @@ linear-gradient(
 }
 
 .logo span{
-
 font-size:10px;
 letter-spacing:5px;
 opacity:.45;
-margin-top:-10px;
 padding-left:4px;
-
 }
 
-/* BOTÕES TOPO */
+/* TOP BUTTONS */
 
 .top-actions{
 display:flex;
@@ -211,11 +199,9 @@ justify-content:center;
 align-items:center;
 
 font-size:17px;
-
-color:white;
 }
 
-/* ÁREA CARD */
+/* CARD AREA */
 
 .cards-area{
 position:relative;
@@ -229,53 +215,36 @@ height:78vh;
 .stack{
 position:absolute;
 inset:0;
-
 border-radius:42px;
 }
 
-/* SOMBRA 1 */
-
 .stack1{
-
-transform:
-translateY(16px)
-scale(.96);
+transform:translateY(18px) scale(.96);
 
 background:
 linear-gradient(
 180deg,
 rgba(255,255,255,.03),
-rgba(255,255,255,.015)
+rgba(255,255,255,.01)
 );
 
-border:1px solid rgba(255,255,255,.03);
-
-opacity:.5;
-
-filter:blur(.3px);
+opacity:.45;
 }
 
-/* SOMBRA 2 */
-
 .stack2{
-
-transform:
-translateY(30px)
-scale(.92);
+transform:translateY(34px) scale(.92);
 
 background:
 linear-gradient(
 180deg,
 rgba(255,255,255,.02),
-rgba(255,255,255,.01)
+rgba(255,255,255,.008)
 );
 
-border:1px solid rgba(255,255,255,.02);
-
-opacity:.3;
+opacity:.22;
 }
 
-/* CARD PRINCIPAL */
+/* CARD */
 
 .card{
 position:absolute;
@@ -295,8 +264,6 @@ transition:
 transform .45s ease,
 opacity .45s ease;
 }
-
-/* FOTO */
 
 .card img{
 width:100%;
@@ -319,20 +286,6 @@ rgba(0,0,0,.92) 100%
 );
 }
 
-/* GLASS */
-
-.glass{
-position:absolute;
-inset:0;
-
-background:
-linear-gradient(
-180deg,
-rgba(255,255,255,.04),
-rgba(255,255,255,.01)
-);
-}
-
 /* INFO */
 
 .info{
@@ -348,7 +301,6 @@ z-index:10;
 /* VERIFIED */
 
 .verified{
-
 display:inline-flex;
 align-items:center;
 gap:8px;
@@ -372,17 +324,15 @@ margin-bottom:18px;
 color:#ffb089;
 }
 
-/* NOME */
+/* NAME */
 
 .name{
-
 font-family:'Cormorant Garamond',serif;
 
 font-size:62px;
 font-weight:600;
 
 line-height:.9;
-
 letter-spacing:-3px;
 }
 
@@ -392,10 +342,9 @@ color:#ff9d74;
 margin-left:10px;
 }
 
-/* LOCAL */
+/* LOCATION */
 
 .location{
-
 margin-top:16px;
 
 display:flex;
@@ -409,7 +358,6 @@ opacity:.72;
 /* BIO */
 
 .bio{
-
 margin-top:18px;
 
 font-size:14px;
@@ -421,7 +369,6 @@ opacity:.88;
 /* TAGS */
 
 .tags{
-
 display:flex;
 flex-wrap:wrap;
 gap:10px;
@@ -430,7 +377,6 @@ margin-top:24px;
 }
 
 .tag{
-
 padding:11px 16px;
 
 border-radius:18px;
@@ -439,17 +385,13 @@ background:rgba(255,255,255,.05);
 
 border:1px solid rgba(255,255,255,.05);
 
-backdrop-filter:blur(20px);
-
 font-size:13px;
 }
 
-/* BOTÕES */
+/* ACTIONS */
 
 .actions{
-
 position:absolute;
-
 bottom:118px;
 
 display:flex;
@@ -460,7 +402,6 @@ z-index:100;
 }
 
 .action{
-
 border:none;
 cursor:pointer;
 
@@ -475,10 +416,7 @@ transition:.25s;
 transform:scale(1.05);
 }
 
-/* X */
-
 .close{
-
 width:78px;
 height:78px;
 
@@ -488,17 +426,12 @@ background:rgba(255,255,255,.05);
 
 border:1px solid rgba(255,255,255,.05);
 
-backdrop-filter:blur(20px);
-
 font-size:28px;
 
 color:#ff9f9f;
 }
 
-/* CORAÇÃO */
-
 .like{
-
 width:100px;
 height:100px;
 
@@ -512,7 +445,6 @@ linear-gradient(
 );
 
 font-size:40px;
-color:white;
 
 box-shadow:
 0 0 40px rgba(255,107,61,.35),
@@ -522,7 +454,6 @@ box-shadow:
 /* NAVBAR */
 
 .navbar{
-
 position:absolute;
 
 bottom:20px;
@@ -545,7 +476,6 @@ align-items:center;
 }
 
 .nav-item{
-
 display:flex;
 flex-direction:column;
 align-items:center;
@@ -568,11 +498,10 @@ font-size:21px;
 /* MATCH */
 
 .match{
-
 position:fixed;
 inset:0;
 
-background:rgba(0,0,0,.85);
+background:rgba(0,0,0,.75);
 
 backdrop-filter:blur(30px);
 
@@ -591,14 +520,12 @@ transition:.45s;
 
 .match.show{
 opacity:1;
-pointer-events:auto;
 }
 
 .match h1{
-
 font-family:'Cormorant Garamond',serif;
 
-font-size:84px;
+font-size:88px;
 
 background:
 linear-gradient(
@@ -612,8 +539,8 @@ linear-gradient(
 }
 
 .match p{
-opacity:.7;
-margin-top:8px;
+margin-top:10px;
+opacity:.72;
 }
 
 /* MOBILE */
@@ -625,7 +552,7 @@ height:76vh;
 }
 
 .name{
-font-size:50px;
+font-size:52px;
 }
 
 .like{
@@ -645,8 +572,6 @@ height:70px;
 
 <body>
 
-<!-- FUNDO -->
-
 <div class="bg">
 
 <div class="glow glow1"></div>
@@ -657,8 +582,6 @@ height:70px;
 
 </div>
 
-<!-- APP -->
-
 <div class="app">
 
 <!-- TOPO -->
@@ -666,11 +589,8 @@ height:70px;
 <div class="topbar">
 
 <div class="logo">
-
 <h1>Laço</h1>
-
 <span>BRASA VIVA</span>
-
 </div>
 
 <div class="top-actions">
@@ -687,7 +607,7 @@ height:70px;
 
 </div>
 
-<!-- ÁREA DOS CARDS -->
+<!-- CARDS -->
 
 <div class="cards-area">
 
@@ -695,15 +615,11 @@ height:70px;
 
 <div class="stack stack1"></div>
 
-<!-- CARD -->
-
 <div class="card" id="card">
 
-<img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop">
+<img id="photo">
 
 <div class="overlay"></div>
-
-<div class="glass"></div>
 
 <div class="info">
 
@@ -713,28 +629,18 @@ Verificada
 </div>
 
 <div>
-<span class="name">Aurora</span>
-<span class="age">26</span>
+<span class="name" id="name"></span>
+<span class="age" id="age"></span>
 </div>
 
 <div class="location">
 <i class="fa-solid fa-location-dot"></i>
-São Paulo • 2km
+<span id="location"></span>
 </div>
 
-<div class="bio">
-Conexões reais, cafés demorados e pessoas que sabem sentir.
-</div>
+<div class="bio" id="bio"></div>
 
-<div class="tags">
-
-<div class="tag">Cinema</div>
-
-<div class="tag">Arte</div>
-
-<div class="tag">Música</div>
-
-<div class="tag">Viagens</div>
+<div class="tags" id="tags"></div>
 
 </div>
 
@@ -742,9 +648,7 @@ Conexões reais, cafés demorados e pessoas que sabem sentir.
 
 </div>
 
-</div>
-
-<!-- BOTÕES -->
+<!-- ACTIONS -->
 
 <div class="actions">
 
@@ -832,25 +736,123 @@ particles.appendChild(p);
 
 }
 
-/* MATCH */
+/* PERFIS */
 
-function like(){
+const profiles = [
+
+{
+name:"Aurora",
+age:"26",
+location:"São Paulo • 2km",
+bio:"Conexões reais, cafés demorados e pessoas que sabem sentir.",
+photo:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop",
+tags:["Cinema","Arte","Viagens","Música"]
+},
+
+{
+name:"Valentina",
+age:"24",
+location:"Rio de Janeiro • 4km",
+bio:"Amo noites calmas, música baixa e conversas profundas.",
+photo:"https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=1200&auto=format&fit=crop",
+tags:["Praia","Jazz","Fotografia","Vinho"]
+},
+
+{
+name:"Helena",
+age:"28",
+location:"Curitiba • 1km",
+bio:"Intensa na medida certa. Energia boa é essencial.",
+photo:"https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop",
+tags:["Moda","Arte","Livros","Viagens"]
+}
+
+];
+
+let current = 0;
 
 const card =
 document.getElementById('card');
+
+function renderProfile(){
+
+const p = profiles[current];
+
+document.getElementById('photo').src = p.photo;
+document.getElementById('name').innerHTML = p.name;
+document.getElementById('age').innerHTML = p.age;
+document.getElementById('location').innerHTML = p.location;
+document.getElementById('bio').innerHTML = p.bio;
+
+const tags =
+document.getElementById('tags');
+
+tags.innerHTML='';
+
+p.tags.forEach(tag=>{
+
+tags.innerHTML += `
+<div class="tag">${tag}</div>
+`;
+
+});
+
+}
+
+/* NEXT */
+
+function nextProfile(){
+
+current++;
+
+if(current >= profiles.length){
+
+current = 0;
+
+}
+
+setTimeout(()=>{
+
+renderProfile();
+
+card.style.transition='none';
+
+card.style.transform=
+'translateX(0) scale(1)';
+
+card.style.opacity='1';
+
+},450);
+
+}
+
+/* LIKE */
+
+function like(){
+
+card.style.transition='.45s ease';
 
 card.style.transform=
 'translateX(120%) scale(.92)';
 
 card.style.opacity='0';
 
+const match =
+document.getElementById('match');
+
 setTimeout(()=>{
 
-document
-.getElementById('match')
-.classList.add('show');
+match.classList.add('show');
 
-},300);
+},250);
+
+setTimeout(()=>{
+
+match.classList.remove('show');
+
+nextProfile();
+
+},1600);
 
 }
 
@@ -858,15 +860,20 @@ document
 
 function dislike(){
 
-const card =
-document.getElementById('card');
+card.style.transition='.45s ease';
 
 card.style.transform=
 'translateX(-120%) scale(.92)';
 
 card.style.opacity='0';
 
+nextProfile();
+
 }
+
+/* START */
+
+renderProfile();
 
 </script>
 
