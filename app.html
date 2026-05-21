@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
 
 <meta charset="UTF-8">
@@ -28,58 +27,89 @@ body{
 
 height:100vh;
 overflow:hidden;
-
-background:
-radial-gradient(circle at top,#ff006620,transparent 25%),
-#050505;
-
 color:white;
+background:#050505;
 
 }
 
-/* FUNDO */
+/* FUNDO CINEMATOGRÁFICO */
 
-.blur1{
+.bg{
 
 position:fixed;
+inset:0;
+overflow:hidden;
+z-index:0;
 
-width:350px;
-height:350px;
+}
 
-background:#ff0066;
+.fire{
 
-filter:blur(140px);
+position:absolute;
+border-radius:50%;
+filter:blur(120px);
+animation:float 10s ease-in-out infinite;
 
-opacity:.08;
+}
+
+.fire1{
+
+width:420px;
+height:420px;
+
+background:
+rgba(255,0,102,.18);
 
 top:-120px;
 right:-120px;
 
-border-radius:50%;
-
-z-index:0;
-
 }
 
-.blur2{
+.fire2{
 
-position:fixed;
+width:360px;
+height:360px;
 
-width:300px;
-height:300px;
-
-background:#ff4d6d;
-
-filter:blur(120px);
-
-opacity:.06;
+background:
+rgba(255,80,80,.12);
 
 bottom:-120px;
 left:-120px;
 
-border-radius:50%;
+animation-delay:2s;
 
-z-index:0;
+}
+
+.fire3{
+
+width:260px;
+height:260px;
+
+background:
+rgba(255,120,0,.10);
+
+top:40%;
+left:50%;
+
+transform:translate(-50%,-50%);
+
+animation-delay:4s;
+
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0px) scale(1);
+}
+
+50%{
+transform:translateY(-20px) scale(1.04);
+}
+
+100%{
+transform:translateY(0px) scale(1);
+}
 
 }
 
@@ -103,7 +133,9 @@ align-items:center;
 z-index:100;
 
 background:
-linear-gradient(to bottom,rgba(0,0,0,.6),transparent);
+linear-gradient(to bottom,rgba(0,0,0,.55),transparent);
+
+backdrop-filter:blur(10px);
 
 }
 
@@ -122,23 +154,23 @@ linear-gradient(45deg,#ff0066,#ff4d8d);
 
 }
 
-.headerIcons{
+.headerRight{
 
 display:flex;
 gap:12px;
 
 }
 
-.headerBtn{
+.topBtn{
 
 width:42px;
 height:42px;
 
+border-radius:14px;
+
 display:flex;
 justify-content:center;
 align-items:center;
-
-border-radius:14px;
 
 background:
 rgba(255,255,255,.05);
@@ -148,13 +180,13 @@ border:
 
 backdrop-filter:blur(20px);
 
-font-size:16px;
-
 color:white;
+
+font-size:16px;
 
 }
 
-/* AREA */
+/* ÁREA */
 
 .area{
 
@@ -165,10 +197,24 @@ display:flex;
 justify-content:center;
 align-items:center;
 
-padding-top:60px;
-padding-bottom:110px;
+padding-top:70px;
+padding-bottom:120px;
 
 position:relative;
+z-index:10;
+
+}
+
+/* STACK */
+
+.stack{
+
+position:relative;
+
+width:92%;
+max-width:410px;
+
+height:74vh;
 
 }
 
@@ -178,10 +224,8 @@ position:relative;
 
 position:absolute;
 
-width:92%;
-max-width:410px;
-
-height:74vh;
+width:100%;
+height:100%;
 
 border-radius:34px;
 
@@ -190,15 +234,15 @@ overflow:hidden;
 background:#111;
 
 box-shadow:
-0 25px 80px rgba(0,0,0,.5);
-
-cursor:grab;
-
-user-select:none;
+0 30px 90px rgba(0,0,0,.55);
 
 transition:
-transform .28s ease,
-opacity .28s ease;
+transform .35s ease,
+opacity .35s ease;
+
+will-change:transform;
+
+touch-action:none;
 
 }
 
@@ -209,24 +253,32 @@ height:100%;
 
 object-fit:cover;
 
-position:absolute;
+}
+
+/* CARD ATRÁS */
+
+.card.second{
+
+transform:
+scale(.96)
+translateY(12px);
+
+opacity:.55;
+
+filter:brightness(.75);
 
 }
 
-/* GRADIENTE */
+/* OVERLAY */
 
-.gradient{
+.overlay{
 
 position:absolute;
 
-bottom:0;
-left:0;
-
-width:100%;
-height:55%;
+inset:0;
 
 background:
-linear-gradient(to top,#000 10%,transparent);
+linear-gradient(to top,#000 12%,transparent 45%);
 
 }
 
@@ -236,27 +288,27 @@ linear-gradient(to top,#000 10%,transparent);
 
 position:absolute;
 
-bottom:24px;
 left:24px;
 right:24px;
+bottom:26px;
 
 z-index:5;
 
 }
 
-.topLine{
+.topInfo{
 
 display:flex;
 align-items:center;
 gap:10px;
 
-margin-bottom:8px;
+margin-bottom:10px;
 
 }
 
 .nome{
 
-font-size:32px;
+font-size:34px;
 font-weight:800;
 
 letter-spacing:-1px;
@@ -268,7 +320,7 @@ letter-spacing:-1px;
 font-size:28px;
 font-weight:500;
 
-opacity:.9;
+opacity:.88;
 
 }
 
@@ -283,7 +335,7 @@ font-size:18px;
 
 font-size:14px;
 
-opacity:.78;
+opacity:.75;
 
 margin-bottom:14px;
 
@@ -296,11 +348,11 @@ line-height:1.6;
 
 opacity:.92;
 
-max-width:90%;
+max-width:88%;
 
 }
 
-/* INTERESSES */
+/* TAGS */
 
 .tags{
 
@@ -321,75 +373,68 @@ border-radius:999px;
 background:
 rgba(255,255,255,.08);
 
-backdrop-filter:blur(20px);
-
 border:
 1px solid rgba(255,255,255,.05);
 
+backdrop-filter:blur(20px);
+
 font-size:12px;
-font-weight:500;
 
 }
 
-/* LIKE */
+/* LIKE / NOPE */
 
-.like{
-
-position:absolute;
-
-top:35px;
-left:25px;
-
-padding:10px 18px;
-
-border-radius:16px;
-
-border:3px solid #00ff88;
-
-color:#00ff88;
-
-font-size:28px;
-font-weight:800;
-
-transform:rotate(-12deg);
-
-opacity:0;
-
-}
-
-/* NOPE */
-
+.like,
 .nope{
 
 position:absolute;
 
 top:35px;
-right:25px;
 
 padding:10px 18px;
 
 border-radius:16px;
 
+font-size:28px;
+font-weight:800;
+
+opacity:0;
+
+transition:.2s;
+
+}
+
+.like{
+
+left:25px;
+
+border:3px solid #00ff88;
+
+color:#00ff88;
+
+transform:rotate(-12deg);
+
+}
+
+.nope{
+
+right:25px;
+
 border:3px solid #ff3b5c;
 
 color:#ff3b5c;
 
-font-size:28px;
-font-weight:800;
-
 transform:rotate(12deg);
-
-opacity:0;
 
 }
 
-/* AÇÕES */
+/* BOTÕES */
 
 .actions{
 
 position:fixed;
 
-bottom:100px;
+bottom:98px;
 left:50%;
 
 transform:translateX(-50%);
@@ -398,7 +443,7 @@ display:flex;
 align-items:center;
 gap:18px;
 
-z-index:100;
+z-index:120;
 
 }
 
@@ -425,13 +470,13 @@ transform:scale(.92);
 
 }
 
-.x{
+.dislike{
 
-width:66px;
-height:66px;
+width:68px;
+height:68px;
 
 background:
-rgba(255,77,109,.12);
+rgba(255,77,109,.10);
 
 color:#ff4d6d;
 
@@ -439,7 +484,7 @@ font-size:28px;
 
 }
 
-.star{
+.super{
 
 width:56px;
 height:56px;
@@ -453,16 +498,16 @@ font-size:22px;
 
 }
 
-.heart{
+.likeBtn{
 
-width:76px;
-height:76px;
+width:78px;
+height:78px;
 
 background:
 linear-gradient(45deg,#ff0066,#ff4d8d);
 
 box-shadow:
-0 12px 40px rgba(255,0,102,.25);
+0 14px 40px rgba(255,0,102,.35);
 
 color:white;
 
@@ -481,14 +526,14 @@ left:0;
 
 width:100%;
 
-padding:14px 10px 26px;
+padding:14px 10px 28px;
 
 display:flex;
 justify-content:space-around;
 align-items:center;
 
 background:
-rgba(8,8,8,.92);
+rgba(8,8,8,.85);
 
 backdrop-filter:blur(30px);
 
@@ -518,7 +563,6 @@ transition:.3s;
 .navItem.active{
 
 opacity:1;
-
 color:#ff4d8d;
 
 }
@@ -544,17 +588,17 @@ translate(-50%,-50%) scale(.8);
 width:88%;
 max-width:340px;
 
-padding:35px;
+padding:36px;
 
 border-radius:34px;
 
 background:
-rgba(15,15,15,.95);
-
-backdrop-filter:blur(30px);
+rgba(15,15,15,.92);
 
 border:
-1px solid rgba(255,255,255,.05);
+1px solid rgba(255,255,255,.06);
+
+backdrop-filter:blur(30px);
 
 text-align:center;
 
@@ -579,7 +623,7 @@ translate(-50%,-50%) scale(1);
 
 .match h1{
 
-font-size:38px;
+font-size:40px;
 font-weight:800;
 
 margin-bottom:12px;
@@ -627,7 +671,7 @@ font-size:15px;
 
 @media(max-width:500px){
 
-.card{
+.stack{
 height:70vh;
 }
 
@@ -642,13 +686,19 @@ font-size:24px;
 }
 
 </style>
-
 </head>
 
 <body>
 
-<div class="blur1"></div>
-<div class="blur2"></div>
+<!-- BG -->
+
+<div class="bg">
+
+<div class="fire fire1"></div>
+<div class="fire fire2"></div>
+<div class="fire fire3"></div>
+
+</div>
 
 <!-- HEADER -->
 
@@ -658,13 +708,13 @@ font-size:24px;
 Laço 💘
 </div>
 
-<div class="headerIcons">
+<div class="headerRight">
 
-<div class="headerBtn">
+<div class="topBtn">
 <i class="fa-solid fa-bell"></i>
 </div>
 
-<div class="headerBtn">
+<div class="topBtn">
 <i class="fa-solid fa-sliders"></i>
 </div>
 
@@ -674,21 +724,25 @@ Laço 💘
 
 <!-- AREA -->
 
-<div class="area" id="area"></div>
+<div class="area">
 
-<!-- ACTIONS -->
+<div class="stack" id="stack"></div>
+
+</div>
+
+<!-- BOTÕES -->
 
 <div class="actions">
 
-<div class="action x" onclick="swipeLeft()">
+<div class="action dislike" onclick="swipeLeft()">
 <i class="fa-solid fa-xmark"></i>
 </div>
 
-<div class="action star">
+<div class="action super">
 <i class="fa-solid fa-star"></i>
 </div>
 
-<div class="action heart" onclick="swipeRight()">
+<div class="action likeBtn" onclick="swipeRight()">
 <i class="fa-solid fa-heart"></i>
 </div>
 
@@ -732,8 +786,8 @@ Laço 💘
 <h1>É Match 💘</h1>
 
 <p>
-Vocês curtiram um ao outro.
-Agora a conversa pode começar.
+A conexão aconteceu.
+Agora começa a melhor parte.
 </p>
 
 <button onclick="closeMatch()">
@@ -775,37 +829,61 @@ interesses:["Shows","Trilhas","Fotografia"]
 
 ];
 
-const area =
-document.getElementById("area");
+const stack =
+document.getElementById("stack");
 
 let current = 0;
 
-function render(){
+/* RENDER */
 
-area.innerHTML = "";
+function renderCards(){
 
-for(let i = perfis.length - 1; i >= current; i--){
+stack.innerHTML = "";
 
-const p = perfis[i];
+const currentProfile =
+perfis[current];
+
+const nextProfile =
+perfis[(current + 1) % perfis.length];
+
+const secondCard =
+createCard(nextProfile,true);
+
+const firstCard =
+createCard(currentProfile,false);
+
+stack.appendChild(secondCard);
+stack.appendChild(firstCard);
+
+drag(firstCard);
+
+}
+
+/* CARD */
+
+function createCard(p,isSecond){
 
 const card =
 document.createElement("div");
 
-card.className = "card";
+card.className =
+isSecond
+? "card second"
+: "card";
 
 card.innerHTML = `
 
 <img src="${p.foto}">
 
+<div class="overlay"></div>
+
 <div class="like">LIKE</div>
 
 <div class="nope">NOPE</div>
 
-<div class="gradient"></div>
-
 <div class="info">
 
-<div class="topLine">
+<div class="topInfo">
 
 <div class="nome">
 ${p.nome}
@@ -839,19 +917,9 @@ ${p.interesses.map(tag =>
 
 `;
 
-area.appendChild(card);
-
-if(i === current){
-
-drag(card);
+return card;
 
 }
-
-}
-
-}
-
-render();
 
 /* DRAG */
 
@@ -894,7 +962,9 @@ const dx =
 currentX - startX;
 
 const rotate =
-dx / 14;
+dx / 16;
+
+card.style.transition = "none";
 
 card.style.transform =
 `translateX(${dx}px) rotate(${rotate}deg)`;
@@ -930,13 +1000,31 @@ dragging = false;
 const dx =
 currentX - startX;
 
+card.style.transition =
+".35s ease";
+
 if(dx > 110){
 
-likeCard();
+card.style.transform =
+"translateX(140%) rotate(24deg)";
+
+setTimeout(()=>{
+
+showMatch();
+nextCard();
+
+},300);
 
 }else if(dx < -110){
 
-dislikeCard();
+card.style.transform =
+"translateX(-140%) rotate(-24deg)";
+
+setTimeout(()=>{
+
+nextCard();
+
+},300);
 
 }else{
 
@@ -953,37 +1041,11 @@ document.removeEventListener("touchmove",move);
 
 }
 
-function likeCard(){
-
-card.style.transform =
-"translateX(130%) rotate(25deg)";
-
-setTimeout(()=>{
-
-showMatch();
-
-next();
-
-},280);
-
 }
 
-function dislikeCard(){
+/* NEXT */
 
-card.style.transform =
-"translateX(-130%) rotate(-25deg)";
-
-setTimeout(()=>{
-
-next();
-
-},280);
-
-}
-
-}
-
-function next(){
+function nextCard(){
 
 current++;
 
@@ -993,22 +1055,26 @@ current = 0;
 
 }
 
-render();
+renderCards();
 
 }
+
+/* BOTÕES */
 
 function swipeRight(){
 
 showMatch();
-next();
+nextCard();
 
 }
 
 function swipeLeft(){
 
-next();
+nextCard();
 
 }
+
+/* MATCH */
 
 function showMatch(){
 
@@ -1025,6 +1091,8 @@ document
 .classList.remove("show");
 
 }
+
+renderCards();
 
 </script>
 
