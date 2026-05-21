@@ -8,10 +8,11 @@
 <title>Laço 💘</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 
 <style>
 
@@ -19,38 +20,37 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+font-family:'Inter',sans-serif;
 -webkit-tap-highlight-color:transparent;
 }
 
 body{
-background:#080808;
+background:#050505;
 overflow:hidden;
 height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
 color:white;
 }
 
 /* FUNDO CINEMATOGRÁFICO */
 
-.bg{
+.background{
 position:fixed;
 inset:0;
 overflow:hidden;
 background:
-radial-gradient(circle at top,#1f0b06 0%,#080808 50%);
-z-index:-10;
+radial-gradient(circle at top left,#2b120b 0%,#050505 38%),
+radial-gradient(circle at bottom right,#1a0d09 0%,#050505 45%);
 }
+
+/* BRASAS */
 
 .ember{
 position:absolute;
 border-radius:50%;
-filter:blur(100px);
-opacity:.22;
+filter:blur(120px);
+opacity:.18;
 mix-blend-mode:screen;
-animation:float 16s infinite ease-in-out;
+animation:emberFloat 18s infinite ease-in-out;
 }
 
 .ember1{
@@ -58,37 +58,41 @@ width:500px;
 height:500px;
 background:#ff6b3d;
 top:-140px;
-left:-160px;
+left:-140px;
 }
 
 .ember2{
-width:400px;
-height:400px;
+width:380px;
+height:380px;
 background:#ff8a3d;
-bottom:-140px;
-right:-140px;
-animation-delay:4s;
+bottom:-100px;
+right:-120px;
+animation-delay:5s;
 }
 
 .ember3{
-width:300px;
-height:300px;
+width:260px;
+height:260px;
 background:#ff6b3d;
 top:40%;
-left:50%;
-animation-delay:8s;
+left:55%;
+animation-delay:9s;
 }
 
-@keyframes float{
+@keyframes emberFloat{
+
 0%{
 transform:translate(0,0) scale(1);
 }
+
 50%{
-transform:translate(20px,-35px) scale(1.1);
+transform:translate(20px,-40px) scale(1.12);
 }
+
 100%{
 transform:translate(0,0) scale(1);
 }
+
 }
 
 /* PARTÍCULAS */
@@ -97,55 +101,81 @@ transform:translate(0,0) scale(1);
 position:absolute;
 background:#ff8a3d;
 border-radius:50%;
-opacity:.3;
-animation:particle linear infinite;
+opacity:.25;
+animation:particle infinite linear;
 }
 
 @keyframes particle{
+
 0%{
 transform:translateY(0px);
 opacity:0;
 }
-20%{
-opacity:.7;
+
+15%{
+opacity:.5;
 }
+
 100%{
 transform:translateY(-120vh);
 opacity:0;
 }
+
 }
 
 /* APP */
 
 .app{
-width:100%;
-max-width:430px;
-height:100vh;
 position:relative;
-overflow:hidden;
+width:100%;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:22px;
 }
 
 /* TOPO */
 
 .topbar{
 position:absolute;
-top:0;
-left:0;
-width:100%;
-padding:24px 22px;
+top:26px;
+left:24px;
+right:24px;
+
 display:flex;
 justify-content:space-between;
 align-items:center;
-z-index:50;
+
+z-index:100;
 }
 
-.logo{
-font-size:42px;
+.brand{
+display:flex;
+flex-direction:column;
+}
+
+.brand h1{
+font-size:38px;
 font-weight:700;
 letter-spacing:-2px;
-background:linear-gradient(135deg,#ffb089,#ff6b3d);
+
+background:
+linear-gradient(
+135deg,
+#ffd3bf,
+#ff6b3d
+);
+
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
+}
+
+.brand span{
+font-size:11px;
+letter-spacing:4px;
+opacity:.45;
+margin-top:-4px;
 }
 
 .top-actions{
@@ -153,50 +183,38 @@ display:flex;
 gap:12px;
 }
 
-.top-btn{
+.icon-btn{
 width:52px;
 height:52px;
+
 border-radius:18px;
 
-background:rgba(255,255,255,.05);
+background:rgba(255,255,255,.045);
 
-border:1px solid rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.05);
+
+backdrop-filter:blur(30px);
 
 display:flex;
 justify-content:center;
 align-items:center;
 
-backdrop-filter:blur(20px);
-
-font-size:18px;
+font-size:17px;
 
 color:white;
 
 box-shadow:
-0 0 25px rgba(255,107,61,.08);
+0 0 25px rgba(255,107,61,.06);
 }
 
-/* CARD ÁREA */
+/* CARD HERO */
 
-.cards{
-position:absolute;
-top:110px;
-left:0;
+.hero-card{
+position:relative;
+
 width:100%;
-height:calc(100vh - 240px);
-
-display:flex;
-justify-content:center;
-align-items:center;
-}
-
-/* CARD */
-
-.card{
-position:absolute;
-
-width:88%;
-height:100%;
+max-width:390px;
+height:78vh;
 
 border-radius:42px;
 
@@ -205,44 +223,42 @@ overflow:hidden;
 background:#111;
 
 box-shadow:
-0 0 80px rgba(255,107,61,.15),
-0 30px 80px rgba(0,0,0,.65);
+0 0 100px rgba(255,107,61,.10),
+0 40px 120px rgba(0,0,0,.8);
 
-user-select:none;
+transform-style:preserve-3d;
 
 transition:
-transform .35s ease,
-opacity .35s ease;
-
-cursor:grab;
+transform .25s ease;
 }
 
-.card::before{
-content:"";
+/* FOTO */
 
+.hero-card img{
+position:absolute;
+inset:0;
+
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+/* CAMADAS */
+
+.overlay{
 position:absolute;
 inset:0;
 
 background:
 linear-gradient(
 180deg,
-rgba(0,0,0,.0) 20%,
-rgba(0,0,0,.15) 40%,
+rgba(0,0,0,.0) 18%,
+rgba(0,0,0,.2) 45%,
 rgba(0,0,0,.92) 100%
 );
-
-z-index:2;
 }
 
-.card img{
-width:100%;
-height:100%;
-object-fit:cover;
-}
-
-/* GLASS */
-
-.card-glass{
+.glass{
 position:absolute;
 inset:0;
 
@@ -253,18 +269,20 @@ rgba(255,255,255,.04),
 rgba(255,255,255,.01)
 );
 
-z-index:1;
+backdrop-filter:blur(.4px);
 }
 
 /* INFO */
 
 .info{
 position:absolute;
-bottom:30px;
 left:28px;
 right:28px;
-z-index:5;
+bottom:28px;
+z-index:10;
 }
+
+/* VERIFIED */
 
 .verified{
 display:inline-flex;
@@ -273,45 +291,61 @@ gap:8px;
 
 padding:10px 16px;
 
+border-radius:18px;
+
 background:rgba(0,0,0,.35);
 
 border:1px solid rgba(255,255,255,.08);
 
-border-radius:18px;
+backdrop-filter:blur(20px);
 
 font-size:13px;
-
-backdrop-filter:blur(20px);
 
 margin-bottom:18px;
 }
 
+.verified i{
+color:#ffb089;
+}
+
+/* NOME */
+
 .name{
-font-size:52px;
+font-size:54px;
 font-weight:700;
-line-height:1;
+line-height:.95;
 letter-spacing:-3px;
 }
 
 .age{
-font-size:36px;
+font-size:32px;
 font-weight:500;
-color:#ff8a3d;
+color:#ff9b73;
 }
 
+/* LOCAL */
+
 .location{
-margin-top:12px;
-font-size:15px;
-opacity:.85;
+margin-top:14px;
+
 display:flex;
 align-items:center;
 gap:8px;
+
+font-size:14px;
+
+opacity:.72;
 }
 
+/* BIO */
+
 .bio{
-margin-top:16px;
+margin-top:18px;
+
 line-height:1.7;
-font-size:15px;
+
+font-size:14px;
+
 opacity:.88;
 }
 
@@ -319,65 +353,80 @@ opacity:.88;
 
 .tags{
 display:flex;
-gap:10px;
 flex-wrap:wrap;
+gap:10px;
+
 margin-top:22px;
 }
 
 .tag{
-padding:12px 18px;
-
-background:rgba(0,0,0,.35);
-
-border:1px solid rgba(255,255,255,.08);
+padding:11px 16px;
 
 border-radius:18px;
 
+background:rgba(255,255,255,.05);
+
+border:1px solid rgba(255,255,255,.05);
+
 backdrop-filter:blur(20px);
 
-font-size:14px;
+font-size:13px;
 }
 
 /* ACTIONS */
 
 .actions{
 position:absolute;
-bottom:115px;
-width:100%;
+bottom:118px;
+
 display:flex;
-justify-content:center;
-gap:24px;
-z-index:100;
+align-items:center;
+gap:22px;
+
+z-index:50;
 }
+
+/* BOTÕES */
 
 .action{
 border:none;
+cursor:pointer;
+
 display:flex;
 justify-content:center;
 align-items:center;
-cursor:pointer;
-transition:.3s;
+
+transition:.25s;
 }
 
-.close-btn{
-width:88px;
-height:88px;
+.action:hover{
+transform:scale(1.06);
+}
+
+/* CLOSE */
+
+.close{
+width:78px;
+height:78px;
 
 border-radius:50%;
 
-background:rgba(255,255,255,.06);
+background:rgba(255,255,255,.05);
+
+border:1px solid rgba(255,255,255,.05);
 
 backdrop-filter:blur(20px);
 
-font-size:34px;
-color:#ff7f7f;
+font-size:30px;
 
-border:1px solid rgba(255,255,255,.05);
+color:#ff8f8f;
 }
 
-.like-btn{
-width:108px;
-height:108px;
+/* LIKE */
+
+.like{
+width:100px;
+height:100px;
 
 border-radius:50%;
 
@@ -385,44 +434,41 @@ background:
 linear-gradient(
 135deg,
 #ff6b3d,
-#ff8a3d
+#ff9a52
 );
 
-font-size:42px;
+font-size:40px;
 color:white;
 
 box-shadow:
-0 0 45px rgba(255,107,61,.45),
-0 0 90px rgba(255,107,61,.22);
-}
-
-.action:hover{
-transform:scale(1.06);
+0 0 40px rgba(255,107,61,.35),
+0 0 100px rgba(255,107,61,.15);
 }
 
 /* NAVBAR */
 
-.nav{
+.navbar{
 position:absolute;
-bottom:18px;
-left:16px;
-right:16px;
+
+bottom:20px;
+left:18px;
+right:18px;
 
 height:82px;
 
 border-radius:30px;
 
-background:rgba(255,255,255,.05);
+background:rgba(255,255,255,.045);
 
-border:1px solid rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.05);
 
-backdrop-filter:blur(20px);
+backdrop-filter:blur(30px);
 
 display:flex;
 justify-content:space-around;
 align-items:center;
 
-z-index:200;
+z-index:100;
 }
 
 .nav-item{
@@ -431,36 +477,36 @@ flex-direction:column;
 align-items:center;
 gap:7px;
 
-font-size:13px;
+font-size:12px;
 
-opacity:.55;
+opacity:.45;
 }
 
 .nav-item.active{
 opacity:1;
-color:#ff8a3d;
+color:#ff9b73;
 }
 
 .nav-item i{
-font-size:22px;
+font-size:21px;
 }
 
 /* MATCH */
 
 .match{
-position:absolute;
+position:fixed;
 inset:0;
 
-background:rgba(0,0,0,.82);
+background:rgba(0,0,0,.85);
 
-backdrop-filter:blur(20px);
+backdrop-filter:blur(30px);
 
 display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
 
-z-index:500;
+z-index:999;
 
 opacity:0;
 pointer-events:none;
@@ -474,12 +520,12 @@ pointer-events:auto;
 }
 
 .match h1{
-font-size:68px;
-margin-bottom:12px;
+font-size:72px;
 
-background:linear-gradient(
+background:
+linear-gradient(
 135deg,
-#ffb089,
+#ffd8c8,
 #ff6b3d
 );
 
@@ -488,30 +534,30 @@ background:linear-gradient(
 }
 
 .match p{
-opacity:.75;
-font-size:17px;
+margin-top:10px;
+opacity:.7;
 }
 
 /* RESPONSIVO */
 
 @media(max-width:500px){
 
+.hero-card{
+height:76vh;
+}
+
 .name{
-font-size:42px;
+font-size:44px;
 }
 
-.age{
-font-size:28px;
+.like{
+width:88px;
+height:88px;
 }
 
-.like-btn{
-width:92px;
-height:92px;
-}
-
-.close-btn{
-width:76px;
-height:76px;
+.close{
+width:70px;
+height:70px;
 }
 
 }
@@ -521,7 +567,9 @@ height:76px;
 
 <body>
 
-<div class="bg">
+<!-- FUNDO -->
+
+<div class="background">
 
 <div class="ember ember1"></div>
 <div class="ember ember2"></div>
@@ -531,23 +579,26 @@ height:76px;
 
 </div>
 
+<!-- APP -->
+
 <div class="app">
 
 <!-- TOPO -->
 
 <div class="topbar">
 
-<div class="logo">
-Laço
+<div class="brand">
+<h1>Laço</h1>
+<span>BRASA VIVA</span>
 </div>
 
 <div class="top-actions">
 
-<div class="top-btn">
+<div class="icon-btn">
 <i class="fa-regular fa-bell"></i>
 </div>
 
-<div class="top-btn">
+<div class="icon-btn">
 <i class="fa-solid fa-sliders"></i>
 </div>
 
@@ -555,54 +606,46 @@ Laço
 
 </div>
 
-<!-- CARDS -->
+<!-- CARD -->
 
-<div class="cards">
+<div class="hero-card" id="card">
 
-<div class="card" id="card">
+<img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop"/>
 
-<div class="card-glass"></div>
+<div class="overlay"></div>
 
-<img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop">
+<div class="glass"></div>
 
 <div class="info">
 
 <div class="verified">
-<i class="fa-solid fa-badge-check"></i>
+<i class="fa-solid fa-circle-check"></i>
 Verificada
 </div>
 
 <div>
-<span class="name">Marina</span>
-<span class="age">25</span>
+<span class="name">Aurora</span>
+<span class="age">26</span>
 </div>
 
 <div class="location">
 <i class="fa-solid fa-location-dot"></i>
-São Paulo, SP • 3km de você
+São Paulo • 2km
 </div>
 
 <div class="bio">
-Apaixonada por momentos simples, música boa e conversas que ficam.
+Conexões reais, cafés demorados e pessoas que sabem sentir.
 </div>
 
 <div class="tags">
 
-<div class="tag">
-✈️ Viagens
-</div>
+<div class="tag">Cinema</div>
 
-<div class="tag">
-🎵 Música
-</div>
+<div class="tag">Música</div>
 
-<div class="tag">
-☕ Café
-</div>
+<div class="tag">Viagens</div>
 
-<div class="tag">
-🌊 Praia
-</div>
+<div class="tag">Arte</div>
 
 </div>
 
@@ -610,25 +653,23 @@ Apaixonada por momentos simples, música boa e conversas que ficam.
 
 </div>
 
-</div>
-
-<!-- BOTÕES -->
+<!-- AÇÕES -->
 
 <div class="actions">
 
-<button class="action close-btn" onclick="swipeLeft()">
+<button class="action close" onclick="dislike()">
 <i class="fa-solid fa-xmark"></i>
 </button>
 
-<button class="action like-btn" onclick="swipeRight()">
+<button class="action like" onclick="like()">
 <i class="fa-solid fa-heart"></i>
 </button>
 
 </div>
 
-<!-- NAV -->
+<!-- NAVBAR -->
 
-<div class="nav">
+<div class="navbar">
 
 <div class="nav-item active">
 <i class="fa-solid fa-fire"></i>
@@ -647,7 +688,7 @@ Apaixonada por momentos simples, música boa e conversas que ficam.
 
 <div class="nav-item">
 <i class="fa-solid fa-location-dot"></i>
-<span>Vibes</span>
+<span>Vibe</span>
 </div>
 
 <div class="nav-item">
@@ -657,15 +698,15 @@ Apaixonada por momentos simples, música boa e conversas que ficam.
 
 </div>
 
+</div>
+
 <!-- MATCH -->
 
 <div class="match" id="match">
 
-<h1>Match 💘</h1>
+<h1>Match</h1>
 
-<p>Vocês combinaram energia.</p>
-
-</div>
+<p>Vocês sentiram a mesma energia.</p>
 
 </div>
 
@@ -676,13 +717,13 @@ Apaixonada por momentos simples, música boa e conversas que ficam.
 const particles =
 document.getElementById('particles');
 
-for(let i=0;i<40;i++){
+for(let i=0;i<35;i++){
 
 const p=document.createElement('div');
 
 p.classList.add('particle');
 
-const size=Math.random()*4+1;
+const size=Math.random()*3+1;
 
 p.style.width=size+'px';
 p.style.height=size+'px';
@@ -691,7 +732,7 @@ p.style.left=Math.random()*100+'vw';
 p.style.top=Math.random()*100+'vh';
 
 p.style.animationDuration=
-(8+Math.random()*12)+'s';
+(10+Math.random()*10)+'s';
 
 p.style.animationDelay=
 Math.random()*5+'s';
@@ -700,117 +741,51 @@ particles.appendChild(p);
 
 }
 
-/* SWIPE */
+/* EFEITO 3D */
 
 const card =
 document.getElementById('card');
 
-let startX=0;
-let currentX=0;
-let isDragging=false;
+document.addEventListener('mousemove',(e)=>{
 
-card.addEventListener('mousedown',startDrag);
-card.addEventListener('touchstart',startDrag);
+const x=
+(window.innerWidth/2-e.clientX)/35;
 
-function startDrag(e){
-
-isDragging=true;
-
-startX=
-e.type.includes('mouse')
-? e.clientX
-: e.touches[0].clientX;
-
-document.addEventListener('mousemove',drag);
-document.addEventListener('touchmove',drag);
-
-document.addEventListener('mouseup',endDrag);
-document.addEventListener('touchend',endDrag);
-
-}
-
-function drag(e){
-
-if(!isDragging) return;
-
-currentX=
-e.type.includes('mouse')
-? e.clientX
-: e.touches[0].clientX;
-
-const moveX=currentX-startX;
+const y=
+(window.innerHeight/2-e.clientY)/35;
 
 card.style.transform=
-`
-translateX(${moveX}px)
-rotate(${moveX/12}deg)
-`;
+`rotateY(${x}deg) rotateX(${-y}deg)`;
 
-}
+});
 
-function endDrag(){
+/* MATCH */
 
-isDragging=false;
-
-const moveX=currentX-startX;
-
-if(moveX > 120){
-
-swipeRight();
-
-}
-else if(moveX < -120){
-
-swipeLeft();
-
-}
-else{
-
-card.style.transform='';
-
-}
-
-document.removeEventListener('mousemove',drag);
-document.removeEventListener('touchmove',drag);
-
-}
-
-/* LIKE */
-
-function swipeRight(){
+function like(){
 
 card.style.transition='.45s';
 
 card.style.transform=
-'translateX(500px) rotate(25deg)';
+'translateX(450px) rotate(20deg)';
 
-showMatch();
+setTimeout(()=>{
+
+document
+.getElementById('match')
+.classList.add('show');
+
+},300);
 
 }
 
 /* DISLIKE */
 
-function swipeLeft(){
+function dislike(){
 
 card.style.transition='.45s';
 
 card.style.transform=
-'translateX(-500px) rotate(-25deg)';
-
-}
-
-/* MATCH */
-
-function showMatch(){
-
-const match =
-document.getElementById('match');
-
-setTimeout(()=>{
-
-match.classList.add('show');
-
-},400);
+'translateX(-450px) rotate(-20deg)';
 
 }
 
