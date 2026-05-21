@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
 
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Laço 💘</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
 
@@ -19,668 +19,499 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Inter',sans-serif;
+font-family:'Poppins',sans-serif;
 -webkit-tap-highlight-color:transparent;
 }
 
 body{
-
-height:100vh;
+background:#080808;
 overflow:hidden;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
 color:white;
-background:#050505;
-
 }
 
 /* FUNDO CINEMATOGRÁFICO */
 
 .bg{
-
 position:fixed;
 inset:0;
 overflow:hidden;
-z-index:0;
-
+background:
+radial-gradient(circle at top,#1f0b06 0%,#080808 50%);
+z-index:-10;
 }
 
-.fire{
-
+.ember{
 position:absolute;
 border-radius:50%;
-filter:blur(120px);
-animation:float 10s ease-in-out infinite;
-
+filter:blur(100px);
+opacity:.22;
+mix-blend-mode:screen;
+animation:float 16s infinite ease-in-out;
 }
 
-.fire1{
-
-width:420px;
-height:420px;
-
-background:
-rgba(255,0,102,.18);
-
-top:-120px;
-right:-120px;
-
+.ember1{
+width:500px;
+height:500px;
+background:#ff6b3d;
+top:-140px;
+left:-160px;
 }
 
-.fire2{
-
-width:360px;
-height:360px;
-
-background:
-rgba(255,80,80,.12);
-
-bottom:-120px;
-left:-120px;
-
-animation-delay:2s;
-
+.ember2{
+width:400px;
+height:400px;
+background:#ff8a3d;
+bottom:-140px;
+right:-140px;
+animation-delay:4s;
 }
 
-.fire3{
-
-width:260px;
-height:260px;
-
-background:
-rgba(255,120,0,.10);
-
+.ember3{
+width:300px;
+height:300px;
+background:#ff6b3d;
 top:40%;
 left:50%;
-
-transform:translate(-50%,-50%);
-
-animation-delay:4s;
-
+animation-delay:8s;
 }
 
 @keyframes float{
-
 0%{
-transform:translateY(0px) scale(1);
+transform:translate(0,0) scale(1);
 }
-
 50%{
-transform:translateY(-20px) scale(1.04);
+transform:translate(20px,-35px) scale(1.1);
 }
-
 100%{
-transform:translateY(0px) scale(1);
+transform:translate(0,0) scale(1);
+}
 }
 
+/* PARTÍCULAS */
+
+.particle{
+position:absolute;
+background:#ff8a3d;
+border-radius:50%;
+opacity:.3;
+animation:particle linear infinite;
 }
 
-/* HEADER */
+@keyframes particle{
+0%{
+transform:translateY(0px);
+opacity:0;
+}
+20%{
+opacity:.7;
+}
+100%{
+transform:translateY(-120vh);
+opacity:0;
+}
+}
 
-.header{
+/* APP */
 
-position:fixed;
+.app{
+width:100%;
+max-width:430px;
+height:100vh;
+position:relative;
+overflow:hidden;
+}
 
+/* TOPO */
+
+.topbar{
+position:absolute;
 top:0;
 left:0;
-
 width:100%;
-
-padding:22px 22px 14px;
-
+padding:24px 22px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-
-z-index:100;
-
-background:
-linear-gradient(to bottom,rgba(0,0,0,.55),transparent);
-
-backdrop-filter:blur(10px);
-
+z-index:50;
 }
 
 .logo{
-
-font-size:30px;
-font-weight:800;
-
-letter-spacing:-1px;
-
-background:
-linear-gradient(45deg,#ff0066,#ff4d8d);
-
+font-size:42px;
+font-weight:700;
+letter-spacing:-2px;
+background:linear-gradient(135deg,#ffb089,#ff6b3d);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-
 }
 
-.headerRight{
-
+.top-actions{
 display:flex;
 gap:12px;
-
 }
 
-.topBtn{
+.top-btn{
+width:52px;
+height:52px;
+border-radius:18px;
 
-width:42px;
-height:42px;
+background:rgba(255,255,255,.05);
 
-border-radius:14px;
+border:1px solid rgba(255,255,255,.06);
 
 display:flex;
 justify-content:center;
 align-items:center;
-
-background:
-rgba(255,255,255,.05);
-
-border:
-1px solid rgba(255,255,255,.05);
 
 backdrop-filter:blur(20px);
 
+font-size:18px;
+
 color:white;
 
-font-size:16px;
-
+box-shadow:
+0 0 25px rgba(255,107,61,.08);
 }
 
-/* ÁREA */
+/* CARD ÁREA */
 
-.area{
-
+.cards{
+position:absolute;
+top:110px;
+left:0;
 width:100%;
-height:100vh;
+height:calc(100vh - 240px);
 
 display:flex;
 justify-content:center;
 align-items:center;
-
-padding-top:70px;
-padding-bottom:120px;
-
-position:relative;
-z-index:10;
-
-}
-
-/* STACK */
-
-.stack{
-
-position:relative;
-
-width:92%;
-max-width:410px;
-
-height:74vh;
-
 }
 
 /* CARD */
 
 .card{
-
 position:absolute;
 
-width:100%;
+width:88%;
 height:100%;
 
-border-radius:34px;
+border-radius:42px;
 
 overflow:hidden;
 
 background:#111;
 
 box-shadow:
-0 30px 90px rgba(0,0,0,.55);
+0 0 80px rgba(255,107,61,.15),
+0 30px 80px rgba(0,0,0,.65);
+
+user-select:none;
 
 transition:
 transform .35s ease,
 opacity .35s ease;
 
-will-change:transform;
-
-touch-action:none;
-
+cursor:grab;
 }
 
-.card img{
-
-width:100%;
-height:100%;
-
-object-fit:cover;
-
-}
-
-/* CARD ATRÁS */
-
-.card.second{
-
-transform:
-scale(.96)
-translateY(12px);
-
-opacity:.55;
-
-filter:brightness(.75);
-
-}
-
-/* OVERLAY */
-
-.overlay{
+.card::before{
+content:"";
 
 position:absolute;
-
 inset:0;
 
 background:
-linear-gradient(to top,#000 12%,transparent 45%);
+linear-gradient(
+180deg,
+rgba(0,0,0,.0) 20%,
+rgba(0,0,0,.15) 40%,
+rgba(0,0,0,.92) 100%
+);
 
+z-index:2;
+}
+
+.card img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+/* GLASS */
+
+.card-glass{
+position:absolute;
+inset:0;
+
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,.04),
+rgba(255,255,255,.01)
+);
+
+z-index:1;
 }
 
 /* INFO */
 
 .info{
-
 position:absolute;
-
-left:24px;
-right:24px;
-bottom:26px;
-
+bottom:30px;
+left:28px;
+right:28px;
 z-index:5;
-
 }
 
-.topInfo{
+.verified{
+display:inline-flex;
+align-items:center;
+gap:8px;
 
+padding:10px 16px;
+
+background:rgba(0,0,0,.35);
+
+border:1px solid rgba(255,255,255,.08);
+
+border-radius:18px;
+
+font-size:13px;
+
+backdrop-filter:blur(20px);
+
+margin-bottom:18px;
+}
+
+.name{
+font-size:52px;
+font-weight:700;
+line-height:1;
+letter-spacing:-3px;
+}
+
+.age{
+font-size:36px;
+font-weight:500;
+color:#ff8a3d;
+}
+
+.location{
+margin-top:12px;
+font-size:15px;
+opacity:.85;
 display:flex;
 align-items:center;
-gap:10px;
-
-margin-bottom:10px;
-
-}
-
-.nome{
-
-font-size:34px;
-font-weight:800;
-
-letter-spacing:-1px;
-
-}
-
-.idade{
-
-font-size:28px;
-font-weight:500;
-
-opacity:.88;
-
-}
-
-.verify{
-
-color:#4da6ff;
-font-size:18px;
-
-}
-
-.local{
-
-font-size:14px;
-
-opacity:.75;
-
-margin-bottom:14px;
-
+gap:8px;
 }
 
 .bio{
-
-font-size:14px;
-line-height:1.6;
-
-opacity:.92;
-
-max-width:88%;
-
+margin-top:16px;
+line-height:1.7;
+font-size:15px;
+opacity:.88;
 }
 
 /* TAGS */
 
 .tags{
-
 display:flex;
 gap:10px;
 flex-wrap:wrap;
-
-margin-top:18px;
-
+margin-top:22px;
 }
 
 .tag{
+padding:12px 18px;
 
-padding:10px 14px;
+background:rgba(0,0,0,.35);
 
-border-radius:999px;
+border:1px solid rgba(255,255,255,.08);
 
-background:
-rgba(255,255,255,.08);
-
-border:
-1px solid rgba(255,255,255,.05);
+border-radius:18px;
 
 backdrop-filter:blur(20px);
 
-font-size:12px;
-
+font-size:14px;
 }
 
-/* LIKE / NOPE */
-
-.like,
-.nope{
-
-position:absolute;
-
-top:35px;
-
-padding:10px 18px;
-
-border-radius:16px;
-
-font-size:28px;
-font-weight:800;
-
-opacity:0;
-
-transition:.2s;
-
-}
-
-.like{
-
-left:25px;
-
-border:3px solid #00ff88;
-
-color:#00ff88;
-
-transform:rotate(-12deg);
-
-}
-
-.nope{
-
-right:25px;
-
-border:3px solid #ff3b5c;
-
-color:#ff3b5c;
-
-transform:rotate(12deg);
-
-}
-
-/* BOTÕES */
+/* ACTIONS */
 
 .actions{
-
-position:fixed;
-
-bottom:98px;
-left:50%;
-
-transform:translateX(-50%);
-
+position:absolute;
+bottom:115px;
+width:100%;
 display:flex;
-align-items:center;
-gap:18px;
-
-z-index:120;
-
+justify-content:center;
+gap:24px;
+z-index:100;
 }
 
 .action{
-
+border:none;
 display:flex;
 justify-content:center;
 align-items:center;
+cursor:pointer;
+transition:.3s;
+}
+
+.close-btn{
+width:88px;
+height:88px;
 
 border-radius:50%;
 
+background:rgba(255,255,255,.06);
+
 backdrop-filter:blur(20px);
 
-transition:.2s;
+font-size:34px;
+color:#ff7f7f;
 
-border:
-1px solid rgba(255,255,255,.05);
-
+border:1px solid rgba(255,255,255,.05);
 }
 
-.action:active{
+.like-btn{
+width:108px;
+height:108px;
 
-transform:scale(.92);
-
-}
-
-.dislike{
-
-width:68px;
-height:68px;
+border-radius:50%;
 
 background:
-rgba(255,77,109,.10);
+linear-gradient(
+135deg,
+#ff6b3d,
+#ff8a3d
+);
 
-color:#ff4d6d;
-
-font-size:28px;
-
-}
-
-.super{
-
-width:56px;
-height:56px;
-
-background:
-rgba(255,212,74,.10);
-
-color:#ffd54a;
-
-font-size:22px;
-
-}
-
-.likeBtn{
-
-width:78px;
-height:78px;
-
-background:
-linear-gradient(45deg,#ff0066,#ff4d8d);
-
-box-shadow:
-0 14px 40px rgba(255,0,102,.35);
-
+font-size:42px;
 color:white;
 
-font-size:30px;
+box-shadow:
+0 0 45px rgba(255,107,61,.45),
+0 0 90px rgba(255,107,61,.22);
+}
 
+.action:hover{
+transform:scale(1.06);
 }
 
 /* NAVBAR */
 
 .nav{
+position:absolute;
+bottom:18px;
+left:16px;
+right:16px;
 
-position:fixed;
+height:82px;
 
-bottom:0;
-left:0;
+border-radius:30px;
 
-width:100%;
+background:rgba(255,255,255,.05);
 
-padding:14px 10px 28px;
+border:1px solid rgba(255,255,255,.06);
+
+backdrop-filter:blur(20px);
 
 display:flex;
 justify-content:space-around;
 align-items:center;
 
-background:
-rgba(8,8,8,.85);
-
-backdrop-filter:blur(30px);
-
-border-top:
-1px solid rgba(255,255,255,.05);
-
 z-index:200;
-
 }
 
-.navItem{
-
+.nav-item{
 display:flex;
 flex-direction:column;
 align-items:center;
-gap:6px;
+gap:7px;
 
-font-size:11px;
-font-weight:500;
+font-size:13px;
 
-opacity:.45;
-
-transition:.3s;
-
+opacity:.55;
 }
 
-.navItem.active{
-
+.nav-item.active{
 opacity:1;
-color:#ff4d8d;
-
+color:#ff8a3d;
 }
 
-.navItem i{
-
-font-size:20px;
-
+.nav-item i{
+font-size:22px;
 }
 
 /* MATCH */
 
 .match{
+position:absolute;
+inset:0;
 
-position:fixed;
+background:rgba(0,0,0,.82);
 
-top:50%;
-left:50%;
+backdrop-filter:blur(20px);
 
-transform:
-translate(-50%,-50%) scale(.8);
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
 
-width:88%;
-max-width:340px;
-
-padding:36px;
-
-border-radius:34px;
-
-background:
-rgba(15,15,15,.92);
-
-border:
-1px solid rgba(255,255,255,.06);
-
-backdrop-filter:blur(30px);
-
-text-align:center;
-
-z-index:999;
+z-index:500;
 
 opacity:0;
 pointer-events:none;
 
-transition:.35s;
-
+transition:.5s;
 }
 
 .match.show{
-
 opacity:1;
 pointer-events:auto;
-
-transform:
-translate(-50%,-50%) scale(1);
-
 }
 
 .match h1{
-
-font-size:40px;
-font-weight:800;
-
+font-size:68px;
 margin-bottom:12px;
 
-background:
-linear-gradient(45deg,#ff0066,#ff4d8d);
+background:linear-gradient(
+135deg,
+#ffb089,
+#ff6b3d
+);
 
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-
 }
 
 .match p{
-
-opacity:.72;
-
-line-height:1.5;
-
-margin-bottom:25px;
-
-}
-
-.match button{
-
-width:100%;
-
-padding:16px;
-
-border:none;
-
-border-radius:18px;
-
-background:
-linear-gradient(45deg,#ff0066,#ff4d8d);
-
-color:white;
-
-font-weight:700;
-
-font-size:15px;
-
+opacity:.75;
+font-size:17px;
 }
 
 /* RESPONSIVO */
 
 @media(max-width:500px){
 
-.stack{
-height:70vh;
+.name{
+font-size:42px;
 }
 
-.nome{
+.age{
 font-size:28px;
 }
 
-.idade{
-font-size:24px;
+.like-btn{
+width:92px;
+height:92px;
+}
+
+.close-btn{
+width:76px;
+height:76px;
 }
 
 }
@@ -690,31 +521,33 @@ font-size:24px;
 
 <body>
 
-<!-- BG -->
-
 <div class="bg">
 
-<div class="fire fire1"></div>
-<div class="fire fire2"></div>
-<div class="fire fire3"></div>
+<div class="ember ember1"></div>
+<div class="ember ember2"></div>
+<div class="ember ember3"></div>
+
+<div id="particles"></div>
 
 </div>
 
-<!-- HEADER -->
+<div class="app">
 
-<div class="header">
+<!-- TOPO -->
+
+<div class="topbar">
 
 <div class="logo">
-Laço 💘
+Laço
 </div>
 
-<div class="headerRight">
+<div class="top-actions">
 
-<div class="topBtn">
-<i class="fa-solid fa-bell"></i>
+<div class="top-btn">
+<i class="fa-regular fa-bell"></i>
 </div>
 
-<div class="topBtn">
+<div class="top-btn">
 <i class="fa-solid fa-sliders"></i>
 </div>
 
@@ -722,11 +555,60 @@ Laço 💘
 
 </div>
 
-<!-- AREA -->
+<!-- CARDS -->
 
-<div class="area">
+<div class="cards">
 
-<div class="stack" id="stack"></div>
+<div class="card" id="card">
+
+<div class="card-glass"></div>
+
+<img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop">
+
+<div class="info">
+
+<div class="verified">
+<i class="fa-solid fa-badge-check"></i>
+Verificada
+</div>
+
+<div>
+<span class="name">Marina</span>
+<span class="age">25</span>
+</div>
+
+<div class="location">
+<i class="fa-solid fa-location-dot"></i>
+São Paulo, SP • 3km de você
+</div>
+
+<div class="bio">
+Apaixonada por momentos simples, música boa e conversas que ficam.
+</div>
+
+<div class="tags">
+
+<div class="tag">
+✈️ Viagens
+</div>
+
+<div class="tag">
+🎵 Música
+</div>
+
+<div class="tag">
+☕ Café
+</div>
+
+<div class="tag">
+🌊 Praia
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 
@@ -734,17 +616,13 @@ Laço 💘
 
 <div class="actions">
 
-<div class="action dislike" onclick="swipeLeft()">
+<button class="action close-btn" onclick="swipeLeft()">
 <i class="fa-solid fa-xmark"></i>
-</div>
+</button>
 
-<div class="action super">
-<i class="fa-solid fa-star"></i>
-</div>
-
-<div class="action likeBtn" onclick="swipeRight()">
+<button class="action like-btn" onclick="swipeRight()">
 <i class="fa-solid fa-heart"></i>
-</div>
+</button>
 
 </div>
 
@@ -752,28 +630,28 @@ Laço 💘
 
 <div class="nav">
 
-<div class="navItem active">
+<div class="nav-item active">
 <i class="fa-solid fa-fire"></i>
 <span>Explorar</span>
 </div>
 
-<div class="navItem">
-<i class="fa-solid fa-heart"></i>
+<div class="nav-item">
+<i class="fa-regular fa-heart"></i>
 <span>Likes</span>
 </div>
 
-<div class="navItem">
-<i class="fa-solid fa-comments"></i>
+<div class="nav-item">
+<i class="fa-regular fa-comments"></i>
 <span>Chat</span>
 </div>
 
-<div class="navItem">
+<div class="nav-item">
 <i class="fa-solid fa-location-dot"></i>
-<span>Vibe</span>
+<span>Vibes</span>
 </div>
 
-<div class="navItem">
-<i class="fa-solid fa-user"></i>
+<div class="nav-item">
+<i class="fa-regular fa-user"></i>
 <span>Perfil</span>
 </div>
 
@@ -783,294 +661,141 @@ Laço 💘
 
 <div class="match" id="match">
 
-<h1>É Match 💘</h1>
+<h1>Match 💘</h1>
 
-<p>
-A conexão aconteceu.
-Agora começa a melhor parte.
-</p>
+<p>Vocês combinaram energia.</p>
 
-<button onclick="closeMatch()">
-Continuar
-</button>
+</div>
 
 </div>
 
 <script>
 
-const perfis = [
+/* PARTÍCULAS */
 
-{
-nome:"Amanda",
-idade:24,
-cidade:"Rio de Janeiro",
-bio:"Praia, viagens e pessoas que fazem a conversa valer a pena.",
-foto:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop",
-interesses:["Viagens","Praia","Música"]
-},
+const particles =
+document.getElementById('particles');
 
-{
-nome:"Camila",
-idade:27,
-cidade:"São Paulo",
-bio:"Café forte, academia e conversas de madrugada.",
-foto:"https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=1200&auto=format&fit=crop",
-interesses:["Cinema","Fitness","Café"]
-},
+for(let i=0;i<40;i++){
 
-{
-nome:"Isabella",
-idade:22,
-cidade:"Belo Horizonte",
-bio:"Adrenalina, rolês inesperados e boas risadas.",
-foto:"https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop",
-interesses:["Shows","Trilhas","Fotografia"]
-}
+const p=document.createElement('div');
 
-];
+p.classList.add('particle');
 
-const stack =
-document.getElementById("stack");
+const size=Math.random()*4+1;
 
-let current = 0;
+p.style.width=size+'px';
+p.style.height=size+'px';
 
-/* RENDER */
+p.style.left=Math.random()*100+'vw';
+p.style.top=Math.random()*100+'vh';
 
-function renderCards(){
+p.style.animationDuration=
+(8+Math.random()*12)+'s';
 
-stack.innerHTML = "";
+p.style.animationDelay=
+Math.random()*5+'s';
 
-const currentProfile =
-perfis[current];
-
-const nextProfile =
-perfis[(current + 1) % perfis.length];
-
-const secondCard =
-createCard(nextProfile,true);
-
-const firstCard =
-createCard(currentProfile,false);
-
-stack.appendChild(secondCard);
-stack.appendChild(firstCard);
-
-drag(firstCard);
+particles.appendChild(p);
 
 }
 
-/* CARD */
-
-function createCard(p,isSecond){
+/* SWIPE */
 
 const card =
-document.createElement("div");
+document.getElementById('card');
 
-card.className =
-isSecond
-? "card second"
-: "card";
+let startX=0;
+let currentX=0;
+let isDragging=false;
 
-card.innerHTML = `
+card.addEventListener('mousedown',startDrag);
+card.addEventListener('touchstart',startDrag);
 
-<img src="${p.foto}">
+function startDrag(e){
 
-<div class="overlay"></div>
+isDragging=true;
 
-<div class="like">LIKE</div>
+startX=
+e.type.includes('mouse')
+? e.clientX
+: e.touches[0].clientX;
 
-<div class="nope">NOPE</div>
+document.addEventListener('mousemove',drag);
+document.addEventListener('touchmove',drag);
 
-<div class="info">
+document.addEventListener('mouseup',endDrag);
+document.addEventListener('touchend',endDrag);
 
-<div class="topInfo">
+}
 
-<div class="nome">
-${p.nome}
-</div>
+function drag(e){
 
-<div class="idade">
-${p.idade}
-</div>
+if(!isDragging) return;
 
-<i class="fa-solid fa-circle-check verify"></i>
+currentX=
+e.type.includes('mouse')
+? e.clientX
+: e.touches[0].clientX;
 
-</div>
+const moveX=currentX-startX;
 
-<div class="local">
-📍 ${p.cidade}
-</div>
-
-<div class="bio">
-${p.bio}
-</div>
-
-<div class="tags">
-
-${p.interesses.map(tag =>
-`<div class="tag">${tag}</div>`
-).join("")}
-
-</div>
-
-</div>
-
+card.style.transform=
+`
+translateX(${moveX}px)
+rotate(${moveX/12}deg)
 `;
 
-return card;
+}
+
+function endDrag(){
+
+isDragging=false;
+
+const moveX=currentX-startX;
+
+if(moveX > 120){
+
+swipeRight();
+
+}
+else if(moveX < -120){
+
+swipeLeft();
+
+}
+else{
+
+card.style.transform='';
 
 }
 
-/* DRAG */
-
-function drag(card){
-
-let startX = 0;
-let currentX = 0;
-let dragging = false;
-
-card.addEventListener("mousedown",start);
-card.addEventListener("touchstart",start);
-
-function start(e){
-
-dragging = true;
-
-startX =
-e.type.includes("mouse")
-? e.pageX
-: e.touches[0].pageX;
-
-document.addEventListener("mousemove",move);
-document.addEventListener("touchmove",move);
-
-document.addEventListener("mouseup",end);
-document.addEventListener("touchend",end);
+document.removeEventListener('mousemove',drag);
+document.removeEventListener('touchmove',drag);
 
 }
 
-function move(e){
-
-if(!dragging) return;
-
-currentX =
-e.type.includes("mouse")
-? e.pageX
-: e.touches[0].pageX;
-
-const dx =
-currentX - startX;
-
-const rotate =
-dx / 16;
-
-card.style.transition = "none";
-
-card.style.transform =
-`translateX(${dx}px) rotate(${rotate}deg)`;
-
-const like =
-card.querySelector(".like");
-
-const nope =
-card.querySelector(".nope");
-
-if(dx > 0){
-
-like.style.opacity =
-dx / 100;
-
-nope.style.opacity = 0;
-
-}else{
-
-nope.style.opacity =
-Math.abs(dx) / 100;
-
-like.style.opacity = 0;
-
-}
-
-}
-
-function end(){
-
-dragging = false;
-
-const dx =
-currentX - startX;
-
-card.style.transition =
-".35s ease";
-
-if(dx > 110){
-
-card.style.transform =
-"translateX(140%) rotate(24deg)";
-
-setTimeout(()=>{
-
-showMatch();
-nextCard();
-
-},300);
-
-}else if(dx < -110){
-
-card.style.transform =
-"translateX(-140%) rotate(-24deg)";
-
-setTimeout(()=>{
-
-nextCard();
-
-},300);
-
-}else{
-
-card.style.transform = "";
-
-card.querySelector(".like").style.opacity = 0;
-
-card.querySelector(".nope").style.opacity = 0;
-
-}
-
-document.removeEventListener("mousemove",move);
-document.removeEventListener("touchmove",move);
-
-}
-
-}
-
-/* NEXT */
-
-function nextCard(){
-
-current++;
-
-if(current >= perfis.length){
-
-current = 0;
-
-}
-
-renderCards();
-
-}
-
-/* BOTÕES */
+/* LIKE */
 
 function swipeRight(){
 
+card.style.transition='.45s';
+
+card.style.transform=
+'translateX(500px) rotate(25deg)';
+
 showMatch();
-nextCard();
 
 }
 
+/* DISLIKE */
+
 function swipeLeft(){
 
-nextCard();
+card.style.transition='.45s';
+
+card.style.transform=
+'translateX(-500px) rotate(-25deg)';
 
 }
 
@@ -1078,21 +803,16 @@ nextCard();
 
 function showMatch(){
 
-document
-.getElementById("match")
-.classList.add("show");
+const match =
+document.getElementById('match');
+
+setTimeout(()=>{
+
+match.classList.add('show');
+
+},400);
 
 }
-
-function closeMatch(){
-
-document
-.getElementById("match")
-.classList.remove("show");
-
-}
-
-renderCards();
 
 </script>
 
