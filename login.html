@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <title>Laço 💘</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link
-href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet"
->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <link
 rel="stylesheet"
@@ -30,432 +24,361 @@ font-family:'Poppins',sans-serif;
 }
 
 body{
-
 height:100vh;
-
-display:flex;
-justify-content:center;
-align-items:center;
-
 overflow:hidden;
-
-background:
-radial-gradient(circle at top,#ff006655,transparent 30%),
-radial-gradient(circle at bottom,#ff4d6d22,transparent 30%),
-#050505;
-
+background:#080808;
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
 color:white;
-
 }
 
-/* BG */
+/* FUNDO CINEMATOGRÁFICO */
 
-.bg1{
-
+.bg{
 position:absolute;
+width:100%;
+height:100%;
+overflow:hidden;
+background:
+radial-gradient(circle at top,#2a0f07 0%,#080808 45%);
+}
 
+.glow{
+position:absolute;
+border-radius:50%;
+filter:blur(90px);
+opacity:.45;
+animation:float 12s infinite ease-in-out;
+}
+
+.glow1{
 width:450px;
 height:450px;
-
-background:#ff0066;
-
-filter:blur(160px);
-
-opacity:.15;
-
-top:-150px;
-right:-150px;
-
-border-radius:50%;
-
+background:#ff6b3d;
+top:-100px;
+left:-120px;
 }
 
-.bg2{
-
-position:absolute;
-
+.glow2{
 width:350px;
 height:350px;
-
-background:#ff4d6d;
-
-filter:blur(150px);
-
-opacity:.10;
-
+background:#ff8a3d;
 bottom:-120px;
-left:-120px;
+right:-100px;
+animation-delay:4s;
+}
 
+.glow3{
+width:250px;
+height:250px;
+background:#ff6b3d;
+top:40%;
+left:55%;
+animation-delay:2s;
+}
+
+@keyframes float{
+0%{
+transform:translateY(0px) translateX(0px) scale(1);
+}
+50%{
+transform:translateY(-30px) translateX(20px) scale(1.08);
+}
+100%{
+transform:translateY(0px) translateX(0px) scale(1);
+}
+}
+
+/* PARTÍCULAS */
+
+.particle{
+position:absolute;
+width:3px;
+height:3px;
+background:#ff8a3d;
 border-radius:50%;
+opacity:.5;
+animation:particleMove linear infinite;
+}
 
+@keyframes particleMove{
+0%{
+transform:translateY(0px);
+opacity:0;
+}
+20%{
+opacity:.7;
+}
+100%{
+transform:translateY(-100vh);
+opacity:0;
+}
 }
 
 /* CARD */
 
-.card{
-
-width:92%;
-max-width:420px;
-
-padding:38px;
-
-border-radius:34px;
-
-background:
-rgba(255,255,255,.05);
-
-border:
-1px solid rgba(255,255,255,.06);
-
-backdrop-filter:blur(30px);
-
-box-shadow:
-0 25px 80px rgba(0,0,0,.45);
-
+.login-container{
 position:relative;
 z-index:10;
+width:390px;
+padding:38px;
+border-radius:34px;
 
-animation:fade .8s ease;
+background:rgba(255,255,255,0.04);
 
+backdrop-filter:blur(25px);
+
+border:1px solid rgba(255,255,255,0.08);
+
+box-shadow:
+0 0 60px rgba(255,107,61,.18),
+0 0 120px rgba(255,107,61,.08);
+
+animation:fadeUp 1.2s ease;
 }
 
-@keyframes fade{
-
+@keyframes fadeUp{
 from{
 opacity:0;
-transform:translateY(20px);
+transform:translateY(30px);
 }
-
 to{
 opacity:1;
-transform:translateY(0);
+transform:translateY(0px);
 }
-
 }
 
 /* LOGO */
 
 .logo{
-
 text-align:center;
-
-font-size:54px;
-font-weight:800;
-
-margin-bottom:10px;
-
-background:
-linear-gradient(45deg,#ff0066,#ff4d8d);
-
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-
+margin-bottom:35px;
 }
 
-.sub{
+.logo h1{
+font-size:58px;
+font-weight:700;
+color:#ff7a45;
+letter-spacing:-2px;
+}
 
-text-align:center;
-
-opacity:.72;
-
-margin-bottom:35px;
-
-font-size:15px;
-
+.logo span{
+font-size:20px;
+letter-spacing:7px;
+opacity:.65;
+display:block;
+margin-top:-8px;
+font-weight:300;
 }
 
 /* INPUTS */
 
-.inputBox{
-
+.input-group{
+margin-bottom:20px;
 position:relative;
-
-margin-bottom:18px;
-
 }
 
-.inputBox i{
-
+.input-group i{
 position:absolute;
-
 left:18px;
-top:50%;
-
-transform:translateY(-50%);
-
-opacity:.45;
-
+top:18px;
+color:#ff8a3d;
+font-size:15px;
 }
 
-.inputBox input{
-
+.input-group input{
 width:100%;
-
-padding:18px 18px 18px 52px;
+padding:18px 18px 18px 50px;
 
 border:none;
 outline:none;
 
 border-radius:18px;
 
-background:
-rgba(255,255,255,.06);
+background:rgba(255,255,255,0.05);
 
 color:white;
-
 font-size:15px;
 
-border:
-1px solid transparent;
-
 transition:.3s;
-
 }
 
-.inputBox input:focus{
-
-border:
-1px solid rgba(255,0,102,.4);
+.input-group input:focus{
+background:rgba(255,255,255,0.08);
 
 box-shadow:
-0 0 20px rgba(255,0,102,.18);
-
+0 0 0 2px rgba(255,107,61,.3),
+0 0 35px rgba(255,107,61,.12);
 }
 
-/* BUTTON */
+.input-group input::placeholder{
+color:rgba(255,255,255,.45);
+}
 
-button{
+/* BOTÃO */
 
+.login-btn{
 width:100%;
-
 padding:18px;
-
 border:none;
+border-radius:20px;
 
-border-radius:18px;
-
-background:
-linear-gradient(45deg,#ff0066,#ff4d8d);
-
-color:white;
+background:linear-gradient(
+135deg,
+#ff6b3d,
+#ff8a3d
+);
 
 font-size:16px;
-font-weight:700;
-
+font-weight:600;
+color:white;
 cursor:pointer;
 
-transition:.3s;
-
-margin-top:8px;
-
-}
-
-button:hover{
-
-transform:translateY(-2px);
+transition:.35s;
 
 box-shadow:
-0 12px 35px rgba(255,0,102,.25);
-
+0 0 35px rgba(255,107,61,.35);
 }
 
-/* INFO */
+.login-btn:hover{
+transform:translateY(-2px) scale(1.01);
 
-.info{
+box-shadow:
+0 0 45px rgba(255,107,61,.55);
+}
 
+/* LINK */
+
+.register{
 text-align:center;
-
-margin-top:25px;
-
-opacity:.7;
-
+margin-top:24px;
 font-size:14px;
-
+color:rgba(255,255,255,.6);
 }
 
-.info a{
-
-color:#ff4d8d;
-
+.register a{
+color:#ff8a3d;
 text-decoration:none;
-
 font-weight:600;
-
 }
 
-/* ERROR */
+/* RESPONSIVO */
 
-.error{
+@media(max-width:500px){
 
-display:none;
-
-margin-top:18px;
-
-text-align:center;
-
-color:#ff4d6d;
-
+.login-container{
+width:92%;
+padding:30px;
 }
 
-/* LOADING */
-
-.loading{
-
-display:none;
-
-margin-top:18px;
-
-text-align:center;
-
-opacity:.7;
+.logo h1{
+font-size:48px;
+}
 
 }
 
 </style>
-
 </head>
 
 <body>
 
-<div class="bg1"></div>
-<div class="bg2"></div>
+<div class="bg">
 
-<div class="card">
+<div class="glow glow1"></div>
+<div class="glow glow2"></div>
+<div class="glow glow3"></div>
+
+</div>
+
+<div id="particles"></div>
+
+<div class="login-container">
 
 <div class="logo">
-Laço 💘
+<h1>Laço</h1>
+<span>CONEXÕES QUE AQUECEM</span>
 </div>
 
-<div class="sub">
-Conexões reais começam aqui
-</div>
-
-<div class="inputBox">
-
+<div class="input-group">
 <i class="fa-solid fa-envelope"></i>
-
 <input
 type="email"
 id="email"
-placeholder="Seu email"
+placeholder="Seu e-mail"
 />
-
 </div>
 
-<div class="inputBox">
-
+<div class="input-group">
 <i class="fa-solid fa-lock"></i>
-
 <input
 type="password"
 id="senha"
 placeholder="Sua senha"
 />
-
 </div>
 
-<button onclick="entrar()">
+<button class="login-btn" onclick="login()">
 Entrar
 </button>
 
-<div class="loading" id="loading">
-Entrando...
-</div>
-
-<div class="error" id="error">
-Email ou senha inválidos
-</div>
-
-<div class="info">
-Não possui conta?
+<div class="register">
+Ainda não possui conta?
 <a href="cadastro.html">
-Criar conta
+Criar agora
 </a>
 </div>
 
 </div>
 
-<script type="module">
+<script>
 
-import { initializeApp }
+/* PARTÍCULAS */
 
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+const particlesContainer = document.getElementById('particles');
 
-import {
+for(let i=0;i<35;i++){
 
-getAuth,
-signInWithEmailAndPassword
+const particle=document.createElement('div');
+
+particle.classList.add('particle');
+
+particle.style.left=Math.random()*100+'vw';
+
+particle.style.top=Math.random()*100+'vh';
+
+particle.style.animationDuration=
+(5+Math.random()*10)+'s';
+
+particle.style.animationDelay=
+Math.random()*5+'s';
+
+particlesContainer.appendChild(particle);
 
 }
-
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-/* FIREBASE */
-
-const firebaseConfig = {
-
-apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
-
-authDomain: "lacoapp.firebaseapp.com",
-
-projectId: "lacoapp",
-
-storageBucket: "lacoapp.firebasestorage.app",
-
-messagingSenderId: "485009455528",
-
-appId: "1:485009455528:web:0c43153be60e62cd6a459d",
-
-measurementId: "G-MSB3J89XLL"
-
-};
-
-const app =
-initializeApp(firebaseConfig);
-
-const auth =
-getAuth(app);
 
 /* LOGIN */
 
-window.entrar = async function(){
+function login(){
 
 const email =
-document.getElementById("email").value;
+document.getElementById('email').value;
 
 const senha =
-document.getElementById("senha").value;
+document.getElementById('senha').value;
 
-const loading =
-document.getElementById("loading");
+if(email === "" || senha === ""){
 
-const error =
-document.getElementById("error");
+alert("Preencha todos os campos.");
 
-loading.style.display = "block";
-
-error.style.display = "none";
-
-try{
-
-await signInWithEmailAndPassword(
-auth,
-email,
-senha
-);
-
-window.location.href =
-"app.html";
-
-}catch(e){
-
-loading.style.display = "none";
-
-error.style.display = "block";
-
-console.log(e);
+return;
 
 }
+
+/* FUTURO FIREBASE */
+
+window.location.href="app.html";
 
 }
 
