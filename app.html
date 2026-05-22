@@ -1,375 +1,29 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Laço 💘</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Inter',sans-serif;
-}
-
-body{
-background:#080808;
-color:white;
-overflow:hidden;
-}
-
-/* FUNDO CINEMATOGRÁFICO */
-
-.bg{
-position:fixed;
-inset:0;
-background:
-radial-gradient(circle at top left, rgba(255,107,61,.18), transparent 30%),
-radial-gradient(circle at bottom right, rgba(255,138,61,.14), transparent 35%),
-linear-gradient(to bottom,#080808,#111);
-z-index:-3;
-overflow:hidden;
-}
-
-.glow{
-position:absolute;
-width:500px;
-height:500px;
-background:rgba(255,107,61,.10);
-filter:blur(120px);
-border-radius:50%;
-animation:pulse 8s infinite ease-in-out;
-}
-
-.glow:nth-child(1){
-top:-120px;
-left:-120px;
-}
-
-.glow:nth-child(2){
-bottom:-160px;
-right:-140px;
-animation-delay:4s;
-}
-
-@keyframes pulse{
-0%,100%{
-transform:scale(1);
-opacity:.5;
-}
-50%{
-transform:scale(1.2);
-opacity:.9;
-}
-}
-
-/* TOPO */
-
-.top{
-height:90px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 24px;
-border-bottom:1px solid rgba(255,255,255,.05);
-backdrop-filter:blur(20px);
-background:rgba(8,8,8,.55);
-}
-
-.logo{
-font-size:32px;
-font-weight:800;
-letter-spacing:-1px;
-background:linear-gradient(135deg,#FF6B3D,#FF8A3D);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-
-/* PERFIL */
-
-.profile{
-width:48px;
-height:48px;
-border-radius:50%;
-overflow:hidden;
-border:2px solid rgba(255,107,61,.4);
-}
-
-.profile img{
-width:100%;
-height:100%;
-object-fit:cover;
-}
-
-/* CONTAINER */
-
-.container{
-height:calc(100vh - 90px);
-display:flex;
-align-items:center;
-justify-content:center;
-padding:30px;
-}
-
-/* CARD */
-
-.card-stack{
-position:relative;
-width:380px;
-height:650px;
-}
-
-.shadow-card{
-position:absolute;
-inset:0;
-border-radius:36px;
-background:#1b1b1b;
-}
-
-.shadow-card:nth-child(1){
-transform:translateY(12px) scale(.96);
-opacity:.18;
-}
-
-.shadow-card:nth-child(2){
-transform:translateY(22px) scale(.92);
-opacity:.10;
-}
-
-.card{
-position:absolute;
-inset:0;
-border-radius:36px;
-overflow:hidden;
-background:#111;
-box-shadow:
-0 20px 80px rgba(0,0,0,.55),
-0 0 0 1px rgba(255,255,255,.04);
-}
-
-.card img{
-width:100%;
-height:100%;
-object-fit:cover;
-}
-
-/* OVERLAY */
-
-.overlay{
-position:absolute;
-inset:0;
-background:
-linear-gradient(to top,
-rgba(0,0,0,.92),
-rgba(0,0,0,.35),
-transparent 55%);
-display:flex;
-flex-direction:column;
-justify-content:flex-end;
-padding:30px;
-}
-
-/* INFO */
-
-.name{
-font-size:38px;
-font-weight:800;
-}
-
-.bio{
-margin-top:10px;
-font-size:15px;
-line-height:1.6;
-color:rgba(255,255,255,.72);
-}
-
-/* BOTÕES */
-
-.actions{
-position:absolute;
-bottom:-90px;
-left:50%;
-transform:translateX(-50%);
-display:flex;
-gap:24px;
-}
-
-.btn{
-width:76px;
-height:76px;
-border:none;
-border-radius:50%;
-cursor:pointer;
-font-size:28px;
-font-weight:700;
-transition:.25s;
-backdrop-filter:blur(20px);
-}
-
-.btn:hover{
-transform:scale(1.08);
-}
-
-.nope{
-background:#1b1b1b;
-color:#999;
-}
-
-.like{
-background:linear-gradient(135deg,#FF6B3D,#FF8A3D);
-color:white;
-box-shadow:0 0 35px rgba(255,107,61,.45);
-}
-
-/* BOTTOM NAV */
-
-.nav{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-height:82px;
-background:rgba(10,10,10,.72);
-backdrop-filter:blur(20px);
-border-top:1px solid rgba(255,255,255,.05);
-display:flex;
-align-items:center;
-justify-content:space-around;
-}
-
-.nav a{
-text-decoration:none;
-color:#777;
-font-size:13px;
-font-weight:600;
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:6px;
-transition:.25s;
-}
-
-.nav a.active{
-color:#FF8A3D;
-}
-
-.icon{
-font-size:22px;
-}
-
-</style>
-</head>
-<body>
-
-<div class="bg">
-<div class="glow"></div>
-<div class="glow"></div>
-</div>
-
-<div class="top">
-<div class="logo">LAÇO</div>
-
-<div class="profile">
-<img src="https://i.pravatar.cc/300?img=12">
-</div>
-</div>
-
-<div class="container">
-
-<div class="card-stack">
-
-<div class="shadow-card"></div>
-<div class="shadow-card"></div>
-
-<div class="card">
-
-<img id="foto" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop">
-
-<div class="overlay">
-
-<div class="name" id="nome">
-Sophie, 26
-</div>
-
-<div class="bio" id="bio">
-Conexões reais. Conversas profundas. Madrugadas inesquecíveis.
-</div>
-
-</div>
-
-</div>
-
-<div class="actions">
-
-<button class="btn nope" onclick="proximo()">
-✕
-</button>
-
-<button class="btn like" onclick="match()">
-❤
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="nav">
-
-<a class="active" href="app.html">
-<div class="icon">🔥</div>
-Explorar
-</a>
-
-<a href="chat.html">
-<div class="icon">💬</div>
-Chat
-</a>
-
-<a href="perfil.html">
-<div class="icon">👤</div>
-Perfil
-</a>
-
-<a href="#">
-<div class="icon">📍</div>
-Vibe
-</a>
-
-</div>
-
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
 getAuth,
-onAuthStateChanged,
-signOut
+onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+/* FIREBASE */
+
 const firebaseConfig = {
-
-apiKey: "SUA_API_KEY",
-authDomain: "SEU_AUTH_DOMAIN",
-projectId: "SEU_PROJECT_ID",
-storageBucket: "SEU_STORAGE_BUCKET",
-messagingSenderId: "SEU_SENDER_ID",
-appId: "SEU_APP_ID"
-
+  apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
+  authDomain: "lacoapp.firebaseapp.com",
+  projectId: "lacoapp",
+  storageBucket: "lacoapp.firebasestorage.app",
+  messagingSenderId: "485009455528",
+  appId: "1:485009455528:web:0c43153be60e62cd6a459d",
+  measurementId: "G-MSB3J89XLL"
 };
 
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
 
-/* PROTEÇÃO TOTAL */
+/* PROTEÇÃO */
 
 onAuthStateChanged(auth,(user)=>{
 
@@ -381,7 +35,7 @@ window.location.href="login.html";
 
 });
 
-/* PERFIS */
+/* BASE DE PERFIS PREMIUM */
 
 const perfis = [
 
@@ -392,57 +46,213 @@ foto:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&a
 },
 
 {
+nome:"Aurora, 28",
+bio:"A química certa muda tudo.",
+foto:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop"
+},
+
+{
 nome:"Emma, 24",
-bio:"Vinho, jazz e pessoas interessantes.",
+bio:"Jazz, vinho e tensão elegante.",
 foto:"https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=1200&auto=format&fit=crop"
 },
 
 {
-nome:"Aurora, 28",
-bio:"O tipo de conexão que muda noites inteiras.",
-foto:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop"
+nome:"Olivia, 27",
+bio:"Poucas conexões. Intensidade verdadeira.",
+foto:"https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop"
+},
+
+{
+nome:"Valentina, 25",
+bio:"Energia boa atrai pessoas raras.",
+foto:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop"
+},
+
+{
+nome:"Charlotte, 29",
+bio:"A madrugada sempre revela quem é real.",
+foto:"https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?q=80&w=1200&auto=format&fit=crop"
+},
+
+{
+nome:"Mia, 23",
+bio:"Conexões começam no olhar.",
+foto:"https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1200&auto=format&fit=crop"
 }
 
 ];
 
 let atual = 0;
 
-window.proximo = ()=>{
+/* ELEMENTOS */
 
-atual++;
+const foto = document.getElementById("foto");
+
+const nome = document.getElementById("nome");
+
+const bio = document.getElementById("bio");
+
+const card = document.querySelector(".card");
+
+/* TROCAR PERFIL */
+
+function trocarPerfil(){
+
+card.style.opacity = "0";
+
+card.style.transform = "scale(.96)";
+
+setTimeout(()=>{
 
 if(atual >= perfis.length){
+
+embaralharPerfis();
 
 atual = 0;
 
 }
 
-trocar();
+foto.src = perfis[atual].foto;
 
-};
+nome.innerText = perfis[atual].nome;
 
-window.match = ()=>{
+bio.innerText = perfis[atual].bio;
 
-alert("💘 Novo Match no Laço");
+card.style.opacity = "1";
 
-proximo();
+card.style.transform = "scale(1)";
 
-};
-
-function trocar(){
-
-document.getElementById("nome").innerText =
-perfis[atual].nome;
-
-document.getElementById("bio").innerText =
-perfis[atual].bio;
-
-document.getElementById("foto").src =
-perfis[atual].foto;
+},250);
 
 }
 
-</script>
+/* EMBARALHAR */
 
-</body>
-</html>
+function embaralharPerfis(){
+
+for(let i = perfis.length - 1; i > 0; i--){
+
+const j = Math.floor(Math.random() * (i + 1));
+
+[perfis[i], perfis[j]] = [perfis[j], perfis[i]];
+
+}
+
+}
+
+/* PASSAR */
+
+window.proximo = ()=>{
+
+card.animate([
+
+{
+transform:"translateX(0) rotate(0deg)",
+opacity:1
+},
+
+{
+transform:"translateX(-120px) rotate(-8deg)",
+opacity:0
+}
+
+],{
+duration:320,
+fill:"forwards"
+});
+
+setTimeout(()=>{
+
+atual++;
+
+trocarPerfil();
+
+},280);
+
+};
+
+/* MATCH */
+
+window.match = ()=>{
+
+card.animate([
+
+{
+transform:"translateX(0) rotate(0deg)",
+opacity:1
+},
+
+{
+transform:"translateX(120px) rotate(8deg)",
+opacity:0
+}
+
+],{
+duration:320,
+fill:"forwards"
+});
+
+setTimeout(()=>{
+
+mostrarMatch();
+
+atual++;
+
+trocarPerfil();
+
+},280);
+
+};
+
+/* MATCH PREMIUM */
+
+function mostrarMatch(){
+
+const div = document.createElement("div");
+
+div.innerHTML = "💘 Novo Match";
+
+div.style.position = "fixed";
+
+div.style.top = "50%";
+
+div.style.left = "50%";
+
+div.style.transform = "translate(-50%,-50%)";
+
+div.style.padding = "18px 34px";
+
+div.style.background = "rgba(15,15,15,.88)";
+
+div.style.border = "1px solid rgba(255,107,61,.35)";
+
+div.style.borderRadius = "18px";
+
+div.style.backdropFilter = "blur(20px)";
+
+div.style.fontSize = "20px";
+
+div.style.fontWeight = "700";
+
+div.style.color = "#FF8A3D";
+
+div.style.boxShadow = "0 0 40px rgba(255,107,61,.25)";
+
+div.style.zIndex = "999999";
+
+document.body.appendChild(div);
+
+setTimeout(()=>{
+
+div.remove();
+
+},1800);
+
+}
+
+/* INICIAR */
+
+trocarPerfil();
+
+</script>
