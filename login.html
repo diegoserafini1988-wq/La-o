@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Laço 💘</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<title>LAÇO 💘</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
 
 <style>
 
@@ -18,429 +22,517 @@ font-family:'Inter',sans-serif;
 }
 
 body{
+
 background:#080808;
 color:white;
-overflow:hidden;
+
+overflow-x:hidden;
+
 }
 
-/* FUNDO CINEMATOGRÁFICO */
+/* FUNDO */
 
 .bg{
+
 position:fixed;
 inset:0;
-background:
-radial-gradient(circle at top left, rgba(255,107,61,.18), transparent 30%),
-radial-gradient(circle at bottom right, rgba(255,138,61,.14), transparent 35%),
-linear-gradient(to bottom,#080808,#111);
-z-index:-3;
+
 overflow:hidden;
+z-index:-1;
+
 }
 
 .glow{
+
 position:absolute;
-width:500px;
-height:500px;
-background:rgba(255,107,61,.10);
-filter:blur(120px);
+
 border-radius:50%;
-animation:pulse 8s infinite ease-in-out;
+
+filter:blur(100px);
+
+animation:float 10s infinite alternate ease-in-out;
+
 }
 
-.glow:nth-child(1){
+.glow1{
+
+width:340px;
+height:340px;
+
+background:
+rgba(255,107,61,.16);
+
 top:-120px;
-left:-120px;
+left:-100px;
+
 }
 
-.glow:nth-child(2){
-bottom:-160px;
-right:-140px;
-animation-delay:4s;
+.glow2{
+
+width:300px;
+height:300px;
+
+background:
+rgba(255,140,80,.12);
+
+bottom:-100px;
+right:-80px;
+
+animation-delay:2s;
+
 }
 
-@keyframes pulse{
-0%,100%{
-transform:scale(1);
-opacity:.5;
-}
-50%{
-transform:scale(1.2);
-opacity:.9;
-}
+@keyframes float{
+
+from{
+transform:translateY(0px);
 }
 
-/* TOPO */
-
-.top{
-height:90px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 24px;
-border-bottom:1px solid rgba(255,255,255,.05);
-backdrop-filter:blur(20px);
-background:rgba(8,8,8,.55);
+to{
+transform:translateY(40px);
 }
+
+}
+
+/* HERO */
+
+.hero{
+
+padding:70px 26px 20px;
+
+text-align:center;
+
+}
+
+/* LOGO */
 
 .logo{
-font-size:32px;
+
+font-size:48px;
 font-weight:800;
-letter-spacing:-1px;
-background:linear-gradient(135deg,#FF6B3D,#FF8A3D);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+
+color:#FF8A3D;
+
+text-shadow:
+0 0 28px rgba(255,138,61,.35);
+
 }
 
-/* PERFIL */
+/* SUB */
 
-.profile{
-width:48px;
-height:48px;
-border-radius:50%;
-overflow:hidden;
-border:2px solid rgba(255,107,61,.4);
+.sub{
+
+margin-top:14px;
+
+font-size:18px;
+line-height:1.7;
+
+color:#d4d4d8;
+
 }
 
-.profile img{
-width:100%;
-height:100%;
-object-fit:cover;
-}
+/* PREVIEW */
 
-/* CONTAINER */
+.preview{
 
-.container{
-height:calc(100vh - 90px);
+margin-top:42px;
+
 display:flex;
-align-items:center;
 justify-content:center;
-padding:30px;
+
 }
 
-/* CARD */
+/* PHONE */
 
-.card-stack{
-position:relative;
-width:380px;
-height:650px;
-}
+.phone{
 
-.shadow-card{
-position:absolute;
-inset:0;
-border-radius:36px;
-background:#1b1b1b;
-}
+width:320px;
+height:620px;
 
-.shadow-card:nth-child(1){
-transform:translateY(12px) scale(.96);
-opacity:.18;
-}
+border-radius:40px;
 
-.shadow-card:nth-child(2){
-transform:translateY(22px) scale(.92);
-opacity:.10;
-}
+padding:12px;
 
-.card{
-position:absolute;
-inset:0;
-border-radius:36px;
-overflow:hidden;
-background:#111;
+background:
+rgba(255,255,255,.04);
+
+border:
+1px solid rgba(255,255,255,.05);
+
 box-shadow:
-0 20px 80px rgba(0,0,0,.55),
-0 0 0 1px rgba(255,255,255,.04);
+0 20px 80px rgba(0,0,0,.45);
+
+backdrop-filter:blur(24px);
+
 }
 
-.card img{
+/* TELA */
+
+.screen{
+
+position:relative;
+
 width:100%;
 height:100%;
+
+border-radius:30px;
+
+overflow:hidden;
+
+background:#111;
+
+}
+
+/* IMG */
+
+.screen img{
+
+width:100%;
+height:100%;
+
 object-fit:cover;
+
 }
 
 /* OVERLAY */
 
 .overlay{
+
 position:absolute;
 inset:0;
+
 background:
-linear-gradient(to top,
-rgba(0,0,0,.92),
-rgba(0,0,0,.35),
-transparent 55%);
+linear-gradient(
+to top,
+rgba(0,0,0,.92) 10%,
+rgba(0,0,0,.2) 55%,
+transparent 100%
+);
+
 display:flex;
 flex-direction:column;
 justify-content:flex-end;
-padding:30px;
+
+padding:24px;
+
 }
 
-/* INFO */
+/* TEXTOS */
 
-.name{
-font-size:38px;
+.title{
+
+font-size:32px;
 font-weight:800;
+
 }
 
-.bio{
+.text{
+
 margin-top:10px;
-font-size:15px;
+
 line-height:1.6;
-color:rgba(255,255,255,.72);
+
+color:#ddd;
+
+font-size:14px;
+
 }
 
-/* BOTÕES */
+/* LOGIN */
 
-.actions{
-position:absolute;
-bottom:-90px;
-left:50%;
-transform:translateX(-50%);
-display:flex;
-gap:24px;
+.login-box{
+
+margin:50px 20px 120px;
+
+padding:24px;
+
+border-radius:30px;
+
+background:
+rgba(255,255,255,.04);
+
+border:
+1px solid rgba(255,255,255,.05);
+
+backdrop-filter:blur(24px);
+
 }
+
+/* INPUT */
+
+.input{
+
+width:100%;
+height:60px;
+
+border:none;
+outline:none;
+
+padding:0 18px;
+
+border-radius:20px;
+
+background:
+rgba(255,255,255,.05);
+
+border:
+1px solid rgba(255,255,255,.05);
+
+color:white;
+
+font-size:15px;
+
+margin-bottom:16px;
+
+}
+
+/* BOTÃO */
 
 .btn{
-width:76px;
-height:76px;
+
+width:100%;
+height:62px;
+
 border:none;
-border-radius:50%;
-cursor:pointer;
-font-size:28px;
+
+border-radius:22px;
+
+background:
+linear-gradient(
+135deg,
+#FF6B3D,
+#FF8A3D
+);
+
+color:white;
+
+font-size:16px;
 font-weight:700;
-transition:.25s;
-backdrop-filter:blur(20px);
+
+cursor:pointer;
+
+box-shadow:
+0 0 30px rgba(255,107,61,.25);
+
+transition:.3s;
+
 }
 
 .btn:hover{
-transform:scale(1.08);
+
+transform:scale(1.02);
+
 }
 
-.nope{
-background:#1b1b1b;
+/* FOOT */
+
+.foot{
+
+margin-top:18px;
+
+text-align:center;
+
+font-size:14px;
+
 color:#999;
+
 }
 
-.like{
-background:linear-gradient(135deg,#FF6B3D,#FF8A3D);
-color:white;
-box-shadow:0 0 35px rgba(255,107,61,.45);
-}
+.foot a{
 
-/* BOTTOM NAV */
-
-.nav{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-height:82px;
-background:rgba(10,10,10,.72);
-backdrop-filter:blur(20px);
-border-top:1px solid rgba(255,255,255,.05);
-display:flex;
-align-items:center;
-justify-content:space-around;
-}
-
-.nav a{
-text-decoration:none;
-color:#777;
-font-size:13px;
-font-weight:600;
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:6px;
-transition:.25s;
-}
-
-.nav a.active{
 color:#FF8A3D;
-}
 
-.icon{
-font-size:22px;
+text-decoration:none;
+
+font-weight:700;
+
 }
 
 </style>
+
 </head>
+
 <body>
 
 <div class="bg">
-<div class="glow"></div>
-<div class="glow"></div>
+
+<div class="glow glow1"></div>
+
+<div class="glow glow2"></div>
+
 </div>
 
-<div class="top">
-<div class="logo">LAÇO</div>
+<!-- HERO -->
 
-<div class="profile">
-<img src="https://i.pravatar.cc/300?img=12">
+<div class="hero">
+
+<div class="logo">
+LAÇO 💘
 </div>
+
+<div class="sub">
+
+Conexões reais.<br>
+
+Pessoas, energia e lugares na mesma vibe.
+
 </div>
 
-<div class="container">
+<!-- PREVIEW -->
 
-<div class="card-stack">
+<div class="preview">
 
-<div class="shadow-card"></div>
-<div class="shadow-card"></div>
+<div class="phone">
 
-<div class="card">
+<div class="screen">
 
-<img id="foto" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop">
+<img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop">
 
 <div class="overlay">
 
-<div class="name" id="nome">
-Sophie, 26
+<div class="title">
+Entre na vibe.
 </div>
 
-<div class="bio" id="bio">
-Conexões reais. Conversas profundas. Madrugadas inesquecíveis.
+<div class="text">
+
+Conheça pessoas com a mesma energia que você.<br><br>
+
+Descubra lugares.<br>
+Conecte experiências.<br>
+Viva algo raro.
+
+</div>
+
+</div>
+
 </div>
 
 </div>
 
 </div>
 
-<div class="actions">
+</div>
 
-<button class="btn nope" onclick="proximo()">
-✕
+<!-- LOGIN -->
+
+<div class="login-box">
+
+<input
+type="email"
+id="email"
+class="input"
+placeholder="Seu e-mail">
+
+<input
+type="password"
+id="senha"
+class="input"
+placeholder="Sua senha">
+
+<button
+class="btn"
+onclick="login()">
+
+Entrar no LAÇO
+
 </button>
 
-<button class="btn like" onclick="match()">
-❤
-</button>
+<div class="foot">
+
+Não possui conta?
+
+<a href="cadastro.html">
+
+Criar agora
+
+</a>
 
 </div>
-
-</div>
-
-</div>
-
-<div class="nav">
-
-<a class="active" href="app.html">
-<div class="icon">💘</div>
-Explorar
-</a>
-
-<a href="chat.html">
-<div class="icon">💬</div>
-Chat
-</a>
-
-<a href="perfil.html">
-<div class="icon">👤</div>
-Perfil
-</a>
-
-<a href="#">
-<div class="icon">📍</div>
-Vibe
-</a>
 
 </div>
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
 getAuth,
+signInWithEmailAndPassword,
 onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-/* FIREBASE REAL */
+/* FIREBASE */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
-  authDomain: "lacoapp.firebaseapp.com",
-  projectId: "lacoapp",
-  storageBucket: "lacoapp.firebasestorage.app",
-  messagingSenderId: "485009455528",
-  appId: "1:485009455528:web:0c43153be60e62cd6a459d",
-  measurementId: "G-MSB3J89XLL"
+
+apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
+
+authDomain: "lacoapp.firebaseapp.com",
+
+projectId: "lacoapp",
+
+storageBucket: "lacoapp.firebasestorage.app",
+
+messagingSenderId: "485009455528",
+
+appId: "1:485009455528:web:0c43153be60e62cd6a459d",
+
+measurementId: "G-MSB3J89XLL"
+
 };
 
-const app = initializeApp(firebaseConfig);
+const app =
+initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+const auth =
+getAuth(app);
 
-/* PROTEÇÃO TOTAL */
+/* AUTO LOGIN */
 
 onAuthStateChanged(auth,(user)=>{
 
-if(!user){
+if(user){
 
-window.location.href="login.html";
+window.location.href =
+"app.html";
 
 }
 
 });
 
-/* PERFIS */
+/* LOGIN */
 
-const perfis = [
+window.login = ()=>{
 
-{
-nome:"Sophie, 26",
-bio:"Conexões reais. Conversas profundas. Madrugadas inesquecíveis.",
-foto:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop"
-},
+const email =
+document.getElementById("email").value;
 
-{
-nome:"Emma, 24",
-bio:"Vinho, jazz e pessoas interessantes.",
-foto:"https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=1200&auto=format&fit=crop"
-},
+const senha =
+document.getElementById("senha").value;
 
-{
-nome:"Aurora, 28",
-bio:"O tipo de conexão que muda noites inteiras.",
-foto:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop"
-}
+signInWithEmailAndPassword(
+auth,
+email,
+senha
+)
 
-];
+.then(()=>{
 
-let atual = 0;
+window.location.href =
+"app.html";
 
-window.proximo = ()=>{
+})
 
-atual++;
+.catch(()=>{
 
-if(atual >= perfis.length){
+alert("E-mail ou senha inválidos.");
 
-atual = 0;
-
-}
-
-trocar();
+});
 
 };
-
-window.match = ()=>{
-
-alert("💘 Novo Match no Laço");
-
-proximo();
-
-};
-
-function trocar(){
-
-document.getElementById("nome").innerText =
-perfis[atual].nome;
-
-document.getElementById("bio").innerText =
-perfis[atual].bio;
-
-document.getElementById("foto").src =
-perfis[atual].foto;
-
-}
 
 </script>
 
