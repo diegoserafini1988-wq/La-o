@@ -221,6 +221,22 @@ box-shadow:
 0 20px 80px rgba(0,0,0,.45),
 0 0 80px rgba(255,107,61,.08);
 
+animation:fade .35s ease;
+
+}
+
+@keyframes fade{
+
+from{
+opacity:0;
+transform:scale(.96);
+}
+
+to{
+opacity:1;
+transform:scale(1);
+}
+
 }
 
 /* IMG */
@@ -244,7 +260,7 @@ inset:0;
 background:
 linear-gradient(
 to top,
-rgba(0,0,0,.95) 10%,
+rgba(0,0,0,.96) 10%,
 rgba(0,0,0,.15) 55%,
 transparent 100%
 );
@@ -324,8 +340,6 @@ gap:24px;
 
 }
 
-/* BTN */
-
 .btn{
 
 width:82px;
@@ -373,6 +387,43 @@ box-shadow:
 .btn:hover{
 
 transform:scale(1.08);
+
+}
+
+/* MATCH */
+
+.match{
+
+position:fixed;
+
+top:50%;
+left:50%;
+
+transform:translate(-50%,-50%);
+
+padding:18px 34px;
+
+border-radius:24px;
+
+background:
+rgba(10,10,10,.82);
+
+border:
+1px solid rgba(255,107,61,.25);
+
+backdrop-filter:blur(24px);
+
+font-size:22px;
+font-weight:800;
+
+color:#FF8A3D;
+
+box-shadow:
+0 0 40px rgba(255,107,61,.25);
+
+display:none;
+
+z-index:9999;
 
 }
 
@@ -431,43 +482,6 @@ color:#FF8A3D;
 
 text-shadow:
 0 0 20px rgba(255,138,61,.4);
-
-}
-
-/* MATCH */
-
-.match{
-
-position:fixed;
-
-top:50%;
-left:50%;
-
-transform:translate(-50%,-50%);
-
-padding:18px 34px;
-
-border-radius:24px;
-
-background:
-rgba(10,10,10,.82);
-
-border:
-1px solid rgba(255,107,61,.25);
-
-backdrop-filter:blur(24px);
-
-font-size:22px;
-font-weight:800;
-
-color:#FF8A3D;
-
-box-shadow:
-0 0 40px rgba(255,107,61,.25);
-
-display:none;
-
-z-index:9999;
 
 }
 
@@ -595,112 +609,11 @@ class="nav-item">
 
 </div>
 
-<script type="module">
+<script>
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+/* PERFIS PREMIUM */
 
-import {
-getAuth,
-onAuthStateChanged
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-import {
-getFirestore,
-collection,
-getDocs
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-/* FIREBASE */
-
-const firebaseConfig = {
-
-apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
-
-authDomain: "lacoapp.firebaseapp.com",
-
-projectId: "lacoapp",
-
-storageBucket: "lacoapp.firebasestorage.app",
-
-messagingSenderId: "485009455528",
-
-appId: "1:485009455528:web:0c43153be60e62cd6a459d",
-
-measurementId: "G-MSB3J89XLL"
-
-};
-
-const app =
-initializeApp(firebaseConfig);
-
-const auth =
-getAuth(app);
-
-const db =
-getFirestore(app);
-
-/* LOGIN */
-
-onAuthStateChanged(auth,(user)=>{
-
-if(!user){
-
-window.location.href =
-"login.html";
-
-return;
-
-}
-
-carregarPerfis();
-
-});
-
-/* PERFIS */
-
-let perfis = [];
-
-let indexAtual = 0;
-
-/* CARREGAR */
-
-async function carregarPerfis(){
-
-try{
-
-const usuario =
-auth.currentUser;
-
-const querySnapshot =
-await getDocs(
-collection(db,"usuarios")
-);
-
-perfis = [];
-
-querySnapshot.forEach((doc)=>{
-
-const dados = doc.data();
-
-if(doc.id !== usuario.uid){
-
-perfis.push({
-id:doc.id,
-...dados
-});
-
-}
-
-});
-
-/* FALLBACK */
-
-if(perfis.length === 0){
-
-perfis = [
+const perfis = [
 
 {
 nome:"Sophia",
@@ -709,7 +622,7 @@ foto:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&a
 },
 
 {
-nome:"Emily",
+nome:"Emma",
 idade:"24",
 foto:"https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=1200&auto=format&fit=crop"
 },
@@ -718,45 +631,39 @@ foto:"https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=1200&a
 nome:"Olivia",
 idade:"28",
 foto:"https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop"
+},
+
+{
+nome:"Charlotte",
+idade:"25",
+foto:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop"
+},
+
+{
+nome:"Amelia",
+idade:"27",
+foto:"https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1200&auto=format&fit=crop"
 }
 
 ];
 
-}
+let atual = 0;
 
-indexAtual = 0;
-
-mostrarPerfil();
-
-}catch(e){
-
-console.log(e);
-
-}
-
-/* DEBUG */
-
-console.log(perfis);
-
-}
-
-/* MOSTRAR */
+/* CARD */
 
 function mostrarPerfil(){
 
-const card =
-document.getElementById("card");
+if(atual >= perfis.length){
 
-if(indexAtual >= perfis.length){
-
-indexAtual = 0;
+atual = 0;
 
 }
 
 const p =
-perfis[indexAtual];
+perfis[atual];
 
-card.innerHTML = `
+document.getElementById("card")
+.innerHTML = `
 
 <img src="${p.foto}">
 
@@ -811,7 +718,7 @@ window.like = ()=>{
 
 mostrarMatch();
 
-indexAtual++;
+atual++;
 
 mostrarPerfil();
 
@@ -821,11 +728,15 @@ mostrarPerfil();
 
 window.nope = ()=>{
 
-indexAtual++;
+atual++;
 
 mostrarPerfil();
 
 };
+
+/* START */
+
+mostrarPerfil();
 
 </script>
 
