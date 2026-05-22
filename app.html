@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>LAÇO 💘</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
 
 <style>
 
@@ -25,7 +29,7 @@ color:#fff;
 
 }
 
-/* FUNDO CINEMATOGRÁFICO */
+/* FUNDO */
 
 .bg{
 
@@ -40,7 +44,8 @@ z-index:-1;
 
 position:absolute;
 border-radius:50%;
-filter:blur(90px);
+filter:blur(100px);
+
 animation:float 10s infinite alternate ease-in-out;
 
 }
@@ -50,22 +55,24 @@ animation:float 10s infinite alternate ease-in-out;
 width:320px;
 height:320px;
 
-background:rgba(255,107,61,.18);
+background:
+rgba(255,107,61,.18);
 
-top:-60px;
+top:-80px;
 left:-80px;
 
 }
 
 .glow2{
 
-width:300px;
-height:300px;
+width:320px;
+height:320px;
 
-background:rgba(255,140,80,.12);
+background:
+rgba(255,140,80,.12);
 
-bottom:-80px;
-right:-60px;
+bottom:-120px;
+right:-80px;
 
 animation-delay:2s;
 
@@ -74,22 +81,18 @@ animation-delay:2s;
 @keyframes float{
 
 from{
-
-transform:translateY(0px) translateX(0px);
-
+transform:translateY(0px);
 }
 
 to{
-
-transform:translateY(40px) translateX(20px);
-
+transform:translateY(40px);
 }
 
 }
 
 /* HEADER */
 
-header{
+.header{
 
 padding:22px;
 
@@ -106,21 +109,22 @@ font-weight:800;
 
 color:#FF8A3D;
 
-letter-spacing:1px;
-
-text-shadow:0 0 28px rgba(255,138,61,.35);
+text-shadow:
+0 0 28px rgba(255,138,61,.35);
 
 }
 
-.premium{
+.badge{
 
-padding:10px 18px;
+padding:10px 16px;
 
 border-radius:999px;
 
-background:rgba(255,255,255,.05);
+background:
+rgba(255,255,255,.05);
 
-border:1px solid rgba(255,255,255,.06);
+border:
+1px solid rgba(255,255,255,.05);
 
 backdrop-filter:blur(20px);
 
@@ -133,7 +137,7 @@ font-weight:600;
 
 .container{
 
-height:calc(100vh - 150px);
+height:calc(100vh - 170px);
 
 display:flex;
 justify-content:center;
@@ -143,44 +147,53 @@ padding:20px;
 
 }
 
-/* STACK */
+/* CARD STACK */
 
 .stack{
 
 position:relative;
+
 width:360px;
 height:620px;
 
 }
 
-/* SOMBRAS DAS CARTAS */
+/* SOMBRAS */
 
 .shadow-card{
 
 position:absolute;
+
 width:100%;
 height:100%;
+
 border-radius:34px;
 
-background:rgba(255,255,255,.03);
+background:
+rgba(255,255,255,.03);
 
-border:1px solid rgba(255,255,255,.04);
+border:
+1px solid rgba(255,255,255,.04);
 
 }
 
 .shadow1{
 
-transform:translateY(12px) scale(.96);
+transform:
+translateY(12px)
+scale(.96);
 
-opacity:.4;
+opacity:.35;
 
 }
 
 .shadow2{
 
-transform:translateY(24px) scale(.92);
+transform:
+translateY(24px)
+scale(.92);
 
-opacity:.2;
+opacity:.18;
 
 }
 
@@ -199,13 +212,12 @@ overflow:hidden;
 
 background:#111;
 
-border:1px solid rgba(255,255,255,.05);
+border:
+1px solid rgba(255,255,255,.05);
 
 box-shadow:
 0 20px 80px rgba(0,0,0,.45),
 0 0 60px rgba(255,107,61,.08);
-
-transition:.3s ease;
 
 }
 
@@ -213,19 +225,25 @@ transition:.3s ease;
 
 width:100%;
 height:100%;
+
 object-fit:cover;
 
+transition:.25s;
+
 }
+
+/* OVERLAY */
 
 .overlay{
 
 position:absolute;
 inset:0;
 
-background:linear-gradient(
+background:
+linear-gradient(
 to top,
 rgba(0,0,0,.92) 10%,
-rgba(0,0,0,.2) 55%,
+rgba(0,0,0,.22) 55%,
 transparent 100%
 );
 
@@ -236,6 +254,8 @@ justify-content:flex-end;
 padding:28px;
 
 }
+
+/* TEXTOS */
 
 .nome{
 
@@ -249,13 +269,13 @@ margin-bottom:8px;
 .bio{
 
 font-size:15px;
-line-height:1.5;
+line-height:1.6;
 
 color:#ddd;
 
 }
 
-/* BOTÕES */
+/* AÇÕES */
 
 .actions{
 
@@ -275,15 +295,15 @@ gap:22px;
 width:78px;
 height:78px;
 
-border-radius:50%;
-
 border:none;
+
+border-radius:50%;
 
 font-size:28px;
 
 cursor:pointer;
 
-transition:.3s ease;
+transition:.25s;
 
 backdrop-filter:blur(20px);
 
@@ -291,17 +311,26 @@ backdrop-filter:blur(20px);
 
 .nope{
 
-background:rgba(255,255,255,.08);
+background:
+rgba(255,255,255,.08);
+
 color:#fff;
 
 }
 
 .like{
 
-background:#FF8A3D;
-color:#fff;
+background:
+linear-gradient(
+135deg,
+#FF6B3D,
+#FF8A3D
+);
 
-box-shadow:0 0 28px rgba(255,138,61,.45);
+color:white;
+
+box-shadow:
+0 0 30px rgba(255,107,61,.35);
 
 }
 
@@ -311,7 +340,7 @@ transform:scale(1.08);
 
 }
 
-/* NAVBAR */
+/* NAV */
 
 .bottom-nav{
 
@@ -326,11 +355,13 @@ display:flex;
 justify-content:space-around;
 align-items:center;
 
-background:rgba(10,10,10,.78);
+background:
+rgba(10,10,10,.82);
 
 backdrop-filter:blur(24px);
 
-border-top:1px solid rgba(255,255,255,.06);
+border-top:
+1px solid rgba(255,255,255,.05);
 
 }
 
@@ -346,7 +377,7 @@ text-decoration:none;
 font-size:12px;
 font-weight:600;
 
-color:#9ca3af;
+color:#999;
 
 transition:.3s;
 
@@ -362,20 +393,15 @@ font-size:22px;
 
 color:#FF8A3D;
 
-text-shadow:0 0 20px rgba(255,138,61,.45);
-
-}
-
-.nav-item:hover{
-
-transform:translateY(-2px);
-
-color:#fff;
+text-shadow:
+0 0 20px rgba(255,138,61,.4);
 
 }
 
 </style>
+
 </head>
+
 <body>
 
 <div class="bg">
@@ -386,13 +412,21 @@ color:#fff;
 
 </div>
 
-<header>
+<!-- HEADER -->
 
-<div class="logo">LAÇO 💘</div>
+<div class="header">
 
-<div class="premium">BRASA VIVA</div>
+<div class="logo">
+LAÇO 💘
+</div>
 
-</header>
+<div class="badge">
+BRASA VIVA
+</div>
+
+</div>
+
+<!-- APP -->
 
 <div class="container">
 
@@ -420,75 +454,123 @@ color:#fff;
 
 </div>
 
+<!-- AÇÕES -->
+
 <div class="actions">
 
-<button class="btn nope" onclick="proximo()">✕</button>
+<button class="btn nope"
+onclick="proximo()">
 
-<button class="btn like" onclick="match()">💘</button>
+✕
+
+</button>
+
+<button class="btn like"
+onclick="match()">
+
+💘
+
+</button>
 
 </div>
 
+<!-- NAV -->
+
 <div class="bottom-nav">
 
-<a href="app.html" class="nav-item active">
+<a href="app.html"
+class="nav-item active">
+
 <div>🔥</div>
-<span>Descobrir</span>
+<span>Explorar</span>
+
 </a>
 
-<a href="matches.html" class="nav-item">
+<a href="matches.html"
+class="nav-item">
+
 <div>💘</div>
 <span>Matches</span>
+
 </a>
 
-<a href="chat.html" class="nav-item">
+<a href="chat.html"
+class="nav-item">
+
 <div>💬</div>
 <span>Chat</span>
+
 </a>
 
-<a href="vibe.html" class="nav-item">
+<a href="vibe.html"
+class="nav-item">
+
 <div>✨</div>
 <span>Vibe</span>
+
 </a>
 
-<a href="perfil.html" class="nav-item">
+<a href="perfil.html"
+class="nav-item">
+
 <div>👤</div>
 <span>Perfil</span>
+
 </a>
 
 </div>
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
 getAuth,
 onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+/* FIREBASE */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
-  authDomain: "lacoapp.firebaseapp.com",
-  projectId: "lacoapp",
-  storageBucket: "lacoapp.firebasestorage.app",
-  messagingSenderId: "485009455528",
-  appId: "1:485009455528:web:0c43153be60e62cd6a459d",
-  measurementId: "G-MSB3J89XLL"
+
+apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
+
+authDomain: "lacoapp.firebaseapp.com",
+
+projectId: "lacoapp",
+
+storageBucket: "lacoapp.firebasestorage.app",
+
+messagingSenderId: "485009455528",
+
+appId: "1:485009455528:web:0c43153be60e62cd6a459d",
+
+measurementId: "G-MSB3J89XLL"
+
 };
 
-const app = initializeApp(firebaseConfig);
+const app =
+initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+const auth =
+getAuth(app);
+
+/* PROTEÇÃO */
 
 onAuthStateChanged(auth,(user)=>{
 
 if(!user){
 
-window.location.href="login.html";
+window.location.href =
+"login.html";
 
 }
 
 });
+
+/* PERFIS */
 
 const perfis = [
 
@@ -500,61 +582,249 @@ foto:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&a
 
 {
 nome:"Valentina, 24",
-bio:"A madrugada sempre aproxima quem vibra igual.",
+bio:"A madrugada aproxima pessoas raras.",
 foto:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop"
 },
 
 {
 nome:"Emma, 28",
-bio:"Química rara. Presença inesquecível.",
+bio:"Química rara. Intensidade elegante.",
 foto:"https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=1200&auto=format&fit=crop"
 },
 
 {
 nome:"Olivia, 25",
-bio:"O olhar certo muda tudo.",
+bio:"Poucas conexões mudam tudo.",
 foto:"https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop"
+},
+
+{
+nome:"Charlotte, 27",
+bio:"A vibe certa sempre encontra você.",
+foto:"https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?q=80&w=1200&auto=format&fit=crop"
+},
+
+{
+nome:"Mia, 23",
+bio:"Conversas profundas valem mais.",
+foto:"https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1200&auto=format&fit=crop"
 }
 
 ];
 
 let atual = 0;
 
-const foto = document.getElementById("foto");
-const nome = document.getElementById("nome");
-const bio = document.getElementById("bio");
+const foto =
+document.getElementById("foto");
+
+const nome =
+document.getElementById("nome");
+
+const bio =
+document.getElementById("bio");
+
+/* EMBARALHAR */
+
+function embaralhar(){
+
+for(
+let i = perfis.length - 1;
+i > 0;
+i--
+){
+
+const j =
+Math.floor(
+Math.random() * (i + 1)
+);
+
+[perfis[i], perfis[j]] =
+[perfis[j], perfis[i]];
+
+}
+
+}
+
+/* CARREGAR */
 
 function carregar(){
 
 if(atual >= perfis.length){
 
+embaralhar();
+
 atual = 0;
 
 }
 
-foto.src = perfis[atual].foto;
-nome.innerText = perfis[atual].nome;
-bio.innerText = perfis[atual].bio;
+const perfil =
+perfis[atual];
+
+foto.style.opacity = "0";
+
+setTimeout(()=>{
+
+foto.src = perfil.foto;
+
+nome.innerText = perfil.nome;
+
+bio.innerText = perfil.bio;
+
+foto.style.opacity = "1";
+
+},180);
 
 }
 
+/* PASSAR */
+
 window.proximo = ()=>{
+
+const card =
+document.querySelector(".card");
+
+card.animate([
+
+{
+transform:"translateX(0px) rotate(0deg)",
+opacity:1
+},
+
+{
+transform:"translateX(-140px) rotate(-10deg)",
+opacity:0
+}
+
+],{
+
+duration:260,
+fill:"forwards"
+
+});
+
+setTimeout(()=>{
 
 atual++;
 
 carregar();
 
+card.style.opacity = "1";
+
+card.style.transform =
+"translateX(0px)";
+
+},250);
+
 };
+
+/* MATCH */
 
 window.match = ()=>{
 
-alert("💘 Novo Match!");
+const card =
+document.querySelector(".card");
+
+card.animate([
+
+{
+transform:"translateX(0px) rotate(0deg)",
+opacity:1
+},
+
+{
+transform:"translateX(140px) rotate(10deg)",
+opacity:0
+}
+
+],{
+
+duration:260,
+fill:"forwards"
+
+});
+
+mostrarMatch();
+
+setTimeout(()=>{
 
 atual++;
 
 carregar();
 
+card.style.opacity = "1";
+
+card.style.transform =
+"translateX(0px)";
+
+},250);
+
 };
+
+/* ALERTA */
+
+function mostrarMatch(){
+
+const div =
+document.createElement("div");
+
+div.innerHTML =
+"💘 Novo Match";
+
+div.style.position =
+"fixed";
+
+div.style.top =
+"50%";
+
+div.style.left =
+"50%";
+
+div.style.transform =
+"translate(-50%,-50%)";
+
+div.style.padding =
+"18px 34px";
+
+div.style.borderRadius =
+"22px";
+
+div.style.background =
+"rgba(10,10,10,.82)";
+
+div.style.border =
+"1px solid rgba(255,107,61,.25)";
+
+div.style.backdropFilter =
+"blur(24px)";
+
+div.style.color =
+"#FF8A3D";
+
+div.style.fontWeight =
+"700";
+
+div.style.fontSize =
+"20px";
+
+div.style.zIndex =
+"999999";
+
+div.style.boxShadow =
+"0 0 40px rgba(255,107,61,.25)";
+
+document.body.appendChild(div);
+
+setTimeout(()=>{
+
+div.remove();
+
+},1600);
+
+}
+
+/* START */
+
+embaralhar();
 
 carregar();
 
