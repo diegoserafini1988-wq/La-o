@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Laço • Matches</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+body{
+
+background:#080808;
+color:white;
+overflow-x:hidden;
+
+}
+
+/* FUNDO */
+
+.bg{
+
+position:fixed;
+inset:0;
+overflow:hidden;
+z-index:-1;
+
+}
+
+.glow{
+
+position:absolute;
+
+border-radius:50%;
+
+filter:blur(100px);
+
+animation:float 8s infinite alternate ease-in-out;
+
+}
+
+.glow1{
+
+width:320px;
+height:320px;
+
+background:rgba(255,107,61,.16);
+
+top:-120px;
+left:-80px;
+
+}
+
+.glow2{
+
+width:300px;
+height:300px;
+
+background:rgba(255,140,80,.12);
+
+bottom:-100px;
+right:-80px;
+
+animation-delay:2s;
+
+}
+
+@keyframes float{
+
+from{
+transform:translateY(0px);
+}
+
+to{
+transform:translateY(40px);
+}
+
+}
+
+/* HEADER */
+
+.header{
+
+padding:26px 22px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+}
+
+.logo{
+
+font-size:34px;
+font-weight:800;
+
+color:#FF8A3D;
+
+text-shadow:
+0 0 28px rgba(255,138,61,.35);
+
+}
+
+.sub{
+
+font-size:13px;
+
+color:#999;
+
+margin-top:4px;
+
+}
+
+/* MATCHES */
+
+.matches{
+
+padding:10px 20px 120px;
+
+display:flex;
+flex-direction:column;
+gap:18px;
+
+}
+
+/* CARD */
+
+.match-card{
+
+display:flex;
+align-items:center;
+gap:16px;
+
+padding:16px;
+
+border-radius:28px;
+
+background:
+rgba(255,255,255,.04);
+
+border:
+1px solid rgba(255,255,255,.05);
+
+backdrop-filter:blur(24px);
+
+box-shadow:
+0 10px 40px rgba(0,0,0,.25);
+
+transition:.3s;
+
+}
+
+.match-card:hover{
+
+transform:translateY(-3px);
+
+}
+
+/* FOTO */
+
+.avatar{
+
+position:relative;
+
+width:72px;
+height:72px;
+
+flex-shrink:0;
+
+}
+
+.avatar img{
+
+width:100%;
+height:100%;
+
+border-radius:22px;
+
+object-fit:cover;
+
+}
+
+.online{
+
+position:absolute;
+
+bottom:4px;
+right:4px;
+
+width:14px;
+height:14px;
+
+border-radius:50%;
+
+background:#4dff91;
+
+border:2px solid #111;
+
+}
+
+/* INFO */
+
+.info{
+
+flex:1;
+
+}
+
+.name{
+
+font-size:18px;
+font-weight:700;
+
+}
+
+.msg{
+
+margin-top:6px;
+
+font-size:13px;
+
+color:#aaa;
+
+line-height:1.5;
+
+}
+
+/* BOTÃO */
+
+.chat-btn{
+
+padding:14px 18px;
+
+border:none;
+
+border-radius:18px;
+
+background:
+linear-gradient(
+135deg,
+#FF6B3D,
+#FF8A3D
+);
+
+color:white;
+
+font-weight:700;
+
+cursor:pointer;
+
+box-shadow:
+0 0 24px rgba(255,107,61,.25);
+
+transition:.3s;
+
+}
+
+.chat-btn:hover{
+
+transform:scale(1.05);
+
+}
+
+/* NAV */
+
+.bottom-nav{
+
+position:fixed;
+bottom:0;
+left:0;
+
+width:100%;
+height:84px;
+
+display:flex;
+justify-content:space-around;
+align-items:center;
+
+background:rgba(10,10,10,.82);
+
+backdrop-filter:blur(24px);
+
+border-top:
+1px solid rgba(255,255,255,.05);
+
+}
+
+.nav-item{
+
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:4px;
+
+text-decoration:none;
+
+font-size:12px;
+font-weight:600;
+
+color:#999;
+
+transition:.3s;
+
+}
+
+.nav-item div{
+
+font-size:22px;
+
+}
+
+.nav-item.active{
+
+color:#FF8A3D;
+
+text-shadow:
+0 0 20px rgba(255,138,61,.4);
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="bg">
+
+<div class="glow glow1"></div>
+
+<div class="glow glow2"></div>
+
+</div>
+
+<!-- HEADER -->
+
+<div class="header">
+
+<div>
+
+<div class="logo">
+LAÇO 💘
+</div>
+
+<div class="sub">
+Seus matches estão esperando.
+</div>
+
+</div>
+
+</div>
+
+<!-- MATCHES -->
+
+<div class="matches">
+
+<!-- CARD -->
+
+<div class="match-card">
+
+<div class="avatar">
+
+<img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400&auto=format&fit=crop">
+
+<div class="online"></div>
+
+</div>
+
+<div class="info">
+
+<div class="name">
+Aurora
+</div>
+
+<div class="msg">
+A conexão começou forte...
+</div>
+
+</div>
+
+<button
+class="chat-btn"
+onclick="abrirChat()">
+
+Conversar
+
+</button>
+
+</div>
+
+<!-- CARD -->
+
+<div class="match-card">
+
+<div class="avatar">
+
+<img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=400&auto=format&fit=crop">
+
+<div class="online"></div>
+
+</div>
+
+<div class="info">
+
+<div class="name">
+Valentina
+</div>
+
+<div class="msg">
+Entrou na vibe agora.
+</div>
+
+</div>
+
+<button
+class="chat-btn"
+onclick="abrirChat()">
+
+Conversar
+
+</button>
+
+</div>
+
+<!-- CARD -->
+
+<div class="match-card">
+
+<div class="avatar">
+
+<img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=400&auto=format&fit=crop">
+
+</div>
+
+<div class="info">
+
+<div class="name">
+Emma
+</div>
+
+<div class="msg">
+Talvez exista algo raro aqui.
+</div>
+
+</div>
+
+<button
+class="chat-btn"
+onclick="abrirChat()">
+
+Conversar
+
+</button>
+
+</div>
+
+</div>
+
+<!-- NAV -->
+
+<div class="bottom-nav">
+
+<a href="app.html" class="nav-item">
+<div>🔥</div>
+<span>Explorar</span>
+</a>
+
+<a href="matches.html" class="nav-item active">
+<div>💘</div>
+<span>Matches</span>
+</a>
+
+<a href="chat.html" class="nav-item">
+<div>💬</div>
+<span>Chat</span>
+</a>
+
+<a href="vibe.html" class="nav-item">
+<div>✨</div>
+<span>Vibe</span>
+</a>
+
+<a href="perfil.html" class="nav-item">
+<div>👤</div>
+<span>Perfil</span>
+</a>
+
+</div>
+
+<script>
+
+function abrirChat(){
+
+window.location.href =
+"chat.html";
+
+}
+
+</script>
+
+</body>
+</html>
