@@ -9,7 +9,7 @@ content="width=device-width, initial-scale=1.0">
 
 <title>LAÇO 💘</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap"
 rel="stylesheet">
 
 <style>
@@ -18,14 +18,13 @@ rel="stylesheet">
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Inter',sans-serif;
+font-family:'Manrope',sans-serif;
 }
 
 body{
 
 background:#080808;
 color:white;
-
 overflow-x:hidden;
 
 }
@@ -36,7 +35,6 @@ overflow-x:hidden;
 
 position:fixed;
 inset:0;
-
 overflow:hidden;
 z-index:-1;
 
@@ -45,38 +43,36 @@ z-index:-1;
 .glow{
 
 position:absolute;
-
 border-radius:50%;
+filter:blur(120px);
 
-filter:blur(100px);
-
-animation:float 10s infinite alternate ease-in-out;
+animation:float 12s infinite alternate ease-in-out;
 
 }
 
 .glow1{
 
-width:340px;
-height:340px;
+width:420px;
+height:420px;
 
 background:
 rgba(255,107,61,.16);
 
-top:-120px;
-left:-100px;
+top:-140px;
+left:-120px;
 
 }
 
 .glow2{
 
-width:300px;
-height:300px;
+width:340px;
+height:340px;
 
 background:
 rgba(255,140,80,.12);
 
-bottom:-100px;
-right:-80px;
+bottom:-120px;
+right:-100px;
 
 animation-delay:2s;
 
@@ -89,7 +85,7 @@ transform:translateY(0px);
 }
 
 to{
-transform:translateY(40px);
+transform:translateY(50px);
 }
 
 }
@@ -98,31 +94,29 @@ transform:translateY(40px);
 
 .hero{
 
-padding:70px 26px 20px;
+padding:60px 24px 30px;
 
 text-align:center;
 
 }
 
-/* LOGO */
-
 .logo{
 
-font-size:48px;
+font-size:56px;
 font-weight:800;
 
 color:#FF8A3D;
 
+letter-spacing:-2px;
+
 text-shadow:
-0 0 28px rgba(255,138,61,.35);
+0 0 35px rgba(255,138,61,.35);
 
 }
 
-/* SUB */
-
 .sub{
 
-margin-top:14px;
+margin-top:16px;
 
 font-size:18px;
 line-height:1.7;
@@ -131,61 +125,85 @@ color:#d4d4d8;
 
 }
 
-/* PREVIEW */
+/* STACK */
 
-.preview{
+.stack{
 
-margin-top:42px;
+position:relative;
 
-display:flex;
-justify-content:center;
+width:330px;
+height:620px;
+
+margin:50px auto;
 
 }
 
-/* PHONE */
+/* SOMBRAS */
 
-.phone{
+.shadow{
 
-width:320px;
-height:620px;
+position:absolute;
 
-border-radius:40px;
+width:100%;
+height:100%;
 
-padding:12px;
+border-radius:38px;
 
 background:
-rgba(255,255,255,.04);
+rgba(255,255,255,.03);
+
+border:
+1px solid rgba(255,255,255,.04);
+
+}
+
+.shadow1{
+
+transform:
+translateY(14px)
+scale(.96);
+
+opacity:.35;
+
+}
+
+.shadow2{
+
+transform:
+translateY(28px)
+scale(.92);
+
+opacity:.18;
+
+}
+
+/* CARD */
+
+.card{
+
+position:absolute;
+
+width:100%;
+height:100%;
+
+overflow:hidden;
+
+border-radius:38px;
+
+background:#111;
 
 border:
 1px solid rgba(255,255,255,.05);
 
 box-shadow:
-0 20px 80px rgba(0,0,0,.45);
-
-backdrop-filter:blur(24px);
-
-}
-
-/* TELA */
-
-.screen{
-
-position:relative;
-
-width:100%;
-height:100%;
-
-border-radius:30px;
-
-overflow:hidden;
-
-background:#111;
+0 20px 80px rgba(0,0,0,.45),
+0 0 80px rgba(255,107,61,.08);
 
 }
 
 /* IMG */
 
-.screen img{
+.card img{
 
 width:100%;
 height:100%;
@@ -204,8 +222,8 @@ inset:0;
 background:
 linear-gradient(
 to top,
-rgba(0,0,0,.92) 10%,
-rgba(0,0,0,.2) 55%,
+rgba(0,0,0,.95) 10%,
+rgba(0,0,0,.15) 55%,
 transparent 100%
 );
 
@@ -213,36 +231,66 @@ display:flex;
 flex-direction:column;
 justify-content:flex-end;
 
-padding:24px;
+padding:28px;
 
 }
 
-/* TEXTOS */
+/* TEXT */
 
 .title{
 
-font-size:32px;
+font-size:36px;
 font-weight:800;
 
 }
 
-.text{
+.desc{
 
-margin-top:10px;
+margin-top:12px;
 
-line-height:1.6;
+font-size:15px;
+line-height:1.7;
 
 color:#ddd;
 
-font-size:14px;
+}
+
+/* MINI VIBE */
+
+.vibe{
+
+margin-top:18px;
+
+display:inline-flex;
+align-items:center;
+gap:10px;
+
+padding:12px 18px;
+
+border-radius:999px;
+
+background:
+rgba(255,255,255,.06);
+
+border:
+1px solid rgba(255,255,255,.06);
+
+backdrop-filter:blur(20px);
+
+font-size:13px;
+font-weight:700;
+
+color:#FFB089;
+
+width:max-content;
 
 }
 
 /* LOGIN */
 
-.login-box{
+.login{
 
-margin:50px 20px 120px;
+margin:0 20px 120px;
 
 padding:24px;
 
@@ -263,20 +311,20 @@ backdrop-filter:blur(24px);
 .input{
 
 width:100%;
-height:60px;
+height:62px;
 
 border:none;
 outline:none;
 
-padding:0 18px;
+padding:0 20px;
 
-border-radius:20px;
+border-radius:22px;
 
 background:
 rgba(255,255,255,.05);
 
 border:
-1px solid rgba(255,255,255,.05);
+1px solid rgba(255,255,255,.06);
 
 color:white;
 
@@ -286,16 +334,16 @@ margin-bottom:16px;
 
 }
 
-/* BOTÃO */
+/* BTN */
 
 .btn{
 
 width:100%;
-height:62px;
+height:64px;
 
 border:none;
 
-border-radius:22px;
+border-radius:24px;
 
 background:
 linear-gradient(
@@ -307,7 +355,7 @@ linear-gradient(
 color:white;
 
 font-size:16px;
-font-weight:700;
+font-weight:800;
 
 cursor:pointer;
 
@@ -372,19 +420,23 @@ LAÇO 💘
 
 <div class="sub">
 
-Conexões reais.<br>
-
-Pessoas, energia e lugares na mesma vibe.
+Pessoas.<br>
+Energia.<br>
+Lugares na mesma vibe.
 
 </div>
 
-<!-- PREVIEW -->
+</div>
 
-<div class="preview">
+<!-- STACK -->
 
-<div class="phone">
+<div class="stack">
 
-<div class="screen">
+<div class="shadow shadow2"></div>
+
+<div class="shadow shadow1"></div>
+
+<div class="card">
 
 <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop">
 
@@ -394,18 +446,16 @@ Pessoas, energia e lugares na mesma vibe.
 Entre na vibe.
 </div>
 
-<div class="text">
+<div class="desc">
 
-Conheça pessoas com a mesma energia que você.<br><br>
+Conexões reais começam na energia certa.<br><br>
 
-Descubra lugares.<br>
-Conecte experiências.<br>
-Viva algo raro.
+Descubra pessoas e lugares com a mesma frequência que você.
 
 </div>
 
-</div>
-
+<div class="vibe">
+✨ Vibes ao vivo perto de você
 </div>
 
 </div>
@@ -416,7 +466,7 @@ Viva algo raro.
 
 <!-- LOGIN -->
 
-<div class="login-box">
+<div class="login">
 
 <input
 type="email"
@@ -432,7 +482,7 @@ placeholder="Sua senha">
 
 <button
 class="btn"
-onclick="login()">
+onclick="entrar()">
 
 Entrar no LAÇO
 
@@ -459,12 +509,9 @@ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
 getAuth,
-signInWithEmailAndPassword,
-onAuthStateChanged
+signInWithEmailAndPassword
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-/* FIREBASE */
 
 const firebaseConfig = {
 
@@ -490,22 +537,7 @@ initializeApp(firebaseConfig);
 const auth =
 getAuth(app);
 
-/* AUTO LOGIN */
-
-onAuthStateChanged(auth,(user)=>{
-
-if(user){
-
-window.location.href =
-"app.html";
-
-}
-
-});
-
-/* LOGIN */
-
-window.login = ()=>{
+window.entrar = ()=>{
 
 const email =
 document.getElementById("email").value;
