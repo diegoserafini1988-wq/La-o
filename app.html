@@ -1,18 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Laço 💘</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
@@ -20,249 +14,142 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 margin:0;
 padding:0;
 box-sizing:border-box;
--webkit-tap-highlight-color:transparent;
+font-family:'Inter',sans-serif;
 }
 
 body{
-background:#050505;
-height:100vh;
-overflow:hidden;
-font-family:'Inter',sans-serif;
+background:#080808;
 color:white;
+overflow:hidden;
 }
 
-/* FUNDO */
+/* FUNDO CINEMATOGRÁFICO */
 
 .bg{
 position:fixed;
 inset:0;
-overflow:hidden;
-
 background:
-radial-gradient(circle at top left,#2c130d 0%,#050505 40%),
-radial-gradient(circle at bottom right,#1d0d09 0%,#050505 45%);
+radial-gradient(circle at top left, rgba(255,107,61,.18), transparent 30%),
+radial-gradient(circle at bottom right, rgba(255,138,61,.14), transparent 35%),
+linear-gradient(to bottom,#080808,#111);
+z-index:-3;
+overflow:hidden;
 }
-
-/* GLOW */
 
 .glow{
 position:absolute;
-border-radius:50%;
-filter:blur(120px);
-opacity:.16;
-mix-blend-mode:screen;
-animation:ambient 18s infinite ease-in-out;
-}
-
-.glow1{
 width:500px;
 height:500px;
-background:#ff6b3d;
-top:-160px;
-left:-140px;
-}
-
-.glow2{
-width:380px;
-height:380px;
-background:#ff954f;
-bottom:-120px;
-right:-120px;
-animation-delay:6s;
-}
-
-.glow3{
-width:240px;
-height:240px;
-background:#ff6b3d;
-top:45%;
-left:55%;
-animation-delay:10s;
-}
-
-@keyframes ambient{
-
-0%{
-transform:translate(0,0) scale(1);
-}
-
-50%{
-transform:translate(20px,-25px) scale(1.1);
-}
-
-100%{
-transform:translate(0,0) scale(1);
-}
-
-}
-
-/* PARTÍCULAS */
-
-.particle{
-position:absolute;
-background:#ff8a5c;
+background:rgba(255,107,61,.10);
+filter:blur(120px);
 border-radius:50%;
-opacity:.18;
-animation:particle linear infinite;
+animation:pulse 8s infinite ease-in-out;
 }
 
-@keyframes particle{
-
-0%{
-transform:translateY(0px);
-opacity:0;
+.glow:nth-child(1){
+top:-120px;
+left:-120px;
 }
 
-20%{
-opacity:.4;
+.glow:nth-child(2){
+bottom:-160px;
+right:-140px;
+animation-delay:4s;
 }
 
-100%{
-transform:translateY(-120vh);
-opacity:0;
+@keyframes pulse{
+0%,100%{
+transform:scale(1);
+opacity:.5;
 }
-
+50%{
+transform:scale(1.2);
+opacity:.9;
 }
-
-/* APP */
-
-.app{
-position:relative;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:24px;
 }
 
 /* TOPO */
 
-.topbar{
-position:absolute;
-top:26px;
-left:24px;
-right:24px;
-
+.top{
+height:90px;
 display:flex;
-justify-content:space-between;
 align-items:center;
-
-z-index:100;
+justify-content:space-between;
+padding:0 24px;
+border-bottom:1px solid rgba(255,255,255,.05);
+backdrop-filter:blur(20px);
+background:rgba(8,8,8,.55);
 }
 
-/* LOGO */
-
-.logo h1{
-font-family:'Cormorant Garamond',serif;
-font-size:54px;
-font-weight:600;
-
-background:
-linear-gradient(
-135deg,
-#ffe0d1,
-#ff6b3d
-);
-
+.logo{
+font-size:32px;
+font-weight:800;
+letter-spacing:-1px;
+background:linear-gradient(135deg,#FF6B3D,#FF8A3D);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
 
-.logo span{
-font-size:10px;
-letter-spacing:5px;
-opacity:.45;
-padding-left:4px;
+/* PERFIL */
+
+.profile{
+width:48px;
+height:48px;
+border-radius:50%;
+overflow:hidden;
+border:2px solid rgba(255,107,61,.4);
 }
 
-/* TOP BUTTONS */
-
-.top-actions{
-display:flex;
-gap:12px;
-}
-
-.top-btn{
-width:52px;
-height:52px;
-
-border-radius:18px;
-
-background:rgba(255,255,255,.045);
-
-border:1px solid rgba(255,255,255,.05);
-
-backdrop-filter:blur(25px);
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-font-size:17px;
-}
-
-/* CARD AREA */
-
-.cards-area{
-position:relative;
+.profile img{
 width:100%;
-max-width:390px;
-height:78vh;
+height:100%;
+object-fit:cover;
 }
 
-/* STACK */
+/* CONTAINER */
 
-.stack{
-position:absolute;
-inset:0;
-border-radius:42px;
-}
-
-.stack1{
-transform:translateY(18px) scale(.96);
-
-background:
-linear-gradient(
-180deg,
-rgba(255,255,255,.03),
-rgba(255,255,255,.01)
-);
-
-opacity:.45;
-}
-
-.stack2{
-transform:translateY(34px) scale(.92);
-
-background:
-linear-gradient(
-180deg,
-rgba(255,255,255,.02),
-rgba(255,255,255,.008)
-);
-
-opacity:.22;
+.container{
+height:calc(100vh - 90px);
+display:flex;
+align-items:center;
+justify-content:center;
+padding:30px;
 }
 
 /* CARD */
 
+.card-stack{
+position:relative;
+width:380px;
+height:650px;
+}
+
+.shadow-card{
+position:absolute;
+inset:0;
+border-radius:36px;
+background:#1b1b1b;
+}
+
+.shadow-card:nth-child(1){
+transform:translateY(12px) scale(.96);
+opacity:.18;
+}
+
+.shadow-card:nth-child(2){
+transform:translateY(22px) scale(.92);
+opacity:.10;
+}
+
 .card{
 position:absolute;
 inset:0;
-
-border-radius:42px;
-
+border-radius:36px;
 overflow:hidden;
-
 background:#111;
-
 box-shadow:
-0 0 100px rgba(255,107,61,.08),
-0 50px 120px rgba(0,0,0,.8);
-
-transition:
-transform .45s ease,
-opacity .45s ease;
+0 20px 80px rgba(0,0,0,.55),
+0 0 0 1px rgba(255,255,255,.04);
 }
 
 .card img{
@@ -276,604 +163,284 @@ object-fit:cover;
 .overlay{
 position:absolute;
 inset:0;
-
 background:
-linear-gradient(
-180deg,
-rgba(0,0,0,.0) 18%,
-rgba(0,0,0,.18) 45%,
-rgba(0,0,0,.92) 100%
-);
+linear-gradient(to top,
+rgba(0,0,0,.92),
+rgba(0,0,0,.35),
+transparent 55%);
+display:flex;
+flex-direction:column;
+justify-content:flex-end;
+padding:30px;
 }
 
 /* INFO */
 
-.info{
-position:absolute;
-
-left:28px;
-right:28px;
-bottom:28px;
-
-z-index:10;
-}
-
-/* VERIFIED */
-
-.verified{
-display:inline-flex;
-align-items:center;
-gap:8px;
-
-padding:10px 16px;
-
-border-radius:18px;
-
-background:rgba(0,0,0,.35);
-
-border:1px solid rgba(255,255,255,.08);
-
-backdrop-filter:blur(20px);
-
-font-size:13px;
-
-margin-bottom:18px;
-}
-
-.verified i{
-color:#ffb089;
-}
-
-/* NAME */
-
 .name{
-font-family:'Cormorant Garamond',serif;
-
-font-size:62px;
-font-weight:600;
-
-line-height:.9;
-letter-spacing:-3px;
+font-size:38px;
+font-weight:800;
 }
-
-.age{
-font-size:28px;
-color:#ff9d74;
-margin-left:10px;
-}
-
-/* LOCATION */
-
-.location{
-margin-top:16px;
-
-display:flex;
-align-items:center;
-gap:8px;
-
-font-size:14px;
-opacity:.72;
-}
-
-/* BIO */
 
 .bio{
-margin-top:18px;
-
-font-size:14px;
-line-height:1.8;
-
-opacity:.88;
+margin-top:10px;
+font-size:15px;
+line-height:1.6;
+color:rgba(255,255,255,.72);
 }
 
-/* TAGS */
-
-.tags{
-display:flex;
-flex-wrap:wrap;
-gap:10px;
-
-margin-top:24px;
-}
-
-.tag{
-padding:11px 16px;
-
-border-radius:18px;
-
-background:rgba(255,255,255,.05);
-
-border:1px solid rgba(255,255,255,.05);
-
-font-size:13px;
-}
-
-/* ACTIONS */
+/* BOTÕES */
 
 .actions{
 position:absolute;
-bottom:118px;
-
+bottom:-90px;
+left:50%;
+transform:translateX(-50%);
 display:flex;
-align-items:center;
 gap:24px;
-
-z-index:100;
 }
 
-.action{
+.btn{
+width:76px;
+height:76px;
 border:none;
+border-radius:50%;
 cursor:pointer;
+font-size:28px;
+font-weight:700;
+transition:.25s;
+backdrop-filter:blur(20px);
+}
 
+.btn:hover{
+transform:scale(1.08);
+}
+
+.nope{
+background:#1b1b1b;
+color:#999;
+}
+
+.like{
+background:linear-gradient(135deg,#FF6B3D,#FF8A3D);
+color:white;
+box-shadow:0 0 35px rgba(255,107,61,.45);
+}
+
+/* BOTTOM NAV */
+
+.nav{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+height:82px;
+background:rgba(10,10,10,.72);
+backdrop-filter:blur(20px);
+border-top:1px solid rgba(255,255,255,.05);
 display:flex;
-justify-content:center;
 align-items:center;
+justify-content:space-around;
+}
 
+.nav a{
+text-decoration:none;
+color:#777;
+font-size:13px;
+font-weight:600;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:6px;
 transition:.25s;
 }
 
-.action:hover{
-transform:scale(1.05);
+.nav a.active{
+color:#FF8A3D;
 }
 
-.close{
-width:78px;
-height:78px;
-
-border-radius:50%;
-
-background:rgba(255,255,255,.05);
-
-border:1px solid rgba(255,255,255,.05);
-
-font-size:28px;
-
-color:#ff9f9f;
-}
-
-.like{
-width:100px;
-height:100px;
-
-border-radius:50%;
-
-background:
-linear-gradient(
-135deg,
-#ff6b3d,
-#ff9852
-);
-
-font-size:40px;
-
-box-shadow:
-0 0 40px rgba(255,107,61,.35),
-0 0 100px rgba(255,107,61,.12);
-}
-
-/* NAVBAR */
-
-.navbar{
-position:absolute;
-
-bottom:20px;
-left:18px;
-right:18px;
-
-height:82px;
-
-border-radius:30px;
-
-background:rgba(255,255,255,.045);
-
-border:1px solid rgba(255,255,255,.05);
-
-backdrop-filter:blur(30px);
-
-display:flex;
-justify-content:space-around;
-align-items:center;
-}
-
-.nav-item{
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:7px;
-
-font-size:12px;
-
-opacity:.45;
-}
-
-.nav-item.active{
-opacity:1;
-color:#ff9d74;
-}
-
-.nav-item i{
-font-size:21px;
-}
-
-/* MATCH */
-
-.match{
-position:fixed;
-inset:0;
-
-background:rgba(0,0,0,.75);
-
-backdrop-filter:blur(30px);
-
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-
-z-index:999;
-
-opacity:0;
-pointer-events:none;
-
-transition:.45s;
-}
-
-.match.show{
-opacity:1;
-}
-
-.match h1{
-font-family:'Cormorant Garamond',serif;
-
-font-size:88px;
-
-background:
-linear-gradient(
-135deg,
-#ffe0d1,
-#ff6b3d
-);
-
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-
-.match p{
-margin-top:10px;
-opacity:.72;
-}
-
-/* MOBILE */
-
-@media(max-width:500px){
-
-.cards-area{
-height:76vh;
-}
-
-.name{
-font-size:52px;
-}
-
-.like{
-width:88px;
-height:88px;
-}
-
-.close{
-width:70px;
-height:70px;
-}
-
+.icon{
+font-size:22px;
 }
 
 </style>
 </head>
-
 <body>
 
 <div class="bg">
-
-<div class="glow glow1"></div>
-<div class="glow glow2"></div>
-<div class="glow glow3"></div>
-
-<div id="particles"></div>
-
+<div class="glow"></div>
+<div class="glow"></div>
 </div>
 
-<div class="app">
+<div class="top">
+<div class="logo">LAÇO</div>
 
-<!-- TOPO -->
-
-<div class="topbar">
-
-<div class="logo">
-<h1>Laço</h1>
-<span>BRASA VIVA</span>
+<div class="profile">
+<img src="https://i.pravatar.cc/300?img=12">
+</div>
 </div>
 
-<div class="top-actions">
+<div class="container">
 
-<div class="top-btn">
-<i class="fa-regular fa-bell"></i>
+<div class="card-stack">
+
+<div class="shadow-card"></div>
+<div class="shadow-card"></div>
+
+<div class="card">
+
+<img id="foto" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop">
+
+<div class="overlay">
+
+<div class="name" id="nome">
+Sophie, 26
 </div>
 
-<div class="top-btn">
-<i class="fa-solid fa-sliders"></i>
-</div>
-
-</div>
-
-</div>
-
-<!-- CARDS -->
-
-<div class="cards-area">
-
-<div class="stack stack2"></div>
-
-<div class="stack stack1"></div>
-
-<div class="card" id="card">
-
-<img id="photo">
-
-<div class="overlay"></div>
-
-<div class="info">
-
-<div class="verified">
-<i class="fa-solid fa-circle-check"></i>
-Verificada
-</div>
-
-<div>
-<span class="name" id="name"></span>
-<span class="age" id="age"></span>
-</div>
-
-<div class="location">
-<i class="fa-solid fa-location-dot"></i>
-<span id="location"></span>
-</div>
-
-<div class="bio" id="bio"></div>
-
-<div class="tags" id="tags"></div>
-
+<div class="bio" id="bio">
+Conexões reais. Conversas profundas. Madrugadas inesquecíveis.
 </div>
 
 </div>
 
 </div>
-
-<!-- ACTIONS -->
 
 <div class="actions">
 
-<button class="action close" onclick="dislike()">
-<i class="fa-solid fa-xmark"></i>
+<button class="btn nope" onclick="proximo()">
+✕
 </button>
 
-<button class="action like" onclick="like()">
-<i class="fa-solid fa-heart"></i>
+<button class="btn like" onclick="match()">
+❤
 </button>
 
 </div>
 
-<!-- NAVBAR -->
-
-<div class="navbar">
-
-<div class="nav-item active">
-<i class="fa-solid fa-fire"></i>
-<span>Explorar</span>
-</div>
-
-<div class="nav-item">
-<i class="fa-regular fa-heart"></i>
-<span>Likes</span>
-</div>
-
-<div class="nav-item">
-<i class="fa-regular fa-comments"></i>
-<span>Chat</span>
-</div>
-
-<div class="nav-item">
-<i class="fa-solid fa-location-dot"></i>
-<span>Vibe</span>
-</div>
-
-<div class="nav-item">
-<i class="fa-regular fa-user"></i>
-<span>Perfil</span>
 </div>
 
 </div>
 
+<div class="nav">
+
+<a class="active" href="app.html">
+<div class="icon">🔥</div>
+Explorar
+</a>
+
+<a href="chat.html">
+<div class="icon">💬</div>
+Chat
+</a>
+
+<a href="perfil.html">
+<div class="icon">👤</div>
+Perfil
+</a>
+
+<a href="#">
+<div class="icon">📍</div>
+Vibe
+</a>
+
 </div>
 
-<!-- MATCH -->
+<script type="module">
 
-<div class="match" id="match">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-<h1>Match</h1>
+import {
+getAuth,
+onAuthStateChanged,
+signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-<p>Vocês sentiram a mesma energia.</p>
+const firebaseConfig = {
 
-</div>
+apiKey: "SUA_API_KEY",
+authDomain: "SEU_AUTH_DOMAIN",
+projectId: "SEU_PROJECT_ID",
+storageBucket: "SEU_STORAGE_BUCKET",
+messagingSenderId: "SEU_SENDER_ID",
+appId: "SEU_APP_ID"
 
-<script>
+};
 
-/* PARTÍCULAS */
+const app = initializeApp(firebaseConfig);
 
-const particles =
-document.getElementById('particles');
+const auth = getAuth(app);
 
-for(let i=0;i<35;i++){
+/* PROTEÇÃO TOTAL */
 
-const p=document.createElement('div');
+onAuthStateChanged(auth,(user)=>{
 
-p.classList.add('particle');
+if(!user){
 
-const size=Math.random()*3+1;
-
-p.style.width=size+'px';
-p.style.height=size+'px';
-
-p.style.left=Math.random()*100+'vw';
-p.style.top=Math.random()*100+'vh';
-
-p.style.animationDuration=
-(10+Math.random()*12)+'s';
-
-p.style.animationDelay=
-Math.random()*5+'s';
-
-particles.appendChild(p);
+window.location.href="login.html";
 
 }
 
+});
+
 /* PERFIS */
 
-const profiles = [
+const perfis = [
 
 {
-name:"Aurora",
-age:"26",
-location:"São Paulo • 2km",
-bio:"Conexões reais, cafés demorados e pessoas que sabem sentir.",
-photo:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop",
-tags:["Cinema","Arte","Viagens","Música"]
+nome:"Sophie, 26",
+bio:"Conexões reais. Conversas profundas. Madrugadas inesquecíveis.",
+foto:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop"
 },
 
 {
-name:"Valentina",
-age:"24",
-location:"Rio de Janeiro • 4km",
-bio:"Amo noites calmas, música baixa e conversas profundas.",
-photo:"https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=1200&auto=format&fit=crop",
-tags:["Praia","Jazz","Fotografia","Vinho"]
+nome:"Emma, 24",
+bio:"Vinho, jazz e pessoas interessantes.",
+foto:"https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=1200&auto=format&fit=crop"
 },
 
 {
-name:"Helena",
-age:"28",
-location:"Curitiba • 1km",
-bio:"Intensa na medida certa. Energia boa é essencial.",
-photo:"https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop",
-tags:["Moda","Arte","Livros","Viagens"]
+nome:"Aurora, 28",
+bio:"O tipo de conexão que muda noites inteiras.",
+foto:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop"
 }
 
 ];
 
-let current = 0;
+let atual = 0;
 
-const card =
-document.getElementById('card');
+window.proximo = ()=>{
 
-function renderProfile(){
+atual++;
 
-const p = profiles[current];
+if(atual >= perfis.length){
 
-document.getElementById('photo').src = p.photo;
-document.getElementById('name').innerHTML = p.name;
-document.getElementById('age').innerHTML = p.age;
-document.getElementById('location').innerHTML = p.location;
-document.getElementById('bio').innerHTML = p.bio;
-
-const tags =
-document.getElementById('tags');
-
-tags.innerHTML='';
-
-p.tags.forEach(tag=>{
-
-tags.innerHTML += `
-<div class="tag">${tag}</div>
-`;
-
-});
+atual = 0;
 
 }
 
-/* NEXT */
+trocar();
 
-function nextProfile(){
+};
 
-current++;
+window.match = ()=>{
 
-if(current >= profiles.length){
+alert("💘 Novo Match no Laço");
 
-current = 0;
+proximo();
 
-}
+};
 
-setTimeout(()=>{
+function trocar(){
 
-renderProfile();
+document.getElementById("nome").innerText =
+perfis[atual].nome;
 
-card.style.transition='none';
+document.getElementById("bio").innerText =
+perfis[atual].bio;
 
-card.style.transform=
-'translateX(0) scale(1)';
-
-card.style.opacity='1';
-
-},450);
+document.getElementById("foto").src =
+perfis[atual].foto;
 
 }
-
-/* LIKE */
-
-function like(){
-
-card.style.transition='.45s ease';
-
-card.style.transform=
-'translateX(120%) scale(.92)';
-
-card.style.opacity='0';
-
-const match =
-document.getElementById('match');
-
-setTimeout(()=>{
-
-match.classList.add('show');
-
-},250);
-
-setTimeout(()=>{
-
-match.classList.remove('show');
-
-nextProfile();
-
-},1600);
-
-}
-
-/* DISLIKE */
-
-function dislike(){
-
-card.style.transition='.45s ease';
-
-card.style.transform=
-'translateX(-120%) scale(.92)';
-
-card.style.opacity='0';
-
-nextProfile();
-
-}
-
-/* START */
-
-renderProfile();
 
 </script>
 
