@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Laço 💘 Vibe</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
+}
+
+body{
+
+background:#050505;
+
+font-family:'Inter',sans-serif;
+
+overflow:hidden;
+
+color:white;
+
+}
+
+/* FUNDO */
+
+.bg{
+
+position:fixed;
+inset:0;
+
+background:
+radial-gradient(circle at top left,#2c130d 0%,#050505 40%),
+radial-gradient(circle at bottom right,#1d0d09 0%,#050505 45%);
+
+overflow:hidden;
+
+z-index:-2;
+
+}
+
+/* GLOWS */
+
+.glow{
+
+position:absolute;
+
+border-radius:50%;
+
+filter:blur(120px);
+
+opacity:.15;
+
+mix-blend-mode:screen;
+
+animation:ambient 18s infinite ease-in-out;
+
+}
+
+.glow1{
+
+width:500px;
+height:500px;
+
+background:#ff6b3d;
+
+top:-180px;
+left:-140px;
+
+}
+
+.glow2{
+
+width:420px;
+height:420px;
+
+background:#ff954f;
+
+bottom:-120px;
+right:-120px;
+
+animation-delay:7s;
+
+}
+
+@keyframes ambient{
+
+0%{
+transform:translate(0,0) scale(1);
+}
+
+50%{
+transform:translate(30px,-20px) scale(1.08);
+}
+
+100%{
+transform:translate(0,0) scale(1);
+}
+
+}
+
+/* HEADER */
+
+.header{
+
+position:absolute;
+
+top:0;
+left:0;
+right:0;
+
+z-index:20;
+
+padding:26px 22px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+}
+
+/* LOGO */
+
+.logo h1{
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:48px;
+
+font-weight:600;
+
+letter-spacing:-2px;
+
+background:
+linear-gradient(
+135deg,
+#ffe0d1,
+#ff6b3d
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+}
+
+.logo span{
+
+font-size:10px;
+
+letter-spacing:4px;
+
+opacity:.45;
+
+padding-left:4px;
+
+}
+
+/* FILTER */
+
+.filter-btn{
+
+width:56px;
+height:56px;
+
+border-radius:20px;
+
+background:rgba(255,255,255,.06);
+
+border:
+1px solid rgba(255,255,255,.06);
+
+backdrop-filter:blur(20px);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-size:20px;
+
+}
+
+/* MAPA */
+
+.map{
+
+position:relative;
+
+width:100%;
+height:100vh;
+
+overflow:hidden;
+
+}
+
+/* MAP IMAGE */
+
+.map img{
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+
+opacity:.28;
+
+filter:
+contrast(1.1)
+brightness(.8)
+saturate(1.2);
+
+}
+
+/* PINS */
+
+.pin{
+
+position:absolute;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+
+cursor:pointer;
+
+animation:float 4s infinite ease-in-out;
+
+}
+
+/* FLOAT */
+
+@keyframes float{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-8px);
+}
+
+100%{
+transform:translateY(0);
+}
+
+}
+
+/* ICON */
+
+.pin-icon{
+
+width:74px;
+height:74px;
+
+border-radius:24px;
+
+background:
+linear-gradient(
+135deg,
+#ff6b3d,
+#ff9852
+);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-size:28px;
+
+box-shadow:
+0 0 50px rgba(255,107,61,.35);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+}
+
+/* LABEL */
+
+.pin-label{
+
+margin-top:12px;
+
+padding:10px 16px;
+
+border-radius:18px;
+
+background:rgba(0,0,0,.45);
+
+backdrop-filter:blur(20px);
+
+font-size:13px;
+
+white-space:nowrap;
+
+border:
+1px solid rgba(255,255,255,.06);
+
+}
+
+/* HOT */
+
+.hot{
+
+position:absolute;
+
+top:-6px;
+right:-6px;
+
+width:18px;
+height:18px;
+
+border-radius:50%;
+
+background:#6dff8d;
+
+border:2px solid #111;
+
+}
+
+/* POSITIONS */
+
+.p1{
+top:26%;
+left:20%;
+}
+
+.p2{
+top:45%;
+left:65%;
+animation-delay:1s;
+}
+
+.p3{
+top:65%;
+left:35%;
+animation-delay:2s;
+}
+
+.p4{
+top:30%;
+left:72%;
+animation-delay:3s;
+}
+
+/* CARD */
+
+.vibe-card{
+
+position:absolute;
+
+left:22px;
+right:22px;
+bottom:110px;
+
+padding:26px;
+
+border-radius:34px;
+
+background:rgba(255,255,255,.05);
+
+border:
+1px solid rgba(255,255,255,.05);
+
+backdrop-filter:blur(30px);
+
+box-shadow:
+0 20px 60px rgba(0,0,0,.45);
+
+z-index:20;
+
+}
+
+/* TOP */
+
+.vibe-top{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+}
+
+/* NAME */
+
+.vibe-name{
+
+font-size:26px;
+
+font-weight:700;
+
+}
+
+.vibe-type{
+
+margin-top:8px;
+
+font-size:13px;
+
+opacity:.6;
+
+}
+
+/* SCORE */
+
+.score{
+
+padding:14px 18px;
+
+border-radius:22px;
+
+background:
+linear-gradient(
+135deg,
+rgba(255,107,61,.18),
+rgba(255,107,61,.08)
+);
+
+border:
+1px solid rgba(255,255,255,.05);
+
+text-align:center;
+
+}
+
+.score h2{
+
+font-size:24px;
+
+color:#ff9d74;
+
+}
+
+.score span{
+
+font-size:11px;
+
+opacity:.55;
+
+}
+
+/* DESC */
+
+.desc{
+
+margin-top:22px;
+
+font-size:14px;
+
+line-height:1.9;
+
+opacity:.82;
+
+}
+
+/* PEOPLE */
+
+.people{
+
+display:flex;
+align-items:center;
+
+margin-top:24px;
+
+}
+
+.people img{
+
+width:48px;
+height:48px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+border:3px solid #111;
+
+margin-right:-10px;
+
+}
+
+/* LIVE */
+
+.live{
+
+margin-left:20px;
+
+font-size:13px;
+
+opacity:.65;
+
+}
+
+/* BUTTON */
+
+.enter-btn{
+
+width:100%;
+
+height:62px;
+
+margin-top:24px;
+
+border:none;
+
+border-radius:24px;
+
+background:
+linear-gradient(
+135deg,
+#ff6b3d,
+#ff9852
+);
+
+color:white;
+
+font-size:16px;
+
+font-weight:600;
+
+cursor:pointer;
+
+box-shadow:
+0 0 40px rgba(255,107,61,.25);
+
+}
+
+/* NAVBAR */
+
+.navbar{
+
+position:fixed;
+
+left:18px;
+right:18px;
+bottom:18px;
+
+height:84px;
+
+border-radius:30px;
+
+background:rgba(255,255,255,.045);
+
+border:
+1px solid rgba(255,255,255,.05);
+
+backdrop-filter:blur(30px);
+
+display:flex;
+justify-content:space-around;
+align-items:center;
+
+z-index:999;
+
+}
+
+/* NAV ITEM */
+
+.nav-item{
+
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:7px;
+
+font-size:12px;
+
+opacity:.45;
+
+cursor:pointer;
+
+transition:.25s;
+
+}
+
+.nav-item.active{
+
+opacity:1;
+
+color:#ff9d74;
+
+}
+
+.nav-item i{
+
+font-size:21px;
+
+}
+
+/* MOBILE */
+
+@media(max-width:500px){
+
+.vibe-card{
+bottom:104px;
+}
+
+.vibe-name{
+font-size:22px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="bg">
+
+<div class="glow glow1"></div>
+
+<div class="glow glow2"></div>
+
+</div>
+
+<!-- HEADER -->
+
+<div class="header">
+
+<div class="logo">
+
+<h1>Laço</h1>
+
+<span>VIBE</span>
+
+</div>
+
+<div class="filter-btn">
+
+<i class="fa-solid fa-sliders"></i>
+
+</div>
+
+</div>
+
+<!-- MAP -->
+
+<div class="map">
+
+<img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5ce?q=80&w=1200&auto=format&fit=crop">
+
+<!-- PINS -->
+
+<div class="pin p1">
+
+<div class="pin-icon">
+
+<i class="fa-solid fa-martini-glass"></i>
+
+<div class="hot"></div>
+
+</div>
+
+<div class="pin-label">
+Velvet Lounge
+</div>
+
+</div>
+
+<div class="pin p2">
+
+<div class="pin-icon">
+
+<i class="fa-solid fa-mug-hot"></i>
+
+</div>
+
+<div class="pin-label">
+Aurora Café
+</div>
+
+</div>
+
+<div class="pin p3">
+
+<div class="pin-icon">
+
+<i class="fa-solid fa-music"></i>
+
+<div class="hot"></div>
+
+</div>
+
+<div class="pin-label">
+Noir Club
+</div>
+
+</div>
+
+<div class="pin p4">
+
+<div class="pin-icon">
+
+<i class="fa-solid fa-utensils"></i>
+
+</div>
+
+<div class="pin-label">
+Brasa Rooftop
+</div>
+
+</div>
+
+</div>
+
+<!-- CARD -->
+
+<div class="vibe-card">
+
+<div class="vibe-top">
+
+<div>
+
+<div class="vibe-name">
+Velvet Lounge
+</div>
+
+<div class="vibe-type">
+Coquetelaria • Música • Conexões
+</div>
+
+</div>
+
+<div class="score">
+
+<h2>9.4</h2>
+
+<span>VIBE SCORE</span>
+
+</div>
+
+</div>
+
+<div class="desc">
+
+Ambiente sofisticado, iluminação quente e energia perfeita para conexões reais.
+Hoje o movimento está acima da média.
+
+</div>
+
+<div class="people">
+
+<img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400&auto=format&fit=crop">
+
+<img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=400&auto=format&fit=crop">
+
+<img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=400&auto=format&fit=crop">
+
+<div class="live">
+
++42 pessoas conectando agora
+
+</div>
+
+</div>
+
+<button
+class="enter-btn"
+onclick="openVibe()">
+
+Entrar na vibe
+
+</button>
+
+</div>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+<div class="nav-item"
+onclick="window.location.href='app.html'">
+
+<i class="fa-solid fa-fire"></i>
+
+<span>Explorar</span>
+
+</div>
+
+<div class="nav-item"
+onclick="window.location.href='chat.html'">
+
+<i class="fa-regular fa-comments"></i>
+
+<span>Chat</span>
+
+</div>
+
+<div class="nav-item active">
+
+<i class="fa-solid fa-location-dot"></i>
+
+<span>Vibe</span>
+
+</div>
+
+<div class="nav-item"
+onclick="window.location.href='perfil.html'">
+
+<i class="fa-regular fa-user"></i>
+
+<span>Perfil</span>
+
+</div>
+
+</div>
+
+<script>
+
+function openVibe(){
+
+alert('Entrando na vibe...');
+
+}
+
+</script>
+
+</body>
+</html>
