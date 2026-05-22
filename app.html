@@ -1,3 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LAÇO 💘</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+body{
+
+background:#080808;
+overflow:hidden;
+color:#fff;
+
+}
+
+/* FUNDO CINEMATOGRÁFICO */
+
+.bg{
+
+position:fixed;
+inset:0;
+overflow:hidden;
+z-index:-1;
+
+}
+
+.glow{
+
+position:absolute;
+border-radius:50%;
+filter:blur(90px);
+animation:float 10s infinite alternate ease-in-out;
+
+}
+
+.glow1{
+
+width:320px;
+height:320px;
+
+background:rgba(255,107,61,.18);
+
+top:-60px;
+left:-80px;
+
+}
+
+.glow2{
+
+width:300px;
+height:300px;
+
+background:rgba(255,140,80,.12);
+
+bottom:-80px;
+right:-60px;
+
+animation-delay:2s;
+
+}
+
+@keyframes float{
+
+from{
+
+transform:translateY(0px) translateX(0px);
+
+}
+
+to{
+
+transform:translateY(40px) translateX(20px);
+
+}
+
+}
+
+/* HEADER */
+
+header{
+
+padding:22px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+}
+
+.logo{
+
+font-size:34px;
+font-weight:800;
+
+color:#FF8A3D;
+
+letter-spacing:1px;
+
+text-shadow:0 0 28px rgba(255,138,61,.35);
+
+}
+
+.premium{
+
+padding:10px 18px;
+
+border-radius:999px;
+
+background:rgba(255,255,255,.05);
+
+border:1px solid rgba(255,255,255,.06);
+
+backdrop-filter:blur(20px);
+
+font-size:13px;
+font-weight:600;
+
+}
+
+/* CONTAINER */
+
+.container{
+
+height:calc(100vh - 150px);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+padding:20px;
+
+}
+
+/* STACK */
+
+.stack{
+
+position:relative;
+width:360px;
+height:620px;
+
+}
+
+/* SOMBRAS DAS CARTAS */
+
+.shadow-card{
+
+position:absolute;
+width:100%;
+height:100%;
+border-radius:34px;
+
+background:rgba(255,255,255,.03);
+
+border:1px solid rgba(255,255,255,.04);
+
+}
+
+.shadow1{
+
+transform:translateY(12px) scale(.96);
+
+opacity:.4;
+
+}
+
+.shadow2{
+
+transform:translateY(24px) scale(.92);
+
+opacity:.2;
+
+}
+
+/* CARD */
+
+.card{
+
+position:absolute;
+
+width:100%;
+height:100%;
+
+border-radius:34px;
+
+overflow:hidden;
+
+background:#111;
+
+border:1px solid rgba(255,255,255,.05);
+
+box-shadow:
+0 20px 80px rgba(0,0,0,.45),
+0 0 60px rgba(255,107,61,.08);
+
+transition:.3s ease;
+
+}
+
+.card img{
+
+width:100%;
+height:100%;
+object-fit:cover;
+
+}
+
+.overlay{
+
+position:absolute;
+inset:0;
+
+background:linear-gradient(
+to top,
+rgba(0,0,0,.92) 10%,
+rgba(0,0,0,.2) 55%,
+transparent 100%
+);
+
+display:flex;
+flex-direction:column;
+justify-content:flex-end;
+
+padding:28px;
+
+}
+
+.nome{
+
+font-size:34px;
+font-weight:800;
+
+margin-bottom:8px;
+
+}
+
+.bio{
+
+font-size:15px;
+line-height:1.5;
+
+color:#ddd;
+
+}
+
+/* BOTÕES */
+
+.actions{
+
+position:absolute;
+bottom:105px;
+
+width:100%;
+
+display:flex;
+justify-content:center;
+gap:22px;
+
+}
+
+.btn{
+
+width:78px;
+height:78px;
+
+border-radius:50%;
+
+border:none;
+
+font-size:28px;
+
+cursor:pointer;
+
+transition:.3s ease;
+
+backdrop-filter:blur(20px);
+
+}
+
+.nope{
+
+background:rgba(255,255,255,.08);
+color:#fff;
+
+}
+
+.like{
+
+background:#FF8A3D;
+color:#fff;
+
+box-shadow:0 0 28px rgba(255,138,61,.45);
+
+}
+
+.btn:hover{
+
+transform:scale(1.08);
+
+}
+
+/* NAVBAR */
+
+.bottom-nav{
+
+position:fixed;
+bottom:0;
+left:0;
+
+width:100%;
+height:84px;
+
+display:flex;
+justify-content:space-around;
+align-items:center;
+
+background:rgba(10,10,10,.78);
+
+backdrop-filter:blur(24px);
+
+border-top:1px solid rgba(255,255,255,.06);
+
+}
+
+.nav-item{
+
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:4px;
+
+text-decoration:none;
+
+font-size:12px;
+font-weight:600;
+
+color:#9ca3af;
+
+transition:.3s;
+
+}
+
+.nav-item div{
+
+font-size:22px;
+
+}
+
+.nav-item.active{
+
+color:#FF8A3D;
+
+text-shadow:0 0 20px rgba(255,138,61,.45);
+
+}
+
+.nav-item:hover{
+
+transform:translateY(-2px);
+
+color:#fff;
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="bg">
+
+<div class="glow glow1"></div>
+
+<div class="glow glow2"></div>
+
+</div>
+
+<header>
+
+<div class="logo">LAÇO 💘</div>
+
+<div class="premium">BRASA VIVA</div>
+
+</header>
+
+<div class="container">
+
+<div class="stack">
+
+<div class="shadow-card shadow2"></div>
+
+<div class="shadow-card shadow1"></div>
+
+<div class="card">
+
+<img id="foto" src="">
+
+<div class="overlay">
+
+<div class="nome" id="nome"></div>
+
+<div class="bio" id="bio"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="actions">
+
+<button class="btn nope" onclick="proximo()">✕</button>
+
+<button class="btn like" onclick="match()">💘</button>
+
+</div>
+
+<div class="bottom-nav">
+
+<a href="app.html" class="nav-item active">
+<div>🔥</div>
+<span>Descobrir</span>
+</a>
+
+<a href="matches.html" class="nav-item">
+<div>💘</div>
+<span>Matches</span>
+</a>
+
+<a href="chat.html" class="nav-item">
+<div>💬</div>
+<span>Chat</span>
+</a>
+
+<a href="vibe.html" class="nav-item">
+<div>✨</div>
+<span>Vibe</span>
+</a>
+
+<a href="perfil.html" class="nav-item">
+<div>👤</div>
+<span>Perfil</span>
+</a>
+
+</div>
+
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -6,8 +465,6 @@ import {
 getAuth,
 onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-/* FIREBASE */
 
 const firebaseConfig = {
   apiKey: "AIzaSyBJM2Oo0tR4CT1vDoeXcNhqw2tIpj1VXnw",
@@ -23,8 +480,6 @@ const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
 
-/* PROTEÇÃO */
-
 onAuthStateChanged(auth,(user)=>{
 
 if(!user){
@@ -35,224 +490,75 @@ window.location.href="login.html";
 
 });
 
-/* BASE DE PERFIS PREMIUM */
-
 const perfis = [
 
 {
-nome:"Sophie, 26",
-bio:"Conexões reais. Conversas profundas. Madrugadas inesquecíveis.",
+nome:"Aurora, 26",
+bio:"Conexões reais começam na energia certa.",
 foto:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop"
 },
 
 {
-nome:"Aurora, 28",
-bio:"A química certa muda tudo.",
-foto:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop"
-},
-
-{
-nome:"Emma, 24",
-bio:"Jazz, vinho e tensão elegante.",
-foto:"https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=1200&auto=format&fit=crop"
-},
-
-{
-nome:"Olivia, 27",
-bio:"Poucas conexões. Intensidade verdadeira.",
-foto:"https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop"
-},
-
-{
-nome:"Valentina, 25",
-bio:"Energia boa atrai pessoas raras.",
+nome:"Valentina, 24",
+bio:"A madrugada sempre aproxima quem vibra igual.",
 foto:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop"
 },
 
 {
-nome:"Charlotte, 29",
-bio:"A madrugada sempre revela quem é real.",
-foto:"https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?q=80&w=1200&auto=format&fit=crop"
+nome:"Emma, 28",
+bio:"Química rara. Presença inesquecível.",
+foto:"https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=1200&auto=format&fit=crop"
 },
 
 {
-nome:"Mia, 23",
-bio:"Conexões começam no olhar.",
-foto:"https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1200&auto=format&fit=crop"
+nome:"Olivia, 25",
+bio:"O olhar certo muda tudo.",
+foto:"https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop"
 }
 
 ];
 
 let atual = 0;
 
-/* ELEMENTOS */
-
 const foto = document.getElementById("foto");
-
 const nome = document.getElementById("nome");
-
 const bio = document.getElementById("bio");
 
-const card = document.querySelector(".card");
-
-/* TROCAR PERFIL */
-
-function trocarPerfil(){
-
-card.style.opacity = "0";
-
-card.style.transform = "scale(.96)";
-
-setTimeout(()=>{
+function carregar(){
 
 if(atual >= perfis.length){
-
-embaralharPerfis();
 
 atual = 0;
 
 }
 
 foto.src = perfis[atual].foto;
-
 nome.innerText = perfis[atual].nome;
-
 bio.innerText = perfis[atual].bio;
 
-card.style.opacity = "1";
-
-card.style.transform = "scale(1)";
-
-},250);
-
 }
-
-/* EMBARALHAR */
-
-function embaralharPerfis(){
-
-for(let i = perfis.length - 1; i > 0; i--){
-
-const j = Math.floor(Math.random() * (i + 1));
-
-[perfis[i], perfis[j]] = [perfis[j], perfis[i]];
-
-}
-
-}
-
-/* PASSAR */
 
 window.proximo = ()=>{
 
-card.animate([
-
-{
-transform:"translateX(0) rotate(0deg)",
-opacity:1
-},
-
-{
-transform:"translateX(-120px) rotate(-8deg)",
-opacity:0
-}
-
-],{
-duration:320,
-fill:"forwards"
-});
-
-setTimeout(()=>{
-
 atual++;
 
-trocarPerfil();
-
-},280);
+carregar();
 
 };
-
-/* MATCH */
 
 window.match = ()=>{
 
-card.animate([
-
-{
-transform:"translateX(0) rotate(0deg)",
-opacity:1
-},
-
-{
-transform:"translateX(120px) rotate(8deg)",
-opacity:0
-}
-
-],{
-duration:320,
-fill:"forwards"
-});
-
-setTimeout(()=>{
-
-mostrarMatch();
+alert("💘 Novo Match!");
 
 atual++;
 
-trocarPerfil();
-
-},280);
+carregar();
 
 };
 
-/* MATCH PREMIUM */
-
-function mostrarMatch(){
-
-const div = document.createElement("div");
-
-div.innerHTML = "💘 Novo Match";
-
-div.style.position = "fixed";
-
-div.style.top = "50%";
-
-div.style.left = "50%";
-
-div.style.transform = "translate(-50%,-50%)";
-
-div.style.padding = "18px 34px";
-
-div.style.background = "rgba(15,15,15,.88)";
-
-div.style.border = "1px solid rgba(255,107,61,.35)";
-
-div.style.borderRadius = "18px";
-
-div.style.backdropFilter = "blur(20px)";
-
-div.style.fontSize = "20px";
-
-div.style.fontWeight = "700";
-
-div.style.color = "#FF8A3D";
-
-div.style.boxShadow = "0 0 40px rgba(255,107,61,.25)";
-
-div.style.zIndex = "999999";
-
-document.body.appendChild(div);
-
-setTimeout(()=>{
-
-div.remove();
-
-},1800);
-
-}
-
-/* INICIAR */
-
-trocarPerfil();
+carregar();
 
 </script>
+
+</body>
+</html>
