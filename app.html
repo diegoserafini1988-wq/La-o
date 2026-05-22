@@ -9,7 +9,7 @@ content="width=device-width, initial-scale=1.0">
 
 <title>LAÇO 💘</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap"
 rel="stylesheet">
 
 <style>
@@ -18,14 +18,14 @@ rel="stylesheet">
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Inter',sans-serif;
+font-family:'Manrope',sans-serif;
 }
 
 body{
 
 background:#080808;
+color:white;
 overflow:hidden;
-color:#fff;
 
 }
 
@@ -44,35 +44,35 @@ z-index:-1;
 
 position:absolute;
 border-radius:50%;
-filter:blur(100px);
+filter:blur(120px);
 
-animation:float 10s infinite alternate ease-in-out;
+animation:float 12s infinite alternate ease-in-out;
 
 }
 
 .glow1{
 
-width:320px;
-height:320px;
+width:420px;
+height:420px;
 
 background:
-rgba(255,107,61,.18);
+rgba(255,107,61,.16);
 
-top:-80px;
-left:-80px;
+top:-140px;
+left:-120px;
 
 }
 
 .glow2{
 
-width:320px;
-height:320px;
+width:340px;
+height:340px;
 
 background:
 rgba(255,140,80,.12);
 
 bottom:-120px;
-right:-80px;
+right:-100px;
 
 animation-delay:2s;
 
@@ -85,7 +85,7 @@ transform:translateY(0px);
 }
 
 to{
-transform:translateY(40px);
+transform:translateY(50px);
 }
 
 }
@@ -94,7 +94,7 @@ transform:translateY(40px);
 
 .header{
 
-padding:22px;
+padding:24px;
 
 display:flex;
 justify-content:space-between;
@@ -109,6 +109,8 @@ font-weight:800;
 
 color:#FF8A3D;
 
+letter-spacing:-1px;
+
 text-shadow:
 0 0 28px rgba(255,138,61,.35);
 
@@ -116,7 +118,7 @@ text-shadow:
 
 .badge{
 
-padding:10px 16px;
+padding:12px 18px;
 
 border-radius:999px;
 
@@ -129,15 +131,15 @@ border:
 backdrop-filter:blur(20px);
 
 font-size:13px;
-font-weight:600;
+font-weight:700;
 
 }
 
-/* CONTAINER */
+/* APP */
 
-.container{
+.app{
 
-height:calc(100vh - 170px);
+height:calc(100vh - 180px);
 
 display:flex;
 justify-content:center;
@@ -147,7 +149,7 @@ padding:20px;
 
 }
 
-/* CARD STACK */
+/* STACK */
 
 .stack{
 
@@ -160,14 +162,14 @@ height:620px;
 
 /* SOMBRAS */
 
-.shadow-card{
+.shadow{
 
 position:absolute;
 
 width:100%;
 height:100%;
 
-border-radius:34px;
+border-radius:38px;
 
 background:
 rgba(255,255,255,.03);
@@ -180,7 +182,7 @@ border:
 .shadow1{
 
 transform:
-translateY(12px)
+translateY(14px)
 scale(.96);
 
 opacity:.35;
@@ -190,7 +192,7 @@ opacity:.35;
 .shadow2{
 
 transform:
-translateY(24px)
+translateY(28px)
 scale(.92);
 
 opacity:.18;
@@ -206,9 +208,9 @@ position:absolute;
 width:100%;
 height:100%;
 
-border-radius:34px;
-
 overflow:hidden;
+
+border-radius:38px;
 
 background:#111;
 
@@ -217,9 +219,11 @@ border:
 
 box-shadow:
 0 20px 80px rgba(0,0,0,.45),
-0 0 60px rgba(255,107,61,.08);
+0 0 80px rgba(255,107,61,.08);
 
 }
+
+/* IMG */
 
 .card img{
 
@@ -227,8 +231,6 @@ width:100%;
 height:100%;
 
 object-fit:cover;
-
-transition:.25s;
 
 }
 
@@ -242,8 +244,8 @@ inset:0;
 background:
 linear-gradient(
 to top,
-rgba(0,0,0,.92) 10%,
-rgba(0,0,0,.22) 55%,
+rgba(0,0,0,.95) 10%,
+rgba(0,0,0,.15) 55%,
 transparent 100%
 );
 
@@ -255,53 +257,87 @@ padding:28px;
 
 }
 
-/* TEXTOS */
+/* INFO */
 
-.nome{
+.info h2{
 
 font-size:34px;
 font-weight:800;
 
-margin-bottom:8px;
-
 }
 
-.bio{
+.info p{
+
+margin-top:10px;
 
 font-size:15px;
-line-height:1.6;
+line-height:1.7;
 
 color:#ddd;
 
 }
 
-/* AÇÕES */
+/* VIBE */
+
+.vibe{
+
+margin-top:18px;
+
+display:inline-flex;
+align-items:center;
+gap:10px;
+
+padding:12px 18px;
+
+border-radius:999px;
+
+background:
+rgba(255,255,255,.06);
+
+border:
+1px solid rgba(255,255,255,.06);
+
+backdrop-filter:blur(20px);
+
+font-size:13px;
+font-weight:700;
+
+color:#FFB089;
+
+width:max-content;
+
+}
+
+/* BOTÕES */
 
 .actions{
 
 position:absolute;
-bottom:105px;
+
+bottom:100px;
 
 width:100%;
 
 display:flex;
 justify-content:center;
-gap:22px;
+gap:24px;
 
 }
 
+/* BTN */
+
 .btn{
 
-width:78px;
-height:78px;
+width:82px;
+height:82px;
 
 border:none;
 
 border-radius:50%;
 
-font-size:28px;
-
 cursor:pointer;
+
+font-size:30px;
 
 transition:.25s;
 
@@ -314,7 +350,7 @@ backdrop-filter:blur(20px);
 background:
 rgba(255,255,255,.08);
 
-color:#fff;
+color:white;
 
 }
 
@@ -330,7 +366,7 @@ linear-gradient(
 color:white;
 
 box-shadow:
-0 0 30px rgba(255,107,61,.35);
+0 0 40px rgba(255,107,61,.35);
 
 }
 
@@ -349,14 +385,14 @@ bottom:0;
 left:0;
 
 width:100%;
-height:84px;
+height:88px;
 
 display:flex;
 justify-content:space-around;
 align-items:center;
 
 background:
-rgba(10,10,10,.82);
+rgba(10,10,10,.85);
 
 backdrop-filter:blur(24px);
 
@@ -375,7 +411,7 @@ gap:4px;
 text-decoration:none;
 
 font-size:12px;
-font-weight:600;
+font-weight:700;
 
 color:#999;
 
@@ -395,6 +431,43 @@ color:#FF8A3D;
 
 text-shadow:
 0 0 20px rgba(255,138,61,.4);
+
+}
+
+/* MATCH */
+
+.match{
+
+position:fixed;
+
+top:50%;
+left:50%;
+
+transform:translate(-50%,-50%);
+
+padding:18px 34px;
+
+border-radius:24px;
+
+background:
+rgba(10,10,10,.82);
+
+border:
+1px solid rgba(255,107,61,.25);
+
+backdrop-filter:blur(24px);
+
+font-size:22px;
+font-weight:800;
+
+color:#FF8A3D;
+
+box-shadow:
+0 0 40px rgba(255,107,61,.25);
+
+display:none;
+
+z-index:9999;
 
 }
 
@@ -428,23 +501,16 @@ BRASA VIVA
 
 <!-- APP -->
 
-<div class="container">
+<div class="app">
 
 <div class="stack">
 
-<div class="shadow-card shadow2"></div>
+<div class="shadow shadow2"></div>
 
-<div class="shadow-card shadow1"></div>
+<div class="shadow shadow1"></div>
 
-<div class="card">
-
-<img id="foto" src="">
-
-<div class="overlay">
-
-<div class="nome" id="nome"></div>
-
-<div class="bio" id="bio"></div>
+<div class="card"
+id="card">
 
 </div>
 
@@ -452,25 +518,34 @@ BRASA VIVA
 
 </div>
 
-</div>
-
-<!-- AÇÕES -->
+<!-- BOTÕES -->
 
 <div class="actions">
 
-<button class="btn nope"
-onclick="proximo()">
+<button
+class="btn nope"
+onclick="nope()">
 
 ✕
 
 </button>
 
-<button class="btn like"
-onclick="match()">
+<button
+class="btn like"
+onclick="like()">
 
 💘
 
 </button>
+
+</div>
+
+<!-- MATCH -->
+
+<div class="match"
+id="matchBox">
+
+💘 Novo Match
 
 </div>
 
@@ -531,6 +606,13 @@ onAuthStateChanged
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+import {
+getFirestore,
+collection,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 /* FIREBASE */
 
 const firebaseConfig = {
@@ -557,7 +639,10 @@ initializeApp(firebaseConfig);
 const auth =
 getAuth(app);
 
-/* PROTEÇÃO */
+const db =
+getFirestore(app);
+
+/* LOGIN */
 
 onAuthStateChanged(auth,(user)=>{
 
@@ -566,267 +651,181 @@ if(!user){
 window.location.href =
 "login.html";
 
+return;
+
 }
+
+carregarPerfis();
 
 });
 
 /* PERFIS */
 
-const perfis = [
+let perfis = [];
+
+let indexAtual = 0;
+
+/* CARREGAR */
+
+async function carregarPerfis(){
+
+try{
+
+const usuario =
+auth.currentUser;
+
+const querySnapshot =
+await getDocs(
+collection(db,"usuarios")
+);
+
+perfis = [];
+
+querySnapshot.forEach((doc)=>{
+
+const dados = doc.data();
+
+if(doc.id !== usuario.uid){
+
+perfis.push({
+id:doc.id,
+...dados
+});
+
+}
+
+});
+
+/* FALLBACK */
+
+if(perfis.length === 0){
+
+perfis = [
 
 {
-nome:"Aurora, 26",
-bio:"Conexões reais começam na energia certa.",
+nome:"Sophia",
+idade:"26",
 foto:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop"
 },
 
 {
-nome:"Valentina, 24",
-bio:"A madrugada aproxima pessoas raras.",
-foto:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop"
-},
-
-{
-nome:"Emma, 28",
-bio:"Química rara. Intensidade elegante.",
+nome:"Emily",
+idade:"24",
 foto:"https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=1200&auto=format&fit=crop"
 },
 
 {
-nome:"Olivia, 25",
-bio:"Poucas conexões mudam tudo.",
+nome:"Olivia",
+idade:"28",
 foto:"https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop"
-},
-
-{
-nome:"Charlotte, 27",
-bio:"A vibe certa sempre encontra você.",
-foto:"https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?q=80&w=1200&auto=format&fit=crop"
-},
-
-{
-nome:"Mia, 23",
-bio:"Conversas profundas valem mais.",
-foto:"https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1200&auto=format&fit=crop"
 }
 
 ];
 
-let atual = 0;
+}
 
-const foto =
-document.getElementById("foto");
+indexAtual = 0;
 
-const nome =
-document.getElementById("nome");
+mostrarPerfil();
 
-const bio =
-document.getElementById("bio");
+}catch(e){
 
-/* EMBARALHAR */
-
-function embaralhar(){
-
-for(
-let i = perfis.length - 1;
-i > 0;
-i--
-){
-
-const j =
-Math.floor(
-Math.random() * (i + 1)
-);
-
-[perfis[i], perfis[j]] =
-[perfis[j], perfis[i]];
+console.log(e);
 
 }
 
-}
+/* DEBUG */
 
-/* CARREGAR */
-
-function carregar(){
-
-if(atual >= perfis.length){
-
-embaralhar();
-
-atual = 0;
+console.log(perfis);
 
 }
 
-const perfil =
-perfis[atual];
+/* MOSTRAR */
 
-foto.style.opacity = "0";
-
-setTimeout(()=>{
-
-foto.src = perfil.foto;
-
-nome.innerText = perfil.nome;
-
-bio.innerText = perfil.bio;
-
-foto.style.opacity = "1";
-
-},180);
-
-}
-
-/* PASSAR */
-
-window.proximo = ()=>{
+function mostrarPerfil(){
 
 const card =
-document.querySelector(".card");
+document.getElementById("card");
 
-card.animate([
+if(indexAtual >= perfis.length){
 
-{
-transform:"translateX(0px) rotate(0deg)",
-opacity:1
-},
+indexAtual = 0;
 
-{
-transform:"translateX(-140px) rotate(-10deg)",
-opacity:0
 }
 
-],{
+const p =
+perfis[indexAtual];
 
-duration:260,
-fill:"forwards"
+card.innerHTML = `
 
-});
+<img src="${p.foto}">
 
-setTimeout(()=>{
+<div class="overlay">
 
-atual++;
+<div class="info">
 
-carregar();
+<h2>
+${p.nome}, ${p.idade}
+</h2>
 
-card.style.opacity = "1";
+<p>
 
-card.style.transform =
-"translateX(0px)";
+Conexões reais começam na energia certa.
 
-},250);
+</p>
 
-};
+<div class="vibe">
+
+✨ Na mesma vibe que você
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}
 
 /* MATCH */
 
-window.match = ()=>{
+function mostrarMatch(){
 
-const card =
-document.querySelector(".card");
+const box =
+document.getElementById("matchBox");
 
-card.animate([
+box.style.display = "block";
 
-{
-transform:"translateX(0px) rotate(0deg)",
-opacity:1
-},
+setTimeout(()=>{
 
-{
-transform:"translateX(140px) rotate(10deg)",
-opacity:0
+box.style.display = "none";
+
+},1400);
+
 }
 
-],{
+/* LIKE */
 
-duration:260,
-fill:"forwards"
-
-});
+window.like = ()=>{
 
 mostrarMatch();
 
-setTimeout(()=>{
+indexAtual++;
 
-atual++;
-
-carregar();
-
-card.style.opacity = "1";
-
-card.style.transform =
-"translateX(0px)";
-
-},250);
+mostrarPerfil();
 
 };
 
-/* ALERTA */
+/* NOPE */
 
-function mostrarMatch(){
+window.nope = ()=>{
 
-const div =
-document.createElement("div");
+indexAtual++;
 
-div.innerHTML =
-"💘 Novo Match";
+mostrarPerfil();
 
-div.style.position =
-"fixed";
-
-div.style.top =
-"50%";
-
-div.style.left =
-"50%";
-
-div.style.transform =
-"translate(-50%,-50%)";
-
-div.style.padding =
-"18px 34px";
-
-div.style.borderRadius =
-"22px";
-
-div.style.background =
-"rgba(10,10,10,.82)";
-
-div.style.border =
-"1px solid rgba(255,107,61,.25)";
-
-div.style.backdropFilter =
-"blur(24px)";
-
-div.style.color =
-"#FF8A3D";
-
-div.style.fontWeight =
-"700";
-
-div.style.fontSize =
-"20px";
-
-div.style.zIndex =
-"999999";
-
-div.style.boxShadow =
-"0 0 40px rgba(255,107,61,.25)";
-
-document.body.appendChild(div);
-
-setTimeout(()=>{
-
-div.remove();
-
-},1600);
-
-}
-
-/* START */
-
-embaralhar();
-
-carregar();
+};
 
 </script>
 
